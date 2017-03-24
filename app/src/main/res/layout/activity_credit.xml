@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/common_toolbar"
+        layout="@layout/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.yqx.mamajh.widget.cyclebanner.ImageCycleView
+                android:id="@+id/icv_imgs"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one_hundred" />
+
+            <com.yqx.mamajh.widget.WrapHeightGridView
+                android:id="@+id/gv_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:numColumns="4"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:text="新手专区"
+                android:textSize="20dp" />
+
+            <com.yqx.mamajh.widget.WrapHeightGridView
+                android:id="@+id/gv_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ten"
+                android:layout_marginTop="@dimen/ten"
+                android:background="@color/white"
+                android:numColumns="2"
+                android:paddingBottom="@dimen/ten"
+                android:paddingTop="@dimen/ten"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:text="热兑专区"
+                android:textSize="20dp" />
+
+            <com.yqx.mamajh.widget.WrapHeightGridView
+                android:id="@+id/gv_hot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ten"
+                android:layout_marginTop="@dimen/ten"
+                android:background="@color/white"
+                android:numColumns="2"
+                android:paddingBottom="@dimen/ten"
+                android:paddingTop="@dimen/ten"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:text="限时热兑"
+                android:textSize="20dp" />
+
+            <com.yqx.mamajh.widget.WrapHeightGridView
+                android:id="@+id/gv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ten"
+                android:layout_marginTop="@dimen/ten"
+                android:background="@color/white"
+                android:numColumns="2"
+                android:paddingBottom="@dimen/ten"
+                android:paddingTop="@dimen/ten"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

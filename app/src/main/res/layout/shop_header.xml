@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/thirty_hundred"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/thirty_hundred"
+        android:background="#50d0">
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent" />
+        <FrameLayout
+            android:id="@+id/fl_personal_icon"
+            android:layout_width="@dimen/one_hundred"
+            android:layout_height="@dimen/one_hundred"
+            android:layout_centerInParent="true">
+
+            <com.yqx.mamajh.widget.RoundImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null" />
+
+            <com.yqx.mamajh.widget.RoundImageView
+                android:id="@+id/iv_shop_icon"
+                android:layout_width="98dp"
+                android:layout_height="98dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                tools:src="@mipmap/ic_launcher" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fl_personal_icon"
+            android:layout_marginTop="@dimen/five"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/ten">
+
+            <RelativeLayout
+                android:id="@+id/rl_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/tv_shopname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/eighteen_sp"
+                    tools:text="旗舰店" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/rl_level"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_contsct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/five"
+                    android:layout_marginRight="@dimen/twenty"
+                    android:background="@drawable/shop_contact_collect_bg"
+                    android:drawableLeft="@mipmap/lxkf"
+                    android:drawablePadding="@dimen/ten"
+                    android:gravity="center"
+                    android:text="联系客服"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/eighteen_sp" />
+
+                <TextView
+                    android:id="@+id/tv_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginRight="@dimen/five"
+                    android:background="@drawable/shop_contact_collect_bg"
+                    android:drawableLeft="@mipmap/dsc"
+                    android:drawablePadding="@dimen/ten"
+                    android:text="收藏店铺"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/eighteen_sp" />
+            </LinearLayout>
+
+            <!--<ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />-->
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_smarttab_root"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:elevation="@dimen/five"
+        android:visibility="invisible">
+
+        <com.github.obsessive.library.smartlayout.SmartTabLayout
+            android:id="@+id/images_tab_smart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:elevation="@dimen/three"
+            app:stl_customTabTextLayoutId="@layout/custom_tab"
+            app:stl_customTabTextViewId="@+id/custom_text"
+            app:stl_defaultTabTextHorizontalPadding="@dimen/twenty"
+            app:stl_defaultTabTextSize="@dimen/sixteen_sp"
+            app:stl_dividerColor="@android:color/transparent"
+            app:stl_dividerThickness="0dp"
+            app:stl_indicatorColor="@color/sr_color_primary"
+            app:stl_indicatorCornerRadius="@dimen/two"
+            app:stl_indicatorInterpolation="smart"
+            app:stl_indicatorThickness="@dimen/three"
+            app:stl_underlineColor="@android:color/transparent" />
+    </RelativeLayout>
+
+</LinearLayout>

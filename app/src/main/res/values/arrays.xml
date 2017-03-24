@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bottom_bar_labels">
+        <item>@string/home</item>
+        <!--<item>@string/classification</item>-->
+        <item>@string/dev</item>
+        <item>@string/trolley</item>
+        <item>@string/mine</item>
+    </string-array>
+
+    <string-array name="bank">
+        <item>===请选择===</item>
+        <item>中国农业银行</item>
+        <item>中国工商银行 </item>
+        <item>中国银行</item>
+        <item>中国建设银行</item>
+        <item>交通银行</item>
+        <item>中信银行</item>
+        <item>中国光大银行</item>
+        <item>华夏银行</item>
+        <item>中国民生银行</item>
+        <item>招商银行</item>
+        <item>兴业银行</item>
+        <item>广发银行</item>
+        <item>平安银行</item>
+        <item>上海浦东发展银行</item>
+        <item>中国邮政储蓄银行</item>
+        <item>北京银行</item>
+        <item>恒丰银行</item>
+        <item>浙商银行</item>
+        <item>渤海银行</item>
+    </string-array>
+
+    <string-array name="coupon_state">
+        <item>未使用</item>
+        <item>已过期</item>
+        <item>已使用</item>
+    </string-array>
+
+    <string-array name="specialtycategory_list">
+        <item>@string/under_way</item>
+        <item>@string/will_begin</item>
+    </string-array>
+</resources>

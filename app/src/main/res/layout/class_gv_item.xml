@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/class_gv_item_bg"
+    android:paddingTop="10dp"
+    android:paddingBottom="1dp"
+    android:paddingRight="1dp"
+    android:paddingLeft="1dp"
+    android:orientation="vertical" >
+
+    <com.yqx.mamajh.widget.DynamicHeightImageView
+        android:id="@+id/iv_calss_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </com.yqx.mamajh.widget.DynamicHeightImageView>
+
+    <TextView
+        android:id="@+id/tv_class_name"
+        android:gravity="center"
+        android:padding="@dimen/five"
+        android:background="@drawable/class_gv_item_text_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

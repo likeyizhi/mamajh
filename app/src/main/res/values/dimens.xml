@@ -1,0 +1,56 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="thirty_hundred">300dp</dimen>
+    <dimen name="two_hundred">200dp</dimen>
+    <dimen name="one_hundred">100dp</dimen>
+    <dimen name="eighty">80dp</dimen>
+    <dimen name="fifteen">15dp</dimen>
+    <dimen name="twenty">20dp</dimen>
+    <dimen name="line_height">1dp</dimen>
+    <dimen name="five">5dp</dimen>
+    <dimen name="twentyfive">25dp</dimen>
+    <dimen name="thirtyfive">35dp</dimen>
+    <dimen name="fortyfive">45dp</dimen>
+    <dimen name="ten">10dp</dimen>
+    <dimen name="eleven">11dp</dimen>
+    <dimen name="eight">8dp</dimen>
+    <dimen name="fifty">50dp</dimen>
+    <dimen name="fiftythree">53dp</dimen>
+    <dimen name="fiftyfive">55dp</dimen>
+    <dimen name="seventytwo">72dp</dimen>
+    <dimen name="sixty">60dp</dimen>
+    <dimen name="two">2dp</dimen>
+    <dimen name="three">3dp</dimen>
+    <dimen name="publish_send">77dp</dimen>
+    <dimen name="seventyfour">74dp</dimen>
+    <dimen name="seven">7dp</dimen>
+    <dimen name="twelve">12dp</dimen>
+    <dimen name="fourteen">14dp</dimen>
+    <dimen name="four">4dp</dimen>
+    <dimen name="twenty_night">28dp</dimen>
+    <dimen name="thirty_night">38dp</dimen>
+    <dimen name="six">6dp</dimen>
+    <dimen name="nine">9dp</dimen>
+    <dimen name="fourty_four">44dp</dimen>
+    <dimen name="forty">40dp</dimen>
+    <dimen name="sixty_four">64dp</dimen>
+    <dimen name="one">1dp</dimen>
+
+    <dimen name="thirty_sp">30sp</dimen>
+    <dimen name="twenty_sp">20sp</dimen>
+    <dimen name="eighteen_sp">18sp</dimen>
+    <dimen name="sixteen_sp">16sp</dimen>
+    <dimen name="twelve_sp">12sp</dimen>
+    <dimen name="small_text">14sp</dimen>
+    <dimen name="ten_sp">10sp</dimen>
+    <dimen name="twentyEight_sp">28sp</dimen>
+    <dimen name="twentySix_sp">26sp</dimen>
+    <dimen name="twentyFour_sp">24sp</dimen>
+    <dimen name="fifteen_sp">15sp</dimen>
+    <dimen name="thirteen_sp">13sp</dimen>
+    <dimen name="nine_sp">9sp</dimen>
+    <dimen name="slidding_menu_width">300dp</dimen>
+</resources>

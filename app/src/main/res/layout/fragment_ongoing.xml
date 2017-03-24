@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_ongoing"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.obsessive.library.widgets.XSwipeRefreshLayout
+        android:id="@+id/srl_ongoning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.yqx.mamajh.widget.LoadMoreListView
+            android:id="@+id/lv_ongoing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="@null"
+            android:dividerHeight="5dp"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:listSelector="#00000000"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+    </com.github.obsessive.library.widgets.XSwipeRefreshLayout>
+
+</LinearLayout>

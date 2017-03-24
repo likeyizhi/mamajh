@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.yqx.mamajh">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <!-- location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <application
+        android:name=".AppApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/mmjhicon512"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.HomeActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 更新相关 -->
+        <service android:name=".update.UpdateService"/>
+        <service android:name=".services.LocationService"/>
+
+        <receiver android:name=".update.InstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="DpOcile4x3kO7hix6tSCsZAQhZPyYZ95" />
+
+        <!-- 个人资料 -->
+        <activity android:name=".activity.MineInfoActivity">
+        </activity>
+        <!-- 收货地址管理 -->
+        <activity android:name=".activity.MineAddressActivity">
+        </activity>
+        <!-- 收货地址编辑 -->
+        <activity android:name=".activity.MineEditAddressActivity">
+        </activity>
+        <!-- 城市区域选择 -->
+        <!-- 登陆 -->
+        <activity android:name=".activity.LoginActivity">
+        </activity>
+        <!-- 注册 -->
+        <activity android:name=".activity.RegisterActivity">
+        </activity>
+        <!-- 忘记密码 -->
+        <activity android:name=".activity.ForgetPwdActivity">
+        </activity>
+        <!-- 购物车 -->
+        <activity android:name=".activity.ShopCartActivity">
+        </activity>
+        <!-- 我的收藏 -->
+        <activity android:name=".activity.MineCollectActivity">
+        </activity>
+        <activity android:name=".activity.SearchActivity">
+        </activity>
+        <!-- 我的订单 -->
+        <activity android:name=".activity.MineOrderActivity">
+        </activity>
+        <!-- 我的资产 -->
+        <activity android:name=".activity.MineAssetActivity">
+        </activity>
+        <!-- 账户余额 -->
+        <activity android:name=".activity.MineAccountBalanceActivity">
+        </activity>
+        <!-- 余额充值 -->
+        <activity android:name=".activity.MineTopUpPriceActivity">
+        </activity>
+        <!-- 微信支付 -->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+        </activity>
+        <!-- 我的江湖币 -->
+        <activity android:name=".activity.MineAccountIntegralActivity">
+        </activity>
+        <activity android:name=".activity.HelpCenterIndexActivity">
+        </activity>
+        <activity android:name=".activity.HelpCenterListActivity">
+        </activity>
+        <activity android:name=".activity.HelpCenterContentActivity">
+        </activity>
+        <activity
+            android:name=".activity.MineFeedbackActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
+        <activity android:name=".activity.MineAboutActivity">
+        </activity>
+        <activity android:name=".activity.MineBankCardActivity">
+        </activity>
+        <activity android:name=".activity.MineAddBankCardActivity">
+        </activity>
+        <activity
+            android:name=".activity.OrderSettlementActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
+        <activity android:name=".activity.DeliveryWayActivity">
+        </activity>
+        <activity android:name=".activity.ShopOrderCouponActivity">
+        </activity>
+        <activity android:name=".activity.CreateOrderSuccessActivity">
+        </activity>
+        <activity android:name=".activity.CouponActivity">
+        </activity>
+        <activity android:name=".activity.WithdrawalsActivity">
+        </activity>
+        <activity android:name=".activity.WithdrawalsLogActivity">
+        </activity>
+        <activity android:name=".activity.WithdrawalsSuccessActivity">
+        </activity>
+        <activity android:name=".activity.WithdrawalsBankActivity">
+        </activity>
+        <activity android:name=".activity.OrderCommentActivity">
+        </activity>
+        <activity android:name=".activity.ShopActivity">
+        </activity>
+        <activity android:name="com.yqx.mamajh.base.BaseWebActivity">
+        </activity>
+        <activity android:name=".activity.GoodsListActivity">
+        </activity>
+        <activity android:name=".activity.SpecialtyTodayActivity">
+        </activity>
+        <activity android:name=".activity.CreditActivity">
+        </activity>
+        <activity android:name=".activity.ClassifyActivity">
+        </activity>
+        <activity android:name=".activity.RankingActivity">
+        </activity>
+        <activity android:name=".activity.ProfitActivity">
+        </activity>
+        <activity android:name=".activity.ShopClassifyActivity">
+        </activity>
+        <activity android:name=".activity.StoreActivity">
+        </activity>
+        <activity android:name=".activity.HotShopActivity">
+        </activity>
+        <activity android:name=".activity.MySearchActivity">
+        </activity>
+        <activity android:name=".activity.SearchResultActivity">
+        </activity>
+        <activity android:name=".activity.ProductInfoActivity">
+        </activity>
+        <activity android:name=".activity.StoreNewActivity">
+        </activity>
+        <activity android:name=".dbcity.CitySelectActivity">
+        </activity>
+        <activity android:name=".activity.OrderInfoActivity">
+        </activity>
+        <activity android:name=".activity.CreditProInfoActivity">
+        </activity>
+        <activity android:name=".activity.MyListActivity">
+        </activity>
+
+
+    </application>
+
+</manifest>

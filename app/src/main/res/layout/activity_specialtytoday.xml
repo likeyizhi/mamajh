@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/common_toolbar"/>
+
+    <com.github.obsessive.library.smartlayout.SmartTabLayout
+        android:id="@+id/stl_specialtytoday"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorColor="#e24158"
+        app:stl_indicatorThickness="@dimen/three"
+        app:stl_indicatorCornerRadius="@dimen/two"
+        app:stl_dividerColor="#4D000000"
+        android:elevation="2dp"
+        app:stl_dividerThickness="1dp"
+        app:stl_underlineColor="#0000"
+        app:stl_defaultTabTextColor="#FC000000"
+        app:stl_defaultTabTextSize="@dimen/small_text"
+        app:stl_defaultTabTextHorizontalPadding="@dimen/sixteen_sp"
+        app:stl_distributeEvenly="true"/>
+
+    <com.github.obsessive.library.widgets.XViewPager
+        android:id="@+id/xvp_specialtytoday"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

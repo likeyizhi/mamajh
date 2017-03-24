@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <com.yqx.mamajh.widget.cyclebanner.ImageCycleView
+        android:id="@+id/icv_imgs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one_hundred" />
+
+    <com.yqx.mamajh.widget.WrapHeightGridView
+        android:id="@+id/gv_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:numColumns="4"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/tv_inoftmation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten"
+        android:background="@color/white"
+        android:padding="@dimen/ten"
+        android:text="附近商家"
+        android:textColor="@color/color_no_location_tv"
+        android:textSize="@dimen/eighteen_sp" />
+
+</LinearLayout>

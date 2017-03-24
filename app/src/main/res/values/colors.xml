@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="textColorCommon">#666666</color>
+    <color name="textColorTitle">#333333</color>
+
+    <color name="colorPrimary">#e24158</color>
+    <color name="colorPrimaryDark">#a93142</color>
+    <color name="colorAccent">#52b835</color>
+
+    <color name="color_no_location_tv">#8F153D</color>
+</resources>

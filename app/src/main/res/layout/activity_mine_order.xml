@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_mine_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.yqx.mamajh.activity.MineOrderActivity">
+
+    <include
+        layout="@layout/common_toolbar"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.obsessive.library.widgets.XSwipeRefreshLayout
+            android:id="@+id/srl_mine_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.yqx.mamajh.widget.LoadMoreListView
+                android:id="@+id/lv_mine_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/gray_300"
+                android:dividerHeight="8dp"
+                android:scrollbars="none"/>
+        </com.github.obsessive.library.widgets.XSwipeRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/lay_null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:src="@mipmap/orders_kk"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="还没有相关订单哦"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

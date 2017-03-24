@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/common_toolbar"
+        layout="@layout/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rl_root"
+        android:layout_below="@+id/common_toolbar">
+
+        <com.github.obsessive.library.widgets.MyTabWidget
+            android:id="@+id/tab_widget"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bottom_labels="@array/bottom_bar_labels">
+        </com.github.obsessive.library.widgets.MyTabWidget>
+
+        <FrameLayout
+            android:id="@+id/fl_viewpager_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tab_widget"
+            android:layout_weight="1.0">
+            <com.github.obsessive.library.widgets.XViewPager
+                android:id="@+id/home_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_hyy"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"
+        android:src="@mipmap/hyy"/>
+
+</RelativeLayout>

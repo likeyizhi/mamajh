@@ -1,0 +1,32 @@
+package com.yqx.mamajh.bean;
+
+/**
+ * 常见问题 内容
+ */
+
+public class HelpCenterContent {
+
+    /**
+     * title : 3
+     * content : 内容
+     */
+
+    private String title;
+    private String content;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+}

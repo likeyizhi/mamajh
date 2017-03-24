@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/common_toolbar"
+        layout="@layout/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingRight="@dimen/ten"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ib_leftbtn"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@null"
+            android:onClick="onClick"
+            android:src="@drawable/home_back_icon_pink" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_input_bg">
+
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:onClick="onClick"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/eighteen_sp"/>
+
+            <com.github.obsessive.library.widgets.ClearEditText
+                android:id="@+id/et_search"
+                android:layout_toLeftOf="@+id/tv_search"
+                android:layout_marginRight="@dimen/ten"
+                android:imeOptions="actionSearch"
+                android:lines="1"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_title_bottom" />
+
+    <ScrollView
+        android:id="@+id/sl_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ten"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/rmss"
+                android:drawablePadding="@dimen/ten"
+                android:textSize="@dimen/sixteen_sp"
+                android:text="@string/search_hot"/>
+
+            <me.gujun.android.taggroup.TagGroup
+                android:id="@+id/tag_group_hot"
+                style="@style/TagGroup"
+                android:layout_marginTop="@dimen/ten"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ssls"
+                android:drawablePadding="@dimen/ten"
+                android:layout_marginTop="@dimen/ten"
+                android:textSize="@dimen/sixteen_sp"
+                android:text="@string/search_history"/>
+
+            <me.gujun.android.taggroup.TagGroup
+                android:id="@+id/tag_group_history"
+                android:layout_marginTop="@dimen/ten"
+                style="@style/TagGroup" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ten">
+
+                <TextView
+                    android:id="@+id/tv_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ssljt"
+                    android:drawablePadding="@dimen/ten"
+                    android:text="@string/clear_search_history"
+                    android:textSize="@dimen/sixteen_sp"
+                    android:onClick="onClick"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
