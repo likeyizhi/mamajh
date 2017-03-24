@@ -33,7 +33,6 @@ import retrofit.Retrofit;
 
 public class CreditProInfoActivity extends Activity {
     private String id;
-
     private TextView tvTitle;
     private ImageView ivImgSrc;
     private TextView tvOprice;
