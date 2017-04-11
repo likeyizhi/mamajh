@@ -45,6 +45,7 @@ import com.yqx.mamajh.activity.HotShopActivity;
 import com.yqx.mamajh.activity.MySearchActivity;
 import com.yqx.mamajh.activity.ProductInfoActivity;
 import com.yqx.mamajh.activity.SearchActivity;
+import com.yqx.mamajh.activity.SearchLocationActivity;
 import com.yqx.mamajh.activity.ShopActivity;
 import com.yqx.mamajh.activity.SpecialtyTodayActivity;
 import com.yqx.mamajh.activity.StoreActivity;
@@ -119,10 +120,18 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private HomeListPresenter mHomeListPresenter;
     public static String y/* = "39.928538"*/;
     public static String x/* = "116.521065"*/;
+    public static String location;
+    public String firstLocation;
     private Call<NetBaseEntity<HomeInfoEntity>> call;
 
     private LocationService mLocationService;
     private boolean isBound;
+
+    private String province;
+    public static String city;
+    private String street;
+    private TitleGroupAdapter groupAdapter;
+
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -132,12 +141,13 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 //                        isBound = false;
 //                        mContext.unbindService(conn);
 //                        mLocationService.stopSelf();
-                        locationService.unregisterListener(mListener); //注销掉监听
-                        locationService.stop(); //停止定位服务
-                        String location = (String) msg.obj;
-                        locationView.setText(location);
-                        hideLoading();
-                        initData();
+                    locationService.unregisterListener(mListener); //注销掉监听
+                    locationService.stop(); //停止定位服务
+                    location = (String) msg.obj;
+                    firstLocation=location;
+                    locationView.setText(location);
+                    hideLoading();
+                    initData();
 //                    Toast.makeText(getActivity(),""+x+","+y,Toast.LENGTH_SHORT).show();
 //                    }
                     break;
@@ -145,7 +155,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             super.handleMessage(msg);
         }
     };
-    private TitleGroupAdapter groupAdapter;
+
 
     @Override
     protected void onFirstUserVisible() {
@@ -178,6 +188,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private void setClickListener() {
         searchView.setOnClickListener(this);
         searchSmallView.setOnClickListener(this);
+        locationRootView.setOnClickListener(this);
     }
 
     private void initData() {
@@ -236,6 +247,14 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     protected void onUserVisible() {
+//        Toast.makeText(getActivity(),"vis0",Toast.LENGTH_SHORT).show();
+        if (firstLocation!=location){
+            locationView.setText(location);
+            mCurrentPage = 1;
+            mHomeListPresenter.loadListData(TAG_LOG, Constants.EVENT_REFRESH_DATA, mCurrentPage,x, y, true);
+            firstLocation=location;
+//            Toast.makeText(getActivity(),""+location+","+x+","+y,Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -382,7 +401,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         mCurrentPage = 1;
         mHomeListPresenter.loadListData(TAG_LOG, Constants.EVENT_REFRESH_DATA, mCurrentPage,x, y, true);
-
+//        Toast.makeText(getActivity(),""+x+","+y,Toast.LENGTH_SHORT).show();
     }
 
 
@@ -425,7 +444,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         if(carouselad != null && carouselad.size() > 0){
 //            for (HomeInfoEntity.CarouseladEntity carouseladentity :
 //                    carouselad) {
-                for(int i=0;i<carouselad.size();i++){
+            for(int i=0;i<carouselad.size();i++){
                 ADInfo adInfo = new ADInfo();
                 adInfo.setId(carouselad.get(i).getProductid());
                 adInfo.setContent(carouselad.get(i).getTitle());
@@ -592,8 +611,15 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             case R.id.ll_search_small:
                 readyGo(SearchActivity.class);
                 break;
+            case R.id.rl_location:
+                Intent intent=new Intent(getActivity(), SearchLocationActivity.class);
+                intent.putExtra("city",city);
+                firstLocation=location;
+                startActivity(intent);
+                break;
         }
     }
+
 
     @Override
     public void onStop() {
@@ -684,12 +710,16 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 BigDecimal bigDecimalLatitude = new BigDecimal(location.getLatitude());
                 BigDecimal bigDecimalLongitude = new BigDecimal(location.getLongitude());
 
-                x = bigDecimalLatitude.toString();
-                y = bigDecimalLongitude.toString();
+                y = bigDecimalLatitude.toString();
+                x = bigDecimalLongitude.toString();
+
+                province=location.getProvince();
+                city=location.getCity();
+                street=location.getStreet();
 
                 Message message = new Message();
                 message.what = HomeFragment.SERVICE_STOP;
-                message.obj = location.getStreet();
+                message.obj = location.getProvince()+location.getCity()+location.getStreet();
                 handler.sendMessage(message);
 
                 hideLoading();

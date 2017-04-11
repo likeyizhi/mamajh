@@ -31,6 +31,15 @@ public class BankCard {
         private String BankName;
         private String Number;
         private String Name;
+        private String Img;
+
+        public String getImg() {
+            return Img;
+        }
+
+        public void setImg(String img) {
+            Img = img;
+        }
 
         public int getID() {
             return ID;

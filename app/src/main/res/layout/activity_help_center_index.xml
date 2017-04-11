@@ -16,6 +16,7 @@
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/gray_300"
+        android:divider="#eeeeee"
+        android:headerDividersEnabled="true"
         android:dividerHeight="8dp"/>
 </LinearLayout>

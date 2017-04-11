@@ -171,7 +171,7 @@ public class MyListActivity extends Activity{
             final MallMyList.MallMyListRes.MallMyListMyList mylistItem = getItem(position);
             Glide.with(MyListActivity.this).load(mylistItem.getImgSrc()).error(R.mipmap.mmjhicon512).placeholder(R.mipmap.mmjhicon512).into(holder.iv_mylist);
             holder.tv_mylist_proName.setText(mylistItem.getTitle()+"");
-            holder.tv_sellPrice.setText(mylistItem.getSellPrice()+"");
+            holder.tv_sellPrice.setText(mylistItem.getSellPrice()+"金币");
             holder.tv_marketPrice.setText("￥"+mylistItem.getMarketPrice()+"");
             holder.tv_marketPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             if (mylistItem!=null){

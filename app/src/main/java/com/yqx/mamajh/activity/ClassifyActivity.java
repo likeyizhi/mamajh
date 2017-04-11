@@ -66,7 +66,7 @@ public class ClassifyActivity extends BaseActivity implements AdapterView.OnItem
 
     @Override
     protected void initViewsAndEvents() {
-
+        setTitle("积分商城分类");
         listEntityListViewDataAdapter = new ListViewDataAdapter<>(new ViewHolderCreator<ClassifyEntity.ResEntity.CataListEntity>() {
             @Override
             public ViewHolderBase<ClassifyEntity.ResEntity.CataListEntity> createViewHolder(int position) {

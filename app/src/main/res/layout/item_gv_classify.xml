@@ -7,11 +7,13 @@
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:background="#aaa"
-        android:textSize="18sp"
-        android:padding="20dp"/>
+        android:background="#eeeeee"
+        android:textSize="14sp"
+
+        android:textColor="#666666"
+        />
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,11 +17,13 @@
         <TextView
             android:id="@+id/tv_about"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:padding="10dp"
             android:lines="2"
+            android:lineSpacingExtra="10dp"
+            android:textColor="#333333"
             android:text="妈妈江湖"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,18 +33,28 @@
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:text="妈妈江湖"
-                android:textColor="#e24158"/>
+                android:paddingLeft="10dp"
+
+                android:textColor="#e24158"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/tv_price_old"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="妈妈江湖"
-                android:layout_marginLeft="10dp"
-                android:layout_alignBottom="@+id/tv_price"
-                android:layout_toRightOf="@+id/tv_price"/>
+                android:textColor="#999999"
+                android:textSize="11sp"
+
+                android:paddingLeft="4dp"
+                android:paddingTop="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_price"
+                android:layout_toEndOf="@+id/tv_price" />
 
             <ImageView
                 android:id="@+id/iv_cart"
@@ -50,6 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="10dp"
+                android:visibility="invisible"
+                android:clickable="false"
                 android:src="@mipmap/store_gwc"/>
 
         </RelativeLayout>

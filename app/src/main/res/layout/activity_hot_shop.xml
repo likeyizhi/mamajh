@@ -2,12 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="#E14258"
+        android:layout_height="24dp">
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:background="#FFFFFF"
-        android:layout_marginTop="25dp"
         android:gravity="center_vertical"
         android:layout_height="wrap_content">
         <ImageButton
@@ -21,40 +26,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="热销店铺"/>
     </RelativeLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"
+        ></TextView>
     <RadioGroup
         android:id="@+id/rg_hotShop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="#ffffff"
+
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/rb_saleTotal"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:gravity="center"
             android:checked="true"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="销量"
-            android:textColor="@drawable/tab_tpi_text_color"
-            android:textSize="16sp" />
+            android:textColor="#e14258"
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/rb_distance"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="距离"
-            android:textColor="@drawable/tab_tpi_text_color"
-            android:textSize="16sp" />
+            android:textColor="#666666"
+            android:textSize="14sp" />
     </RadioGroup>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"
+        ></TextView>
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_hotShop"
         android:layout_width="match_parent"

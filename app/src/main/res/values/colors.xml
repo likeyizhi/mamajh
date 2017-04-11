@@ -3,7 +3,8 @@
     <color name="textColorCommon">#666666</color>
     <color name="textColorTitle">#333333</color>
 
-    <color name="colorPrimary">#e24158</color>
+    <color name="colorPrimary">#e14258</color>
+    
     <color name="colorPrimaryDark">#a93142</color>
     <color name="colorAccent">#52b835</color>
 

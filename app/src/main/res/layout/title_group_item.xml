@@ -2,20 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <com.yqx.mamajh.widget.DynamicHeightImageView
         android:id="@+id/iv_icon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp"
-        android:layout_marginTop="@dimen/ten"/>
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop= "5dp"
+       />
 
     <TextView
         android:id="@+id/tv_title"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/ten"/>
+        android:layout_marginBottom="15dp"/>
 
 </LinearLayout>

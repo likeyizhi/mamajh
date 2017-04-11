@@ -11,7 +11,7 @@
     <string name="down_sucess">下载成功</string>
 
     <string name="login_username">用户名:</string>
-    <string name="login">登陆</string>
+    <string name="login">登录</string>
     <string name="login_userpassword">密 码:</string>
     <string name="telephone">手机号：</string>
     <string name="verification_code">验证码：</string>
@@ -72,7 +72,7 @@
     <string name="my_collection">我的收藏</string>
     <string name="my_data">个人资料</string>
     <string name="my_post">我的帖子</string>
-    <string name="service_and_help">联系客服  工作事件：工作日9–18点</string>
+    <string name="service_and_help">联系客服  工作时间：工作日9–18点</string>
     <string name="feedback">意见反馈</string>
     <string name="delete_order">删除订单</string>
     <string name="go_payment">去付款</string>

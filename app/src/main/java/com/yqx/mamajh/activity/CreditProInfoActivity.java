@@ -11,6 +11,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class CreditProInfoActivity extends Activity {
     private TextView tvSaleCount;
     private TextView tvPrice;
     private ImageButton ibBack;
+    private Button btJQJB;
     private WebView tvDis;
     private List<MallProductDatails.MallProductDatailsRes> mMallProductDatails;
 
@@ -61,12 +63,22 @@ public class CreditProInfoActivity extends Activity {
         tvSaleCount = (TextView) findViewById(R.id.tv_yiDui);
         tvPrice = (TextView) findViewById(R.id.tv_jinBi);
         tvDis = (WebView) findViewById(R.id.tv_xiangQing);
+       btJQJB=(Button)findViewById(R.id.bt_zhuanQuJinBi);
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        btJQJB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(CreditProInfoActivity.this, ProfitActivity.class);
+                startActivity(intent);
+               
+            }
+        });
+
 
     }
 

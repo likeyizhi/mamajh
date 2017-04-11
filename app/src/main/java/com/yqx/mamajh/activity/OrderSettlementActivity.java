@@ -61,8 +61,14 @@ public class OrderSettlementActivity extends BaseActivity {
     LinearLayout    laySelectCoupon;
     @BindView(R.id.et_remark)
     EditText        etRemark;
-    @BindView(R.id.tv_total_info)
-    TextView        tvTotalInfo;
+    @BindView(R.id.tv_total_info1)
+    TextView        tvTotalInfo1;
+    @BindView(R.id.tv_total_info2)
+    TextView        tvTotalInfo2;
+    @BindView(R.id.tv_total_info3)
+    TextView        tvTotalInfo3;
+    @BindView(R.id.tv_total_info4)
+    TextView        tvTotalInfo4;
     @BindView(R.id.tv_payment_method)
     TextView        tvPaymentMethod;
     @BindView(R.id.tv_item_price)
@@ -370,10 +376,12 @@ public class OrderSettlementActivity extends BaseActivity {
             tvCouponInfo.setText("使用" + shop.getGiftPrice()  + "元优惠券");
         }
 
-        tvTotalInfo.setText("共" + mOrderInfo.getProductCount() +
-                "件，合计：￥" + mOrderInfo.getOrderTotalPrice() +
-                "，运费：￥" + mOrderInfo.getFreight() +
-                "，优惠：￥" + mOrderInfo.getPriceGiftPriceTotal());
+        tvTotalInfo1.setText( mOrderInfo.getProductCount()+"");
+        tvTotalInfo2.setText(  "￥" + mOrderInfo.getOrderTotalPrice());
+        tvTotalInfo3.setText( "￥" + mOrderInfo.getFreight());
+        tvTotalInfo4.setText("￥" + mOrderInfo.getPriceGiftPriceTotal());
+
+
         tvItemPrice.setText(mOrderInfo.getOrderTotalPrice() + "");
         tvExpressPrice.setText(mOrderInfo.getFreight() + "");
         tvPromotionBreaks.setText(0 + "");
@@ -381,7 +389,7 @@ public class OrderSettlementActivity extends BaseActivity {
         tvPaymentPrice.setText(mOrderInfo.getOrderPayPrice() + "");
 
         tvCount.setText(mOrderInfo.getProductCount() + "");
-        tvTotalPrice.setText(mOrderInfo.getOrderPayPrice() + "");
+        tvTotalPrice.setText("￥"+mOrderInfo.getOrderPayPrice() + "");
         tvTotalExpressPrice.setText(mOrderInfo.getFreight() + "");
 
     }
@@ -402,10 +410,12 @@ public class OrderSettlementActivity extends BaseActivity {
             tvCouponInfo.setText("您有" + shop.getGiftCount()  + "张可用优惠券");
         }
         tvCouponInfo.setText("使用" + shop.getGiftPrice()  + "元优惠券");
-        tvTotalInfo.setText("共" + mOrderInfo.getProductCount() +
-                "件，合计：￥" + mOrderInfo.getOrderTotalPrice() +
-                "，运费：￥" + mOrderInfo.getFreight() +
-                "，优惠：￥" + mOrderInfo.getPriceGiftPriceTotal());
+        tvTotalInfo1.setText( mOrderInfo.getProductCount()+"");
+
+
+        tvTotalInfo2.setText(  "￥" + mOrderInfo.getOrderTotalPrice());
+        tvTotalInfo3.setText( "￥" + mOrderInfo.getFreight());
+        tvTotalInfo4.setText("￥" + mOrderInfo.getPriceGiftPriceTotal());
         tvItemPrice.setText(mOrderInfo.getOrderTotalPrice() + "");
         tvExpressPrice.setText(mOrderInfo.getFreight() + "");
         tvPromotionBreaks.setText(0 + "");

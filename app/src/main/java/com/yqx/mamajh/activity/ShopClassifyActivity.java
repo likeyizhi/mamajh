@@ -267,7 +267,7 @@ public class ShopClassifyActivity extends BaseActivity {
                         @Override
                         public void onClick(View v) {
                             // TODO
-                            Toast.makeText(mContext, "第"+(position+1)+"个" + childListEntity.getID(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, "第"+(position+1)+"个" + childListEntity.getID(), Toast.LENGTH_SHORT).show();
                             Bundle bundle = new Bundle();
                             bundle.putString(ShopActivity.IDBUNDLE, id);
                             bundle.putString("title",childListEntity.getName());

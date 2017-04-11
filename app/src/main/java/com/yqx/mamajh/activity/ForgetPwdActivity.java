@@ -10,8 +10,10 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.api.defaults.DefaultBootstrapBrand;
 import com.github.obsessive.library.eventbus.EventCenter;
 import com.github.obsessive.library.netstatus.NetUtils;
+import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.base.BaseActivity;
+import com.yqx.mamajh.bean.MemberInfo;
 import com.yqx.mamajh.bean.NetBaseEntity;
 import com.yqx.mamajh.bean.SendRegMessage;
 import com.yqx.mamajh.network.RetrofitService;
@@ -43,10 +45,12 @@ public class ForgetPwdActivity extends BaseActivity {
     private int            obj             = 0;
     private Timer          timer           = null;
     private int            time            = 60;
+    private TimerTask timerTask;
+    private String changeType;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
-
+        changeType=extras.getString("changeType");
     }
 
     @Override
@@ -67,6 +71,28 @@ public class ForgetPwdActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         setTitle("设置密码");
+        getPhone();
+    }
+
+    private void getPhone() {
+        Call<NetBaseEntity<MemberInfo>> mGetDataCallNet = RetrofitService.getInstance().memberInfo(AppApplication.TOKEN);
+        mGetDataCallNet.enqueue(new Callback<NetBaseEntity<MemberInfo>>() {
+            @Override
+            public void onResponse(Response<NetBaseEntity<MemberInfo>> response, Retrofit retrofit) {
+                if (response==null){
+                    return;
+                }
+                if (response.body().getStatus()==0){
+                    etForgetName.setText(response.body().getRes().getMobile()+"");
+                    etForgetName.setFocusable(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -146,9 +172,43 @@ public class ForgetPwdActivity extends BaseActivity {
                     showToast("你确定有发送验证码吗？");
                     break;
                 }
-                register(phone, pwd, code, obj);
+                if (changeType.equals("修改账户密码")){
+                    register(phone, pwd, code, obj);
+                }
+                if (changeType.equals("修改支付密码")){
+                    changPayPwd(phone, pwd, code, obj);
+                }
                 break;
         }
+    }
+
+    private void changPayPwd(String phone, String pwd, String code, int obj) {
+        mMaterialDialog = new MaterialDialog.Builder(ForgetPwdActivity.this)
+                .content(R.string.loading)
+                .cancelable(false)
+                .progress(true, 0)
+                .progressIndeterminateStyle(false)
+                .show();
+        Call<NetBaseEntity> call = RetrofitService.getInstance().memberChangePayPassword(AppApplication.TOKEN, pwd, code, obj+"");
+        call.enqueue(new Callback<NetBaseEntity>() {
+            @Override
+            public void onResponse(Response<NetBaseEntity> response, Retrofit retrofit) {
+                if (response.body().getMes() != null && response.body().getStatus() == 0) {
+                    showToast("密码设置成功");
+                    timerTask.cancel();
+                    finish();
+                } else {
+                    showToast(response.body().getMes());
+                }
+                mMaterialDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                showToast(t.getMessage());
+                mMaterialDialog.dismiss();
+            }
+        });
     }
 
     private void getCode(String phone) {
@@ -166,7 +226,7 @@ public class ForgetPwdActivity extends BaseActivity {
                     obj = response.body().getRes().getObj();
                     showToast(response.body().getMes());
                     timer = new Timer();
-                    TimerTask timerTask = new TimerTask() {
+                    timerTask = new TimerTask() {
                         @Override
                         public void run() {
                             runOnUiThread(new Runnable() {
@@ -215,6 +275,7 @@ public class ForgetPwdActivity extends BaseActivity {
             public void onResponse(Response<NetBaseEntity> response, Retrofit retrofit) {
                 if (response.body().getMes() != null && response.body().getStatus() == 0) {
                     showToast("密码设置成功");
+                    timerTask.cancel();
                     finish();
                 } else {
                     showToast(response.body().getMes());

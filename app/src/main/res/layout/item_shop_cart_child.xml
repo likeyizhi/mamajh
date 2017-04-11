@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:stepper="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/gray_100"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:stepper="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fafafa"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="4dp">
+        android:paddingTop="7dp"
+        android:paddingLeft="10dp">
 
-        <com.rey.material.widget.CheckBox
+        <CheckBox
             android:id="@+id/cb_item_check"
-            style="@style/round_check"
+            android:layout_marginTop="22dp"
+            style="@style/CustomCheckboxTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
+            android:layout_marginRight="5dp"
             android:gravity="center_vertical"
-            android:textColor="@color/white"/>
+            />
 
         <ImageView
+            android:layout_marginTop="10dp"
             android:id="@+id/iv_item_pic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginRight="8dp"
             android:src="@mipmap/ic_launcher"/>
 
@@ -33,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -40,6 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:textSize="12sp"
                 android:text="{name}"
                 android:textColor="@color/gray_700"/>
 
@@ -52,7 +59,7 @@
                 stepper:max="99"
                 stepper:min="0"
                 stepper:stepper_background="@color/gray_200"
-                stepper:stepper_contentBackground="@color/gray_200"
+                stepper:stepper_contentBackground="@color/white"
                 stepper:stepper_contentTextColor="@color/black"
                 stepper:stepper_leftButtonBackground="@color/white"
                 stepper:stepper_rightButtonBackground="@color/white"
@@ -63,7 +70,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:gravity="right"
+
             android:orientation="vertical">
 
             <TextView
@@ -73,17 +82,21 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="{￥99.99}"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#e14258"
                 android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/iv_item_del"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/gwc_delete"/>
         </LinearLayout>
 
 
     </LinearLayout>
-
+    <View
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"></View>
 </LinearLayout>

@@ -15,6 +15,7 @@ import com.yqx.mamajh.bean.AccountBalance;
 import com.yqx.mamajh.bean.AccountIntegral;
 import com.yqx.mamajh.bean.AddShowProduct;
 import com.yqx.mamajh.bean.BankCard;
+import com.yqx.mamajh.bean.BaseEntity;
 import com.yqx.mamajh.bean.Cartlist;
 import com.yqx.mamajh.bean.ClassifivationInfoEntity;
 import com.yqx.mamajh.bean.ClassifyEntity;
@@ -27,6 +28,7 @@ import com.yqx.mamajh.bean.DeliveryAddress;
 import com.yqx.mamajh.bean.DeliveryInfo;
 import com.yqx.mamajh.bean.DeliveryWay;
 import com.yqx.mamajh.bean.DemoFormtEntity;
+import com.yqx.mamajh.bean.DictionaryBank;
 import com.yqx.mamajh.bean.EvaluateEntity;
 import com.yqx.mamajh.bean.EvaluatesEntity;
 import com.yqx.mamajh.bean.FeedbackType;
@@ -34,11 +36,13 @@ import com.yqx.mamajh.bean.HelpCenterContent;
 import com.yqx.mamajh.bean.HelpCenterIndex;
 import com.yqx.mamajh.bean.HomeInfoEntity;
 import com.yqx.mamajh.bean.HotGoodsEntity;
+import com.yqx.mamajh.bean.LocationCity;
 import com.yqx.mamajh.bean.MallMyList;
 import com.yqx.mamajh.bean.MallProductDatails;
 import com.yqx.mamajh.bean.MemberOrderInfo;
 import com.yqx.mamajh.bean.ProInfo;
 import com.yqx.mamajh.bean.SearchResultBean;
+import com.yqx.mamajh.bean.ShopCartCount;
 import com.yqx.mamajh.bean.ShopCategoryEntity;
 import com.yqx.mamajh.bean.ShopInformationEntity;
 import com.yqx.mamajh.bean.ShopList;
@@ -54,11 +58,13 @@ import com.yqx.mamajh.bean.SearchHistoryListEntity;
 import com.yqx.mamajh.bean.SendRegMessage;
 import com.yqx.mamajh.bean.ShopInfoEntity;
 import com.yqx.mamajh.bean.SpecialChannelGoodsEntity;
+import com.yqx.mamajh.bean.StoreSearch;
 import com.yqx.mamajh.bean.Token;
 import com.yqx.mamajh.bean.TopUpIntegral;
 import com.yqx.mamajh.bean.TopUpOrder;
 import com.yqx.mamajh.bean.TopUpPrice;
 import com.yqx.mamajh.bean.UserCenterAccount;
+import com.yqx.mamajh.bean.UserCenterBankCard;
 import com.yqx.mamajh.bean.UserCenterWithdrawal;
 import com.yqx.mamajh.bean.WeiXinPay;
 import com.yqx.mamajh.bean.WithdrawalLog;
@@ -230,8 +236,8 @@ public class RetrofitService {
         return retrofitInterface.collectScoreProductList(token, p, size);
     }
 
-    public Call<NetBaseEntity<SearchHistoryListEntity>> getSearchHistory() {
-        return retrofitInterface.getSearchHistory();
+    public Call<NetBaseEntity<SearchHistoryListEntity>> getSearchHistory(String token) {
+        return retrofitInterface.getSearchHistory(token);
     }
 
     public Call<NetBaseEntity<List<MemberOrder>>> memberOrderAll(String token, String state, int p, int size) {
@@ -290,6 +296,10 @@ public class RetrofitService {
         return retrofitInterface.userCenterBankCard(token);
     }
 
+    public Call<UserCenterBankCard> userCenterBankCardNew(String token) {
+        return retrofitInterface.userCenterBankCardNew(token);
+    }
+
     public Call<NetBaseEntity> userCenterBankCardAdd(String token, String name, String number, String bank) {
         return retrofitInterface.userCenterBankCardAdd(token, name, number, bank);
     }
@@ -314,8 +324,8 @@ public class RetrofitService {
         return retrofitInterface.createOrder(token, params);
     }
 
-    public Call<NetBaseEntity<WeiXinPay>> getOrderWeiXinPayParam(String token, String ordernumber, String useBlance) {
-        return retrofitInterface.getOrderWeiXinPayParam(token, ordernumber, useBlance);
+    public Call<NetBaseEntity<WeiXinPay>> getOrderWeiXinPayParam(String token, String ordernumber, String useBlance, String pwd) {
+        return retrofitInterface.getOrderWeiXinPayParam(token, ordernumber, useBlance, pwd);
     }
 
     public Call<NetBaseEntity<Coupon>> userCenterCouponList(String token, int type) {
@@ -344,6 +354,10 @@ public class RetrofitService {
 
     public Call<NetBaseEntity> saveImage(String token, int type, int showid, MultipartBody.Part file_img1, MultipartBody.Part file_img2, MultipartBody.Part file_img3) {
         return retrofitInterface.saveImage(token, type, showid, file_img1, file_img2, file_img3);
+    }
+
+    public Call<NetBaseEntity> saveImageHead(String token, int type,MultipartBody.Part file_img) {
+        return retrofitInterface.saveImageHead(token, type, file_img);
     }
 
     public Call<NetBaseEntity<ShopInfoEntity>> getShopInfo(String token,String userId) {
@@ -387,8 +401,8 @@ public class RetrofitService {
         return retrofitInterface.deleteDeliveryInfo(token, id);
     }
 
-    public Call<SearchResultBean> getSearchResult(String k, String x, String y) {
-        return retrofitInterface.getSearchResult(k,x,y);
+    public Call<SearchResultBean> getSearchResult(String token,String k, String x, String y) {
+        return retrofitInterface.getSearchResult(token,k,x,y);
     }
 
     public Call<ProInfo> getProInfo(int id,String token) {
@@ -414,8 +428,8 @@ public class RetrofitService {
         return retrofitInterface.getShopClassify(id);
     }
 
-    public Call<HotGoodsEntity> getHotGoods(String id, String cid, int page, String pageSize) {
-        return retrofitInterface.getHotGoods(id, cid, page, pageSize);
+    public Call<HotGoodsEntity> getHotGoods(String id, String cid, int page, String pageSize,String key) {
+        return retrofitInterface.getHotGoods(id, cid, page, pageSize,key);
     }
 
     public Call<EvaluateEntity> loadRvaluate(String id) {
@@ -452,6 +466,38 @@ public class RetrofitService {
 
     public Call<MallMyList> integralMallMyList(String token, int cid, int o,int p, int psize){
         return retrofitInterface.integralMallMyList(token, cid, o, p, psize);
+    }
+
+    public Call<LocationCity> getLocationCity(){
+        return retrofitInterface.getLocationCity();
+    }
+
+    public Call<EvaluatesEntity> getShopProductEvaluateContent(int id,int p,int size){
+        return retrofitInterface.getShopProductEvaluateContent(id, p, size);
+    }
+
+    public Call<NetBaseEntity> memberInfoSeave(String token, String name, String sex){
+        return retrofitInterface.memberInfoSeave(token, name, sex);
+    }
+
+    public Call<NetBaseEntity> memberChangePayPassword(String token, String NewPassword, String code, String obj){
+        return retrofitInterface.memberChangePayPassword(token, NewPassword, code, obj);
+    }
+
+    public Call<ShopCartCount> getShopCartCount(String token){
+        return retrofitInterface.getShopCartCount(token);
+    }
+
+    public Call<StoreSearch> getShopSearchList(String shopid){
+        return retrofitInterface.getShopSearchList(shopid);
+    }
+
+    public Call<NetBaseEntity> clearSearch(String token){
+        return retrofitInterface.clearSearch(token);
+    }
+
+    public Call<DictionaryBank> dictionaryBankList(){
+        return retrofitInterface.dictionaryBankList();
     }
 
 }

@@ -3,6 +3,8 @@ package com.yqx.mamajh.fragment;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -12,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.github.obsessive.library.adapter.ListViewDataAdapter;
 import com.github.obsessive.library.adapter.MultiItemRowListAdapter;
@@ -51,7 +54,8 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
     LinearLayout root;
     @BindView(R.id.gv_reXiaoPro)
     GridView gv_reXiaoPro;
-
+    @BindView(R.id.scrollview)
+    NestedScrollView scrollview;
     private ListViewDataAdapter<HotGoodsEntity.ResEntity.ProlistEntity> listViewDataAdapter;
 
     private String id;
@@ -64,8 +68,9 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
     }
     private String cid="0";
     private int p=1;
-    private String size="10";
-
+    private String size="6";
+    private MaterialDialog mMaterialDialog = null;
+    private String key;
     @Override
     protected void onFirstUserVisible() {
 
@@ -96,6 +101,7 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
         Bundle bundle = getArguments();
         if(bundle != null ){
             id = bundle.getString(ShopActivity.IDBUNDLE);
+            key="";
             loadMyGvData(false);
             gv_reXiaoPro.setOnScrollListener(new AbsListView.OnScrollListener() {
                 private boolean isBottom;
@@ -104,8 +110,10 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
                     switch (scrollState) {
                         case SCROLL_STATE_FLING:
                             //Log.i("info", "SCROLL_STATE_FLING");
+//                            Toast.makeText(getActivity(),"0001",Toast.LENGTH_SHORT).show();
                             break;
                         case SCROLL_STATE_IDLE:
+//                            Toast.makeText(getActivity(),"0002",Toast.LENGTH_SHORT).show();
                             if (isBottom) {
                                 p++;
                                 loadMyGvData(true);
@@ -127,6 +135,16 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
         }
 
         loadMoreListView.setCanLoadMore(true);
+
+        scrollview.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                    p++;
+                    loadMyGvData(true);
+                }
+            }
+        });
 
         listViewDataAdapter = new ListViewDataAdapter<>(new ViewHolderCreator<HotGoodsEntity.ResEntity.ProlistEntity>() {
             @Override
@@ -191,12 +209,22 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
 
     }
 
+
     private void loadMyGvData(final boolean isLoadMore) {
-        Call<HotGoodsEntity> EShopCall=RetrofitService.getInstance().getHotGoods(id+"",cid,p,size);
+        if (!isLoadMore){
+            mMaterialDialog = new MaterialDialog.Builder(getActivity())
+                    .content(R.string.loading)
+                    .cancelable(false)
+                    .progress(true, 0)
+                    .progressIndeterminateStyle(false)
+                    .show();
+        }
+        Call<HotGoodsEntity> EShopCall=RetrofitService.getInstance().getHotGoods(id+"",cid,p,size,key);
         EShopCall.enqueue(new Callback<HotGoodsEntity>() {
             @Override
             public void onResponse(Response<HotGoodsEntity> response, Retrofit retrofit) {
                 if (response.body()==null){
+                    mMaterialDialog.dismiss();
 //                    Toast.makeText(getActivity(),"arr",Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -204,22 +232,28 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
                     if (isLoadMore){
                         List<HotGoodsEntity.ResEntity.ProlistEntity> proListAdd = response.body().getRes().getProlist();
                         if (!proListAdd.isEmpty()){
+                            mMaterialDialog.dismiss();
                             proList.addAll(proListAdd);
                             gvAdapter.notifyDataSetChanged();
-                            Toast.makeText(getActivity(),"正在加载...",Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(),"正在加载...",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(gv_reXiaoPro,"正在加载更多产品...",Snackbar.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(getActivity(),"就这些产品啦...",Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(),"就这些产品啦...",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(gv_reXiaoPro,"就这些产品啦",Snackbar.LENGTH_SHORT).show();
+                            mMaterialDialog.dismiss();
                         }
                     }else{
                         proList=response.body().getRes().getProlist();
                         setGvAdapter(response.body().getRes().getProlist());
+                        mMaterialDialog.dismiss();
                     }
                 }
+                mMaterialDialog.dismiss();
             }
 
             @Override
             public void onFailure(Throwable t) {
-
+                mMaterialDialog.dismiss();
             }
         });
     }
@@ -236,6 +270,7 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
             }
         });
 
+        mMaterialDialog.dismiss();
     }
 
     private void loadData(final int page) {
@@ -243,7 +278,7 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
         if(page == 1){
             showLoading("", true);
         }
-        Call<HotGoodsEntity> call = RetrofitService.getInstance().getHotGoods(id, "", page, "20");
+        Call<HotGoodsEntity> call = RetrofitService.getInstance().getHotGoods(id, "", page, "20",key);
         call.enqueue(new Callback<HotGoodsEntity>() {
             @Override
             public void onResponse(Response<HotGoodsEntity> response, Retrofit retrofit) {
@@ -310,4 +345,6 @@ public class HotGoodsFragment extends BaseFragment implements LoadMoreListView.O
         mCurrentPage++;
         loadData(mCurrentPage);
     }
+
+
 }

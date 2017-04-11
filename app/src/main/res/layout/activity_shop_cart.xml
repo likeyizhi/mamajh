@@ -28,13 +28,14 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:divider="@color/gray_300"
-                android:dividerHeight="3dp"
+
+                android:dividerHeight="@null"
                 android:groupIndicator="@null"/>
 
             <LinearLayout
                 android:id="@+id/rl_accounts"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:background="@color/gray_900"
                 android:orientation="horizontal">
 
@@ -90,6 +91,7 @@
                     android:text="立即结算"
                     app:bootstrapBrand="danger"
                     app:bootstrapSize="lg"
+                    android:textSize="14sp"
                     app:buttonMode="regular"/>
 
             </LinearLayout>

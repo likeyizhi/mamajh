@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context="com.yqx.mamajh.activity.MineAccountBalanceActivity">
 
     <include
@@ -18,7 +19,7 @@
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="25dp">
+        android:padding="40dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -48,8 +49,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="充值余额"
-            android:visibility="invisible"
-            android:clickable="false"
             app:bootstrapBrand="regular"
             app:buttonMode="regular"
             app:roundedCorners="true"/>
@@ -60,23 +59,26 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="收支明细"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textSize="16sp"
+        android:textColor="#333333"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray_300"/>
+        android:background="#eeeeee"/>
 
     <com.github.obsessive.library.widgets.XSwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <com.yqx.mamajh.widget.LoadMoreListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/gray_300"
+            android:layout_height="match_parent"
+            android:divider="#eeeeee"
+            android:layout_marginBottom="20dp"
             android:dividerHeight="1dp"
             android:scrollbars="none"/>
     </com.github.obsessive.library.widgets.XSwipeRefreshLayout>

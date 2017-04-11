@@ -36,7 +36,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cacheColorHint="@android:color/transparent"
-            android:divider="@color/gray_300"
+            android:divider="#eeeeee"
+            android:headerDividersEnabled="true"
+            android:footerDividersEnabled="false"
             android:dividerHeight="1dp"
             android:scrollbars="none"/>
     </com.github.obsessive.library.widgets.XSwipeRefreshLayout>

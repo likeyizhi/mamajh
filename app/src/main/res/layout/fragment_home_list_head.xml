@@ -22,11 +22,19 @@
         android:id="@+id/tv_inoftmation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/ten"
+        android:layout_marginTop="4dp"
         android:background="@color/white"
-        android:padding="@dimen/ten"
-        android:text="附近商家"
-        android:textColor="@color/color_no_location_tv"
-        android:textSize="@dimen/eighteen_sp" />
+        android:paddingLeft="@dimen/ten"
+
+        android:text="   附近商家"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:drawableLeft="@mipmap/sctb"
+        android:textColor="#666"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"/>
 
 </LinearLayout>

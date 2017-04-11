@@ -2,6 +2,7 @@ package com.yqx.mamajh.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.api.defaults.DefaultBootstrapBrand;
 import com.bumptech.glide.Glide;
@@ -61,7 +63,7 @@ public class MineOrderActivity extends BaseActivity {
 
     private List<MemberOrder> mOrderEntities = new ArrayList<>();
     private OrderItmeAdapter mAdapter;
-
+    private MaterialDialog mMaterialDialog = null;
     @Override
     protected void getBundleExtras(Bundle extras) {
 
@@ -165,7 +167,15 @@ public class MineOrderActivity extends BaseActivity {
 
     private void getData(int page, final boolean isLoadMore) {
         if (NetUtils.isNetworkConnected(mContext)) {
-            Call<NetBaseEntity<List<MemberOrder>>> mGetDataCallNet = RetrofitService.getInstance().memberOrderAll(AppApplication.TOKEN, type, page, 20);
+            if (!isLoadMore){
+                mMaterialDialog = new MaterialDialog.Builder(MineOrderActivity.this)
+                        .content(R.string.loading)
+                        .cancelable(false)
+                        .progress(true, 0)
+                        .progressIndeterminateStyle(false)
+                        .show();
+            }
+            Call<NetBaseEntity<List<MemberOrder>>> mGetDataCallNet = RetrofitService.getInstance().memberOrderAll(AppApplication.TOKEN, type, page, 10);
             mGetDataCallNet.enqueue(new Callback<NetBaseEntity<List<MemberOrder>>>() {
                 @Override
                 public void onResponse(Response<NetBaseEntity<List<MemberOrder>>> response, Retrofit retrofit) {
@@ -175,24 +185,32 @@ public class MineOrderActivity extends BaseActivity {
                             mLv.onLoadMoreComplete();
                         } else {
                             mOrderEntities = response.body().getRes();
+                            mLv.onLoadMoreComplete();
+                            mMaterialDialog.dismiss();
                         }
                         if (mOrderEntities.size() > 0) {
                             layNull.setVisibility(View.GONE);
                         } else {
                             layNull.setVisibility(View.VISIBLE);
                         }
+                        mMaterialDialog.dismiss();
+                        mLv.onLoadMoreComplete();
                         mAdapter.notifyDataSetChanged();
                     } else {
                         //showToast(response.body().getMes());
+                        mLv.onLoadMoreComplete();
+                        mMaterialDialog.dismiss();
                     }
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
+                    mMaterialDialog.dismiss();
                     System.out.println(t.getMessage());
                 }
             });
         } else {
+
             toggleNetworkError(true, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -266,7 +284,7 @@ public class MineOrderActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) view.getTag();
             }
-            holder.tvItemTitle.setText(entity.getName());
+            holder.tvItemTitle.setText(entity.getShopName());
             holder.tvItemOrderState.setText(entity.getOrderState());
             holder.tvItemTime.setText(entity.getTime());
             holder.tvItemOrderPriceInfo.setText(String.format("共%s商品 合计：￥%s (含运费￥%s)", entity.getProductCount(), entity.getPrice(), entity.getPostPrice()));
@@ -358,6 +376,7 @@ public class MineOrderActivity extends BaseActivity {
 //                        Toast.makeText(MineOrderActivity.this,""+entity.getNumber(),Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(MineOrderActivity.this,OrderInfoActivity.class);
                         intent.putExtra("_orderId",entity.getNumber()+"");
+                        intent.putExtra("_shopId",entity.getShopID()+"");
                         startActivity(intent);
                     }
                 });
@@ -444,17 +463,22 @@ public class MineOrderActivity extends BaseActivity {
             }
             Glide.with(getApplicationContext()).load(entity.getImg()).crossFade().into(holder.ivMineOrderProductItemImg);
             holder.tvItemOrderProductTitle.setText(entity.getName());
-            holder.tvItemOrderProductStandard.setText(entity.getStandard());
+            holder.tvItemOrderProductStandard.setText("规格："+entity.getStandard());
             holder.tvItemOrderProductPrice.setText("￥" + entity.getPrice());
             holder.tvItemOrderProductPrice2.setText("￥" + entity.getPrice2());
             holder.tvItemOrderProductCount.setText("X " + entity.getCount());
+            holder.tvItemOrderProductPrice2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             if (entityList.get(i)!=null){
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 //                        Toast.makeText(MineOrderActivity.this,""+entity.getID(),Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(MineOrderActivity.this,ProductInfoActivity.class);
-                        intent.putExtra("_id", Integer.parseInt(entity.getID()+""));
+//                        Intent intent=new Intent(MineOrderActivity.this,ProductInfoActivity.class);
+//                        intent.putExtra("_id", Integer.parseInt(entity.getID()+""));
+//                        startActivity(intent);
+                        Intent intent=new Intent(MineOrderActivity.this,OrderInfoActivity.class);
+                        intent.putExtra("_orderId",entity.getOrderNumber()+"");
+                        intent.putExtra("_shopId",entity.getShopId()+"");
                         startActivity(intent);
                     }
                 });

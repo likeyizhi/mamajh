@@ -63,7 +63,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         setTitle(getString(R.string.login));
-        etLoginName.setText(SPUtils.getString(getApplicationContext(), SP_PHONE, ""));
+//        etLoginName.setText(SPUtils.getString(getApplicationContext(), SP_PHONE, ""));
     }
 
     @Override
@@ -124,7 +124,9 @@ public class LoginActivity extends BaseActivity {
 //                readyGoForResult(RegisterActivity.class, RC_REGISTER);
                 break;
             case R.id.tv_login_forget:
-                readyGo(ForgetPwdActivity.class);
+                Bundle bu=new Bundle();
+                bu.putString("changeType","修改账户密码");
+                readyGo(ForgetPwdActivity.class, bu);
                 break;
         }
     }

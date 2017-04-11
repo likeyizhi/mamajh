@@ -31,7 +31,7 @@ public class MineCollectActivity extends BaseActivity {
     TabPageIndicator indicator;
     @BindView(R.id.view_pager)
     XViewPager       viewPager;
-    private Tab[] mItems = new Tab[]{Tab.A, Tab.B, Tab.C};
+    private Tab[] mItems = new Tab[]{Tab.A, Tab.B, Tab.C, Tab.D};
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -152,8 +152,8 @@ public class MineCollectActivity extends BaseActivity {
                             setFragment(Tab.B, fragment);
                         else if (fragment instanceof CollectScoreProductFragment)
                             setFragment(Tab.C, fragment);
-                        //else if(fragment instanceof SwitchesFragment)
-                        //    setFragment(Tab.D, fragment);
+                        else if(fragment instanceof CollectScoreProductFragment)
+                            setFragment(Tab.D, fragment);
                     }
                 }
             } catch (Exception e) {
@@ -182,9 +182,9 @@ public class MineCollectActivity extends BaseActivity {
                     case C:
                         mFragments[position] = CollectScoreProductFragment.newInstance();
                         break;
-                    //case D:
-                    //    mFragments[position] = CollectScoreProductFragment.newInstance();
-                    //    break;
+                    case D:
+                        mFragments[position] = CollectScoreProductFragment.newInstance();
+                        break;
                 }
             }
 

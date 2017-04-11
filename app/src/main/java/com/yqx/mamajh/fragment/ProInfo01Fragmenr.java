@@ -50,6 +50,8 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 import android.view.ViewGroup.LayoutParams;
+
+import static com.yqx.mamajh.R.id.swipe;
 import static com.yqx.mamajh.R.id.vp_proinfo;
 
 /**
@@ -181,7 +183,7 @@ public class ProInfo01Fragmenr extends android.support.v4.app.Fragment {
 
     private void loadData(final int id) {
 //        Toast.makeText(getActivity(),""+id,Toast.LENGTH_SHORT).show();
-        Call<ProInfo> call= RetrofitService.getInstance().getProInfo(id,AppApplication.TOKEN);
+        final Call<ProInfo> call= RetrofitService.getInstance().getProInfo(id,AppApplication.TOKEN);
         call.enqueue(new Callback<ProInfo>() {
             public ProInfo.ProInfoRes proInfos;
 
@@ -195,7 +197,7 @@ public class ProInfo01Fragmenr extends android.support.v4.app.Fragment {
 //                    Toast.makeText(getActivity(),""+response.body().getRes().getName(),Toast.LENGTH_SHORT).show();
 //                    vp_proImg
                     tv_proName.setText(proInfos.getProname()+"");
-                    tv_shopPrice.setText("￥"+proInfos.getSaleprice()+"");
+                    tv_shopPrice.setText(proInfos.getSaleprice()+"");
                     tv_realPrice.setText("￥"+proInfos.getMarketprice()+"");
                     tv_realPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
                     tv_buyNumber.setText(proInfos.getSalecount()+"人已购买");
@@ -225,31 +227,80 @@ public class ProInfo01Fragmenr extends android.support.v4.app.Fragment {
 
                         }
                     });
-                    if (proInfos.getDeliverylist().get(0).getState()==1){
-                        tv_proinf_zhida.setTextColor(Color.rgb(255,77,77));//#FF4D4D
-                    }else{
-                        tv_proinf_zhida.setTextColor(Color.rgb(142,142,142));//#8E8E8E
+                    int delListSize = proInfos.getDeliverylist().size();
+                    switch (delListSize){
+                        case 0:
+                            tv_proinf_zhida.setVisibility(View.INVISIBLE);
+                            tv_proinfo_ziqu.setVisibility(View.INVISIBLE);
+                            tv_proinfo_fn.setVisibility(View.INVISIBLE);
+                            tv_proinfo_bd.setVisibility(View.INVISIBLE);
+                            break;
+                        case 1:
+                            tv_proinf_zhida.setVisibility(View.VISIBLE);
+                            tv_proinf_zhida.setText(proInfos.getDeliverylist().get(0).getTitle()+"");
+                            tv_proinfo_ziqu.setVisibility(View.INVISIBLE);
+                            tv_proinfo_fn.setVisibility(View.INVISIBLE);
+                            tv_proinfo_bd.setVisibility(View.INVISIBLE);
+                            break;
+                        case 2:
+                            tv_proinf_zhida.setVisibility(View.VISIBLE);
+                            tv_proinf_zhida.setText(proInfos.getDeliverylist().get(0).getTitle()+"");
+                            tv_proinfo_ziqu.setVisibility(View.VISIBLE);
+                            tv_proinfo_ziqu.setText(proInfos.getDeliverylist().get(1).getTitle()+"");
+                            tv_proinfo_fn.setVisibility(View.INVISIBLE);
+                            tv_proinfo_bd.setVisibility(View.INVISIBLE);
+                            break;
+                        case 3:
+                            tv_proinf_zhida.setVisibility(View.VISIBLE);
+                            tv_proinf_zhida.setText(proInfos.getDeliverylist().get(0).getTitle()+"");
+                            tv_proinfo_ziqu.setVisibility(View.VISIBLE);
+                            tv_proinfo_ziqu.setText(proInfos.getDeliverylist().get(1).getTitle()+"");
+                            tv_proinfo_fn.setVisibility(View.VISIBLE);
+                            tv_proinfo_fn.setText(proInfos.getDeliverylist().get(2).getTitle()+"");
+                            tv_proinfo_bd.setVisibility(View.INVISIBLE);
+                            break;
+                        case 4:
+                            tv_proinf_zhida.setVisibility(View.VISIBLE);
+                            tv_proinf_zhida.setText(proInfos.getDeliverylist().get(0).getTitle()+"");
+                            tv_proinfo_ziqu.setVisibility(View.VISIBLE);
+                            tv_proinfo_ziqu.setText(proInfos.getDeliverylist().get(1).getTitle()+"");
+                            tv_proinfo_fn.setVisibility(View.VISIBLE);
+                            tv_proinfo_fn.setText(proInfos.getDeliverylist().get(2).getTitle()+"");
+                            tv_proinfo_bd.setVisibility(View.VISIBLE);
+                            tv_proinfo_bd.setText(proInfos.getDeliverylist().get(3).getTitle()+"");
+                            break;
                     }
-                    if (proInfos.getDeliverylist().get(1).getState()==1){
-                        tv_proinfo_ziqu.setTextColor(Color.rgb(255,77,77));//#FF4D4D
-                    }else{
-                        tv_proinfo_ziqu.setTextColor(Color.rgb(142,142,142));//#8E8E8E
-                    }
-                    if (proInfos.getDeliverylist().get(2).getState()==1){
-                        tv_proinfo_fn.setTextColor(Color.rgb(255,77,77));//#FF4D4D
-                    }else{
-                        tv_proinfo_fn.setTextColor(Color.rgb(142,142,142));//#8E8E8E
-                    }
-                    if (proInfos.getDeliverylist().get(3).getState()==1){
-                        tv_proinfo_cuxiao.setTextColor(Color.rgb(255,77,77));//#FF4D4D
-                    }else{
-                        tv_proinfo_cuxiao.setTextColor(Color.rgb(142,142,142));//#8E8E8E
-                    }
+//                    if (proInfos.getDeliverylist().get(0).getState()==1){
+//                        tv_proinf_zhida.setTextColor(Color.rgb(255,77,77));//#FF4D4D
+//                    }else{
+//                        tv_proinf_zhida.setTextColor(Color.rgb(142,142,142));//#8E8E8E
+//                    }
+//
+//                    if (proInfos.getDeliverylist().get(1).getState()==1){
+//                        tv_proinfo_ziqu.setTextColor(Color.rgb(255,77,77));//#FF4D4D
+//                    }else{
+//                        tv_proinfo_ziqu.setTextColor(Color.rgb(142,142,142));//#8E8E8E
+//                    }
+//
+//                    if (proInfos.getDeliverylist().get(2).getState()==1){
+//                        tv_proinfo_fn.setTextColor(Color.rgb(255,77,77));//#FF4D4D
+//                    }else{
+//                        tv_proinfo_fn.setTextColor(Color.rgb(142,142,142));//#8E8E8E
+//                    }
+//
+//                    if (proInfos.getDeliverylist().get(3).getState()==1){
+//                        tv_proinfo_bd.setTextColor(Color.rgb(255,77,77));//#FF4D4D
+//                    }else{
+//                        tv_proinfo_bd.setTextColor(Color.rgb(142,142,142));//#8E8E8E
+//                    }
+
                     tv_proinfo_pingjia.setText("评价/晒单("+proInfos.getPjcount()+")");
                     tv_proinfo_haopinglv.setText(proInfos.getGoodratio()+"%");
                     if (proInfos.getActivitylist().size()!=0){
 //                        Toast.makeText(getActivity(),proInfos.getActivitylist().get(0).getName()+"",Toast.LENGTH_SHORT).show();
                         tv_proinfo_cuxiao.setText(proInfos.getActivitylist().get(0).getName()+" . . .");
+                    }else {
+                        ll_cuXiao.setVisibility(View.GONE);
                     }
                     ll_cuXiao.setOnClickListener(new View.OnClickListener() {
                         @Override

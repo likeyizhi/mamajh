@@ -6,27 +6,36 @@
               android:background="@color/white"
               android:gravity="center_vertical"
               android:orientation="horizontal"
-              android:padding="4dp">
+              android:padding="10dp">
 
 
-    <com.rey.material.widget.CheckBox
+    <CheckBox
         android:id="@+id/cb_item_check"
-        style="@style/round_check"
+        style="@style/CustomCheckboxTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="5dp"
         android:checked="false"
         android:gravity="center_vertical"
-        android:textColor="@color/white"/>
+        />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_item_pic"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="5dp"
         android:src="@mipmap/ic_launcher"
         app:civ_border_color="@color/Gray"
+        android:visibility="gone"
         app:civ_border_width="2dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:src="@mipmap/dpdp"
+
+
+         />
 
     <TextView
         android:id="@+id/tv_item_title"
@@ -34,6 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="{name}"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/gray_700"/>
 

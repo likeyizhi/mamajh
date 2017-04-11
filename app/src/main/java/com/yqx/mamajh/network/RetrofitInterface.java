@@ -4,6 +4,7 @@ import com.yqx.mamajh.bean.AccountBalance;
 import com.yqx.mamajh.bean.AccountIntegral;
 import com.yqx.mamajh.bean.AddShowProduct;
 import com.yqx.mamajh.bean.BankCard;
+import com.yqx.mamajh.bean.BaseEntity;
 import com.yqx.mamajh.bean.Cartlist;
 import com.yqx.mamajh.bean.ClassifivationInfoEntity;
 import com.yqx.mamajh.bean.ClassifyEntity;
@@ -16,6 +17,7 @@ import com.yqx.mamajh.bean.DeliveryAddress;
 import com.yqx.mamajh.bean.DeliveryInfo;
 import com.yqx.mamajh.bean.DeliveryWay;
 import com.yqx.mamajh.bean.DemoFormtEntity;
+import com.yqx.mamajh.bean.DictionaryBank;
 import com.yqx.mamajh.bean.EvaluateEntity;
 import com.yqx.mamajh.bean.EvaluatesEntity;
 import com.yqx.mamajh.bean.FeedbackType;
@@ -23,11 +25,13 @@ import com.yqx.mamajh.bean.HelpCenterContent;
 import com.yqx.mamajh.bean.HelpCenterIndex;
 import com.yqx.mamajh.bean.HomeInfoEntity;
 import com.yqx.mamajh.bean.HotGoodsEntity;
+import com.yqx.mamajh.bean.LocationCity;
 import com.yqx.mamajh.bean.MallMyList;
 import com.yqx.mamajh.bean.MallProductDatails;
 import com.yqx.mamajh.bean.MemberOrderInfo;
 import com.yqx.mamajh.bean.ProInfo;
 import com.yqx.mamajh.bean.SearchResultBean;
+import com.yqx.mamajh.bean.ShopCartCount;
 import com.yqx.mamajh.bean.ShopCategoryEntity;
 import com.yqx.mamajh.bean.ShopInformationEntity;
 import com.yqx.mamajh.bean.ShopList;
@@ -43,11 +47,13 @@ import com.yqx.mamajh.bean.SearchHistoryListEntity;
 import com.yqx.mamajh.bean.SendRegMessage;
 import com.yqx.mamajh.bean.ShopInfoEntity;
 import com.yqx.mamajh.bean.SpecialChannelGoodsEntity;
+import com.yqx.mamajh.bean.StoreSearch;
 import com.yqx.mamajh.bean.Token;
 import com.yqx.mamajh.bean.TopUpIntegral;
 import com.yqx.mamajh.bean.TopUpOrder;
 import com.yqx.mamajh.bean.TopUpPrice;
 import com.yqx.mamajh.bean.UserCenterAccount;
+import com.yqx.mamajh.bean.UserCenterBankCard;
 import com.yqx.mamajh.bean.UserCenterWithdrawal;
 import com.yqx.mamajh.bean.WeiXinPay;
 import com.yqx.mamajh.bean.WithdrawalLog;
@@ -255,7 +261,7 @@ public interface RetrofitInterface {
 
     //搜索页
     @GET("GetSearchList.aspx")
-    Call<NetBaseEntity<SearchHistoryListEntity>> getSearchHistory();
+    Call<NetBaseEntity<SearchHistoryListEntity>> getSearchHistory(@Query("token") String token);
 
 
     /**
@@ -366,6 +372,9 @@ public interface RetrofitInterface {
     @GET("UserCenterBankCard.aspx")
     Call<NetBaseEntity<List<BankCard>>> userCenterBankCard(@Query("token") String token);
 
+    @GET("UserCenterBankCard.aspx")
+    Call<UserCenterBankCard> userCenterBankCardNew(@Query("token") String token);
+
     /**
      * 75、添加银行卡
      * <p>
@@ -436,7 +445,7 @@ public interface RetrofitInterface {
      * @return
      */
     @GET("GetOrderWeiXinPayParam.aspx")
-    Call<NetBaseEntity<WeiXinPay>> getOrderWeiXinPayParam(@Query("token") String token, @Query("ordernumber") String ordernumber, @Query("UseBlance") String useBlance);
+    Call<NetBaseEntity<WeiXinPay>> getOrderWeiXinPayParam(@Query("token") String token, @Query("ordernumber") String ordernumber, @Query("UseBlance") String useBlance, @Query("pwd") String pwd);
 
     /**
      * 96、个人中心-我的优惠券
@@ -526,10 +535,17 @@ public interface RetrofitInterface {
      */
     @Multipart
     @POST("SaveImage.aspx")
-    Call<NetBaseEntity> saveImage(@Query("token") String token, @Query("Type") int type, @Query("showid") int showid,
-                                  @Part("file_img") MultipartBody.Part file_img1,
+    Call<NetBaseEntity> saveImage(@Query("token") String token, @Query("type") int type, @Query("showid") int showid,
+                                  @Part("file_img1") MultipartBody.Part file_img1,
                                   @Part("file_img2") MultipartBody.Part file_img2,
                                   @Part("file_img3") MultipartBody.Part file_img3);
+    /**
+     * 修改头像
+     */
+    @Multipart
+    @POST("SaveImage.aspx")
+    Call<NetBaseEntity> saveImageHead(@Query("token") String token, @Query("type") int type,
+                                  @Part("file_img") MultipartBody.Part file_img);
 
     //搜索页
     @GET("EShop.aspx")
@@ -569,7 +585,7 @@ public interface RetrofitInterface {
     Call<NetBaseEntity> deleteDeliveryInfo(@Query("token") String token, @Query("id") String id);
 
     @GET("GetSearchResult.aspx")
-    Call<SearchResultBean> getSearchResult(@Query("k") String k, @Query("x") String x, @Query("y") String y);
+    Call<SearchResultBean> getSearchResult(@Query("token") String token, @Query("k") String k, @Query("x") String x, @Query("y") String y);
 
     @GET("ProductInfo.aspx")
     Call<ProInfo> getProInfo(@Query("id") int id,@Query("token") String token);
@@ -590,7 +606,7 @@ public interface RetrofitInterface {
     Call<ShopCategoryEntity> getShopClassify(@Query("Id") String id);
 
     @GET("GetEShopProductList.aspx")
-    Call<HotGoodsEntity> getHotGoods(@Query("Id") String id, @Query("cid")  String cid, @Query("p")  int page, @Query("size")  String pageSize);
+    Call<HotGoodsEntity> getHotGoods(@Query("Id") String id, @Query("cid")  String cid, @Query("p")  int page, @Query("size")  String pageSize, @Query("key") String key);
 
     @GET("GetEShopEvaluate.aspx")
     Call<EvaluateEntity> getEvaluate(@Query("Id") String id);
@@ -618,4 +634,29 @@ public interface RetrofitInterface {
 
     @GET("IntegralMallMyList.aspx")
     Call<MallMyList> integralMallMyList(@Query("token") String token, @Query("cid") int cid, @Query("o") int o, @Query("p") int p, @Query("psize") int psize);
+
+    @GET("GetLocationCityList.aspx")
+    Call<LocationCity> getLocationCity();
+
+    @GET("GetShopProductEvaluateContent.aspx")
+    Call<EvaluatesEntity> getShopProductEvaluateContent(@Query("id") int id, @Query("p") int p, @Query("size") int size);
+
+    @GET("MemberInfoSeave.aspx")
+    Call<NetBaseEntity> memberInfoSeave(@Query("token") String token, @Query("name") String name, @Query("sex") String sex);
+
+    @GET("MemberChangePayPassword.aspx")
+    Call<NetBaseEntity> memberChangePayPassword(@Query("token") String token, @Query("NewPassword") String NewPassword, @Query("code") String code, @Query("obj") String obj);
+
+    @GET("GetShopCartCount.aspx")
+    Call<ShopCartCount> getShopCartCount(@Query("token") String tokne);
+
+    @GET("GetShopSearchList.aspx")
+    Call<StoreSearch> getShopSearchList(@Query("shopid") String shopid);
+
+    @GET("ClearSearch.aspx")
+    Call<NetBaseEntity> clearSearch(@Query("token") String token);
+
+    @GET("DictionaryBankList.aspx")
+    Call<DictionaryBank> dictionaryBankList();
+
 }

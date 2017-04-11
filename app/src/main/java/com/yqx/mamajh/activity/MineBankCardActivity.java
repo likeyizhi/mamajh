@@ -5,16 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.github.obsessive.library.eventbus.EventCenter;
 import com.github.obsessive.library.netstatus.NetUtils;
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.base.BaseActivity;
 import com.yqx.mamajh.bean.BankCard;
+import com.yqx.mamajh.bean.DictionaryBank;
 import com.yqx.mamajh.bean.NetBaseEntity;
+import com.yqx.mamajh.bean.UserCenterBankCard;
 import com.yqx.mamajh.network.RetrofitService;
 
 import java.util.List;
@@ -34,7 +38,8 @@ public class MineBankCardActivity extends BaseActivity {
     @BindView(R.id.lv)
     ListView lv;
 
-    private List<BankCard.BankCardBean> mEntities;
+    private List<DictionaryBank.DictionaryBankRes.DictionaryBankList> bankCards;
+    private List<UserCenterBankCard.UserCenterBankCardRes.UserCenterBankCards> mEntities;
 
 
     @Override
@@ -60,8 +65,28 @@ public class MineBankCardActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         setTitle("我的银行卡");
-        tvMoney.setText(AppApplication.memeberIndex.getMainPrice() + "");
+        getBankCardList();
         getData();
+    }
+
+    private void getBankCardList() {
+        Call<DictionaryBank> call=RetrofitService.getInstance().dictionaryBankList();
+        call.enqueue(new Callback<DictionaryBank>() {
+            @Override
+            public void onResponse(Response<DictionaryBank> response, Retrofit retrofit) {
+                if (response==null){
+                    return;
+                }
+                if (response.body().getStatus()==0){
+                    bankCards=response.body().getRes().getList();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -107,15 +132,16 @@ public class MineBankCardActivity extends BaseActivity {
 
     private void getData() {
         if (NetUtils.isNetworkConnected(mContext)) {
-            Call<NetBaseEntity<List<BankCard>>> mGetDataCallNet = RetrofitService.getInstance().userCenterBankCard(AppApplication.TOKEN);
-            mGetDataCallNet.enqueue(new Callback<NetBaseEntity<List<BankCard>>>() {
+            Call<UserCenterBankCard> mGetDataCallNet = RetrofitService.getInstance().userCenterBankCardNew(AppApplication.TOKEN);
+            mGetDataCallNet.enqueue(new Callback<UserCenterBankCard>() {
                 @Override
-                public void onResponse(Response<NetBaseEntity<List<BankCard>>> response, Retrofit retrofit) {
+                public void onResponse(Response<UserCenterBankCard> response, Retrofit retrofit) {
                     if (response.body() == null) {
                         return;
                     }
                     if (response.body().getStatus() == 0) {
                         mEntities = response.body().getRes().get(0).getBankCard();
+                        tvMoney.setText(response.body().getAccount()+"");
                         lv.setAdapter(new BankCardAdapter());
                     }
                 }
@@ -132,6 +158,30 @@ public class MineBankCardActivity extends BaseActivity {
                 }
             });
         }
+//            mGetDataCallNet.enqueue(new Callback<NetBaseEntity<List<BankCard>>>() {
+//                @Override
+//                public void onResponse(Response<NetBaseEntity<List<BankCard>>> response, Retrofit retrofit) {
+//                    if (response.body() == null) {
+//                        return;
+//                    }
+//                    if (response.body().getStatus() == 0) {
+//                        mEntities = response.body().getRes().get(0).getBankCard();
+//                        lv.setAdapter(new BankCardAdapter());
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Throwable t) {
+//                }
+//            });
+//        } else {
+//            toggleNetworkError(true, new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    //错误后的点击屏幕的处理
+//                }
+//            });
+//        }
     }
 
     private class BankCardAdapter extends BaseAdapter {
@@ -153,7 +203,7 @@ public class MineBankCardActivity extends BaseActivity {
 
         @Override
         public View getView(final int i, View view, ViewGroup viewGroup) {
-            final BankCard.BankCardBean entity = mEntities.get(i);
+            UserCenterBankCard.UserCenterBankCardRes.UserCenterBankCards entity = mEntities.get(i);
             final ViewHolder            holder;
             if (view == null) {
                 view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_bank_card, null);
@@ -163,8 +213,9 @@ public class MineBankCardActivity extends BaseActivity {
                 holder = (ViewHolder) view.getTag();
             }
             holder.tvItemBankName.setText(entity.getBankName());
-            holder.tvItemBankCardNo.setText("尾号" + entity.getNumber().substring(entity.getNumber().length() - 4, entity.getNumber().length())
-                    + " " + entity.getName());
+            holder.tvItemBankCardNo.setText(/*"尾号"*/"卡号" + entity.getNumber()/*.substring(entity.getNumber().length() - 4, entity.getNumber().length())
+                    + " "*/ + entity.getName());
+            Glide.with(getApplicationContext()).load(entity.getImg()).error(R.mipmap.mmjhicon512).into(holder.ivBank);
             return view;
         }
 
@@ -175,10 +226,17 @@ public class MineBankCardActivity extends BaseActivity {
         TextView tvItemBankName;
         @BindView(R.id.tv_item_bank_card_no)
         TextView tvItemBankCardNo;
+        @BindView(R.id.iv_bank)
+        ImageView ivBank;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }
 
+    @Override
+    protected void onRestart() {
+        getData();
+        super.onRestart();
+    }
 }

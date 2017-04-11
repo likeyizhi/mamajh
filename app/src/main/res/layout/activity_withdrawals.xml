@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="#f8f8f8"
     tools:context="com.yqx.mamajh.activity.WithdrawalsActivity">
 
     <include
@@ -51,8 +52,10 @@
                 android:id="@+id/tv_withdrawals_ing_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:text="0.00"
-                android:textColor="@color/yellow_700"/>
+                android:textColor="#ffd600"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,6 +79,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
+
         android:orientation="horizontal">
 
         <ImageView
@@ -97,24 +101,50 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="中国银行"
-                android:textColor="@color/gray_700"
-                android:textSize="18dp"/>
+                android:textColor="#666666"
+                android:textSize="16dp"/>
 
             <TextView
                 android:id="@+id/tv_bank_card_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="尾号0000"
-                android:textColor="@color/gray_700"
-                android:textSize="16dp"/>
+                android:textColor="#aaaaaa"
+                android:textSize="12dp"/>
+
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical|right"
 
+            android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/btn_forward_normal2"/>
+        </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#eeeeee"></View>
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#eeeeee">
+
+    </View>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+
         android:background="@color/white"
         android:orientation="horizontal"
         android:padding="10dp">
@@ -122,6 +152,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#333333"
             android:text="提现金额（元）"/>
 
         <EditText
@@ -135,20 +167,25 @@
             android:singleLine="true"
             android:textSize="14sp"/>
     </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#eeeeee">
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
+    </View>
+    <Button
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="25dp"
         android:text="提交提现申请"
-        app:bootstrapBrand="danger"
-        app:bootstrapSize="lg"
-        app:buttonMode="regular"
-        app:roundedCorners="true"/>
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/red_bg"
+        />
 
     <TextView
         android:id="@+id/tv_tip"
@@ -156,5 +193,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/gray_500"
+        android:textSize="12sp"
         android:text="每日限额：2000  今日还可以转出2000.0"/>
 </LinearLayout>

@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -45,7 +47,7 @@ public class WithdrawalsActivity extends BaseActivity {
     @BindView(R.id.et_withdrawals_price)
     EditText        etWithdrawalsPrice;
     @BindView(R.id.btn_submit)
-    BootstrapButton btnSubmit;
+    Button btnSubmit;
     @BindView(R.id.tv_tip)
     TextView        tvTip;
 
@@ -54,7 +56,8 @@ public class WithdrawalsActivity extends BaseActivity {
     private UserCenterWithdrawal mWithdrawal;
 
     private MaterialDialog mMaterialDialog = null;
-
+    private int bankId;
+    public static WithdrawalsActivity withdrawalsActivity=null;
     @Override
     protected void getBundleExtras(Bundle extras) {
 
@@ -77,7 +80,10 @@ public class WithdrawalsActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        withdrawalsActivity=this;
         setTitle("申请提现");
+//        Toast.makeText(this,"功能暂未开放",Toast.LENGTH_SHORT).show();
+//        finish();
         getData();
     }
 
@@ -111,10 +117,11 @@ public class WithdrawalsActivity extends BaseActivity {
         switch (requestCode) {
             case RC_SELECT_BANK:
                 if (data != null) {
-                    BankCard.BankCardBean bank = (BankCard.BankCardBean) data.getExtras().getSerializable("bank");
-                    mWithdrawal.setBankName(bank.getBankName());
-                    mWithdrawal.setBankNum(bank.getNumber());
-                    mWithdrawal.setUserName(bank.getName());
+//                    BankCard.BankCardBean bank = (BankCard.BankCardBean) data.getExtras().getSerializable("bank");
+                    mWithdrawal.setBankName(data.getStringExtra("bankName")+"");
+                    mWithdrawal.setBankNum(data.getStringExtra("bankNumber")+"");
+                    mWithdrawal.setUserName(data.getStringExtra("name")+"");
+                    bankId=data.getIntExtra("bankId", 0);
                     setData();
                 }
                 break;
@@ -144,7 +151,7 @@ public class WithdrawalsActivity extends BaseActivity {
                     showToast("请输入限额类金额");
                     return;
                 }
-                getSave(1, m, mWithdrawal.getBankNum());
+                getSave(1, m, bankId+"");
                 break;
         }
     }
@@ -187,14 +194,14 @@ public class WithdrawalsActivity extends BaseActivity {
     }
 
     private void setData() {
-        tvBalance.setText(mWithdrawal.getBalance() + "");
+        tvBalance.setText("￥"+mWithdrawal.getBalance() + "");
         tvBankName.setText(mWithdrawal.getBankName());
         String s = mWithdrawal.getBankNum();
-        tvBankCardNo.setText("尾号" + s.substring(s.length() - 4, s.length()) + "  " + mWithdrawal.getUserName());
+        tvBankCardNo.setText(/*"尾号"*/"卡号" + s/*.substring(s.length() - 4, s.length()) + "  "*/ + mWithdrawal.getUserName());
         tvTip.setText("每日限额：" + mWithdrawal.getLimit() + "  今日还可以转出" + mWithdrawal.getCanOut());
     }
 
-    private void getSave(int type, String money, String id) {
+    private void getSave(int type, final String money, String id) {
         if (NetUtils.isNetworkConnected(mContext)) {
             mMaterialDialog = new MaterialDialog.Builder(WithdrawalsActivity.this)
                     .content(R.string.loading)
@@ -233,5 +240,4 @@ public class WithdrawalsActivity extends BaseActivity {
             });
         }
     }
-
 }

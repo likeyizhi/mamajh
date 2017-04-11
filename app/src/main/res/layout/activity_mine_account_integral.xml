@@ -106,20 +106,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="金币充值"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:bootstrapBrand="regular"
                 app:buttonMode="regular"
-                android:clickable="false"
                 app:roundedCorners="true"/>
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/btn_convert"
                 android:layout_width="wrap_content"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="兑换商城"
-                android:clickable="false"
                 app:bootstrapBrand="regular"
                 app:buttonMode="regular"
                 app:roundedCorners="true"/>

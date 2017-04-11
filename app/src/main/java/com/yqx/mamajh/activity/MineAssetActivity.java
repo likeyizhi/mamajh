@@ -104,8 +104,8 @@ public class MineAssetActivity extends BaseActivity {
                     if (response.body().getStatus() == 0) {
                         mAccount = response.body().getRes();
                         tvAssetPrice.setText(mAccount.getMainPrice() + "");
-                        tvAssetCouponCount.setText(mAccount.getCardCount() + "");
-                        tvAssetBankCardCount.setText(mAccount.getVouchersCount() + "");
+                        tvAssetCouponCount.setText(mAccount.getVouchersCount() + "");
+                        tvAssetBankCardCount.setText(mAccount.getCardCount() + "");
                         tvAssetWithdrawals.setText(mAccount.getWithdrawals() + "");
                         tvAssetScore.setText(mAccount.getScore() + "");
                         tvAssetScore2.setText(mAccount.getScore2() + "");
@@ -140,14 +140,23 @@ public class MineAssetActivity extends BaseActivity {
                 readyGo(MineBankCardActivity.class);
                 break;
             case R.id.lay_withdrawals:
-                readyGo(WithdrawalsActivity.class);
+
+               readyGo(WithdrawalsActivity.class);
                 break;
             case R.id.lay_score:
                 readyGo(MineAccountIntegralActivity.class);
                 break;
             case R.id.lay_set_payment_pwd:
-                readyGo(ForgetPwdActivity.class);
+                Bundle bu=new Bundle();
+                bu.putString("changeType","修改支付密码");
+                readyGo(ForgetPwdActivity.class, bu);
                 break;
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        getData(AppApplication.TOKEN);
+        super.onRestart();
     }
 }

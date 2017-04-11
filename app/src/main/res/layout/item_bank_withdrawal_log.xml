@@ -26,22 +26,23 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="中国银行"
-            android:textColor="@color/gray_700"
-            android:textSize="16dp"/>
+            android:textColor="#666666"
+            android:textSize="14dp"/>
 
         <TextView
             android:id="@+id/tv_item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="尾号0000"
-            android:textColor="@color/gray_700"
-            android:textSize="16dp"/>
+            android:textColor="#aaaaaa"
+            android:textSize="12dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginRight="5dp"
         android:orientation="vertical">
 
         <TextView
@@ -50,8 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="+20.00"
-            android:textColor="@color/gray_700"
-            android:textSize="16dp"/>
+            android:textColor="#333333"
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/tv_item_desc"
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="提现处理中"
             android:textColor="@color/colorPrimary"
-            android:textSize="16dp"/>
+            android:textSize="12dp"/>
     </LinearLayout>
 
 </LinearLayout>

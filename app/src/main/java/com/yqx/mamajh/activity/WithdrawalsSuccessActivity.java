@@ -35,6 +35,7 @@ public class WithdrawalsSuccessActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         setTitle("提现成功");
+        WithdrawalsActivity.withdrawalsActivity.finish();
     }
 
     @Override

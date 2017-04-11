@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.adapter.SearchResultAdapter;
 import com.yqx.mamajh.bean.SearchResultBean;
@@ -39,6 +40,7 @@ public class SearchResultActivity extends Activity{
         setContentView(R.layout.activity_search_result);
         Intent intent=getIntent();
         k=intent.getStringExtra("_searchKey");
+//        Toast.makeText(this,""+k,Toast.LENGTH_SHORT).show();
         initView();
         loadData();
         setListeners();
@@ -54,7 +56,7 @@ public class SearchResultActivity extends Activity{
     }
 
     private void loadData() {
-        Call<SearchResultBean> call= RetrofitService.getInstance().getSearchResult(k, HomeFragment.y, HomeFragment.x);
+        Call<SearchResultBean> call= RetrofitService.getInstance().getSearchResult(AppApplication.TOKEN, k, HomeFragment.x, HomeFragment.y);
         call.enqueue(new Callback<SearchResultBean>() {
             @Override
             public void onResponse(Response<SearchResultBean> response, Retrofit retrofit) {

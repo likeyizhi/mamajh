@@ -128,7 +128,10 @@ public class MineAddressActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_rightbtn:
-                readyGoForResult(MineEditAddressActivity.class, RC_EDITADDRESS);
+                Bundle bundle = new Bundle();
+                bundle.putString("title","添加收货地址");
+                bundle.putString("buttonText","添加");
+                readyGoForResult(MineEditAddressActivity.class, RC_EDITADDRESS,bundle);
                 break;
             case R.id.lay_null:
                 break;
@@ -239,7 +242,7 @@ public class MineAddressActivity extends BaseActivity {
             }
             holder.tvItemAddressConsignee.setText("收货人：" + entity.getName());
             holder.tvItemAddressPhone.setText(entity.getPhone());
-            holder.tvItemAddressInfo.setText("收货地址：" + entity.getArea() + entity.getAddress());
+            holder.tvItemAddressInfo.setText("收货地址："  /*+entity.getArea()*/ + entity.getAddress());
             if (TextUtils.equals(entity.getMoren(), "1")) {
                 holder.cbItemAddressSelect.setVisibility(View.VISIBLE);
                 holder.cbItemAddressSelect.setChecked(true);
@@ -273,6 +276,8 @@ public class MineAddressActivity extends BaseActivity {
                     Bundle bundle = new Bundle();
                     bundle.putInt("id", entity.getId());
 //                    bundle.putSerializable(MineEditAddressActivity.KEY_ENTITY, entity);
+                    bundle.putString("title","编辑收货地址");
+                    bundle.putString("buttonText","保存");
                     readyGoForResult(MineEditAddressActivity.class, RC_EDITADDRESS, bundle);
                 }
             });
@@ -286,6 +291,9 @@ public class MineAddressActivity extends BaseActivity {
                         public void onResponse(Response<NetBaseEntity> response, Retrofit retrofit) {
                             mEntities.remove(i);
                             mAdapter.notifyDataSetChanged();
+                            if (mEntities.isEmpty()){
+                                layNull.setVisibility(View.VISIBLE);
+                            }
                             showToast("删除成功");
                             if (response.body()!=null){
                                 return;

@@ -6,7 +6,10 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:background="#ffffff"
+    >
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +22,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/tv_item_address_consignee"
@@ -28,8 +32,8 @@
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:text="{收货人}"
-                android:textColor="@color/gray_800"
-                android:textStyle="bold"/>
+                android:textColor="#333333"
+                />
 
             <TextView
                 android:id="@+id/tv_item_address_phone"
@@ -39,7 +43,7 @@
                 android:maxLines="1"
                 android:text="{18000000000}"
                 android:textColor="@color/gray_800"
-                android:textStyle="bold"/>
+                />
 
         </LinearLayout>
 
@@ -52,14 +56,15 @@
         android:layout_weight="1"
         android:padding="5dp"
         android:text="{地址}"
-        android:textColor="@color/gray_800"/>
+        android:textColor="#999999"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_marginBottom="10dp">
 
         <com.rey.material.widget.CheckBox
             android:id="@+id/cb_item_address_select"
@@ -70,7 +75,7 @@
             android:checked="false"
             android:gravity="center|left"
             android:text="设为默认地址"
-            android:textColor="@color/gray_800"/>
+            android:textColor="#666666"/>
 
 
         <com.beardedhen.androidbootstrap.BootstrapButton
@@ -78,6 +83,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:textColor="#666666"
+            android:layout_marginBottom="5dp"
             app:bootstrapBrand="secondary"
             app:bootstrapText="{fa-pencil-square-o} 编辑"
             app:buttonMode="regular"
@@ -88,6 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bootstrapBrand="secondary"
+            android:textColor="#666666"
             app:bootstrapText="{fa-trash-o} 删除"
             app:buttonMode="regular"
             app:roundedCorners="true"/>

@@ -162,8 +162,8 @@ public class MineAccountIntegralActivity extends BaseActivity {
                 readyGo(MineTopUpPriceActivity.class,bundle);
                 break;
             case R.id.btn_convert:
-                //TODO
-                showToast("积分兑换");
+                readyGo(CreditActivity.class);
+//                showToast("积分兑换");
                 break;
         }
     }

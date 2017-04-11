@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll_root"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="18dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
@@ -35,7 +36,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="全部商品"
-                        android:textSize="18sp" />
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:id="@+id/textView20" />
 
                     <ImageView
                         android:id="@+id/iv_more"
@@ -43,17 +46,23 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/uc_right" />
+                        android:src="@mipmap/btn_forward_normal2" />
 
                 </RelativeLayout>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#eeeeee"
+                    ></TextView>
                 <com.yqx.mamajh.widget.MyListview
+
+                    android:layout_marginLeft="10dp"
                     android:id="@+id/fragment_shop_classify"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:cacheColorHint="@android:color/transparent"
                     android:divider="#888"
-                    android:dividerHeight="1dp"
+                    android:dividerHeight="0dp"
                     android:fadingEdge="none"
                     android:fadingEdgeLength="0dp"
                     android:listSelector="@android:color/transparent"

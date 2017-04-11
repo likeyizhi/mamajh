@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <include
@@ -21,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cacheColorHint="@android:color/transparent"
-            android:divider="@null"
-            android:dividerHeight="0dp"
+            android:divider="#eeeeee"
+            android:dividerHeight="1dp"
             android:fadingEdge="none"
             android:fadingEdgeLength="0dp"
             android:listSelector="@android:color/transparent"

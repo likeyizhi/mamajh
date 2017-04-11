@@ -65,7 +65,11 @@ public class WithdrawalsBankActivity extends BaseActivity {
                 BankCard.BankCardBean bankCard = mEntities.get(i);
                 Intent                intent   = new Intent();
                 Bundle                bundle   = new Bundle();
-                bundle.putSerializable("bank", bankCard);
+//                bundle.putSerializable("bank", bankCard);
+                bundle.putInt("bankId",bankCard.getID());
+                bundle.putString("bankName",bankCard.getBankName()+"");
+                bundle.putString("bankNumber",bankCard.getNumber()+"");
+                bundle.putString("name",bankCard.getName()+"");
                 intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -157,8 +161,8 @@ public class WithdrawalsBankActivity extends BaseActivity {
                 holder = (ViewHolder) view.getTag();
             }
             holder.tvItemBankName.setText(entity.getBankName());
-            holder.tvItemBankCardNo.setText("尾号" + entity.getNumber().substring(entity.getNumber().length() - 4, entity.getNumber().length())
-                    + " " + entity.getName());
+            holder.tvItemBankCardNo.setText(/*"尾号"*/"卡号" + entity.getNumber()/*.substring(entity.getNumber().length() - 4, entity.getNumber().length())
+                    + " "*/ + entity.getName());
             return view;
         }
 

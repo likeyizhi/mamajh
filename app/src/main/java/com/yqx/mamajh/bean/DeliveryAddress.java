@@ -30,6 +30,32 @@ public class DeliveryAddress implements Serializable {
     private String phone2;
     private String postcode;
     private String area;
+    private String x;
+    private String y;
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public String getX() {
+        return x;
+    }
+
+    public void setX(String x) {
+        this.x = x;
+    }
+
+    public String getY() {
+        return y;
+    }
+
+    public void setY(String y) {
+        this.y = y;
+    }
 
     public boolean getIsCheck() {
         return isCheck;

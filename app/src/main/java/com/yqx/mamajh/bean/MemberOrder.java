@@ -328,12 +328,21 @@ public class MemberOrder implements Serializable {
         private String Img;
         private String Standard;
         private String OrderID;
+        private String ShopId;
         private String OrderNumber;
         private String Count;
         private String Price;
         private String Price2;
 
         private int rating = 5;
+
+        public String getShopId() {
+            return ShopId;
+        }
+
+        public void setShopId(String shopId) {
+            ShopId = shopId;
+        }
 
         public int getRating() {
             return rating;

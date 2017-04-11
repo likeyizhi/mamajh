@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#FFFFFF"
     android:layout_height="match_parent">
@@ -17,31 +18,36 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="320dp"
+
                 >
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/vp_proImg"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
 
                 <LinearLayout
                     android:id="@+id/tip"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentBottom="true"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-                </LinearLayout>
+                    android:orientation="horizontal"></LinearLayout>
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_proName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:text="商品名"
-                android:textSize="25sp" />
+                android:lineSpacingExtra="5dp"
+                android:textColor="#333333"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,45 +56,72 @@
                 android:orientation="horizontal">
 
                 <TextView
+
+                    android:id="@+id/tv_qian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="￥"
+                    android:textColor="#e24158"
+                    android:textSize="14sp" />
+
+                <TextView
                     android:id="@+id/tv_shopPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥106.00"
-                    android:textColor="#FF4D4D"
-                    android:textSize="25sp" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="00.00"
+                    android:textColor="#e24158"
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/tv_realPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:text="￥108.00" />
+                    android:layout_marginTop="10dp"
+                    android:text="￥108.00"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_buyNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:text="100人已购买" />
+                    android:layout_marginTop="10dp"
+                    android:text="100人已购买"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#dcdcdc" />
+                android:layout_height="8dp"
+                android:background="#f6f6f6" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:padding="5dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:text="其他规格"
-                android:textSize="20sp" />
+                android:textColor="#333333"
+                android:textSize="16sp" />
 
             <com.yqx.mamajh.widget.ZListview
                 android:id="@+id/lv_proinfo_others"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.yqx.mamajh.widget.ZListview>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:divider="@null"></com.yqx.mamajh.widget.ZListview>
 
             <TextView
                 android:layout_width="match_parent"
@@ -97,18 +130,23 @@
                 android:gravity="center_vertical"
                 android:padding="8dp"
                 android:text="正品保障    假就赔"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <com.yqx.mamajh.widget.RoundImageView
                     android:id="@+id/iv_shop_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/ic_launcher" />
 
@@ -117,15 +155,43 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_shopName"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="商店名"
-                        android:textSize="20sp" />
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_shopName"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:padding="5dp"
+                            android:text="商店名"
+                            android:textColor="#333333"
+                            android:textSize="16sp" />
 
+                        <TextView
+
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="综合"
+                            android:paddingBottom="5dp"
+                            android:textColor="#999999"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_zonghe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="10.00"
+                            android:layout_marginRight="10dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="#e24158"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                     <RatingBar
                         android:id="@+id/ratingBar"
                         style="?android:attr/ratingBarStyleSmall"
@@ -134,8 +200,21 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/five"
                         android:numStars="5"
+                        android:progressTint="#e24158"
                         android:rating="5" />
+
+                    <TextView
+                        android:id="@+id/tv_juli"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/juli"
+                        android:padding="5dp"
+                        android:text="13km"
+                        android:textColor="#999999"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -165,13 +244,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="关注人数"
-                        android:textSize="20sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#dcdcdc" />
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#eeeeee" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -193,13 +274,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="全部商品"
-                        android:textSize="20sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#dcdcdc" />
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#eeeeee" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -221,46 +304,49 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="店铺活动"
-                        android:textSize="20sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     android:id="@+id/tv_lianximaijia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/proinfo_bg"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="联系卖家" />
+                    android:text="联系卖家"
+                    android:textColor="#999999" />
 
                 <TextView
                     android:id="@+id/tv_jinrudianpu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/proinfo_bg"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="进入店铺" />
+                    android:text="进入店铺"
+                    android:textColor="#999999" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="#dcdcdc" />
+                android:layout_height="8dp"
+                android:background="#f6f6f6" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -273,56 +359,68 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
                     android:text="配送"
-                    android:textSize="14sp" />
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_proinf_zhida"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableLeft="@mipmap/duihao"
                     android:gravity="center"
                     android:text="门店直达"
-                    android:textColor="#8e8e8e"
-                    android:textSize="14sp" />
+
+                    android:textColor="#e14258"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_proinfo_ziqu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableLeft="@mipmap/duihao"
                     android:gravity="center"
+                    android:paddingLeft="5dp"
                     android:text="自取"
-                    android:textColor="#8e8e8e"
-                    android:textSize="14sp" />
+                    android:textColor="#e14258"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_proinfo_fn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableLeft="@mipmap/duihao"
                     android:gravity="center"
+                    android:paddingLeft="5dp"
                     android:text="蜂鸟配送"
-                    android:textColor="#8e8e8e"
-                    android:textSize="14sp" />
+                    android:textColor="#e14258"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_proinfo_bd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableLeft="@mipmap/duihao"
                     android:gravity="center"
+                    android:paddingLeft="5dp"
                     android:text="百度物流"
-                    android:textColor="#8e8e8e"
-                    android:textSize="14sp" />
+                    android:textColor="#e14258"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#dcdcdc" />
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+
+                android:background="#efefef" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -335,10 +433,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
                     android:text="支付"
-                    android:textSize="14sp" />
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -348,14 +448,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
-                    android:text="微信" />
+                    android:text="微信"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dcdcdc" />
+                android:layout_marginLeft="10dp"
+                android:background="#efefef" />
 
             <LinearLayout
                 android:id="@+id/ll_cuXiao"
@@ -370,10 +474,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
                     android:text="促销"
-                    android:textSize="14sp" />
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_proinfo_cuxiao"
@@ -388,7 +494,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dcdcdc" />
+                android:layout_marginLeft="10dp"
+                android:background="#efefef" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -402,10 +509,12 @@
                     android:id="@+id/tv_proinfo_pingjia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
                     android:text="评价/晒单(0)"
-                    android:textSize="14sp" />
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -413,7 +522,8 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="好评率"
-                    android:textSize="14sp" />
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_proinfo_haopinglv"
@@ -421,9 +531,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:text="100%"
-                    android:textColor="#FF4d4d"
-                    android:textSize="14sp" />
+                    android:textColor="#e14258"
+                    android:textSize="12sp" />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#eeeeee" />
 
             <WebView
                 android:id="@+id/wbv_proinfoxiangqing"

@@ -4,7 +4,8 @@
               xmlns:stepper="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@color/gray_100"
+
+              android:background="#fafafa"
               android:orientation="vertical">
 
     <LinearLayout
@@ -15,10 +16,14 @@
 
         <ImageView
             android:id="@+id/iv_item_pic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginRight="8dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:padding="5dp"
+            android:layout_margin="5dp"
+
+            android:background="@drawable/bg_border"
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +36,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="{name}"
-                android:textColor="@color/gray_700"/>
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#333333" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,15 +54,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="{￥99.99}"
-                    android:textColor="@color/colorPrimary"/>
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/tv_item_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/colorPrimary"
-                    android:text="X1"/>
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
+                    android:textSize="12sp"
+                    android:text="X1"
+                    android:textColor="#666666" />
 
             </LinearLayout>
 

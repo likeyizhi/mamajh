@@ -58,6 +58,7 @@ public class MemberOrderInfo {
          "payprice": "0.00",
          "notpayprice": "0.04",
          "giftpayprice": "0.00",
+         "promotionprice": "0.00",
          "shopname": "北京旗舰店",
          "orderremark": "",
          "postinfo": "",
@@ -86,6 +87,16 @@ public class MemberOrderInfo {
         private String payprice;
         private String notpayprice;
         private String giftpayprice;
+        private String promotionprice;
+
+        public String getPromotionprice() {
+            return promotionprice;
+        }
+
+        public void setPromotionprice(String promotionprice) {
+            this.promotionprice = promotionprice;
+        }
+
         private String shopname;
         private String orderremark;
         private String postinfo;

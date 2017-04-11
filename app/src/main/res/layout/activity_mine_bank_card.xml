@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="#f8f8f8"
     tools:context="com.yqx.mamajh.activity.MineBankCardActivity">
 
     <include
@@ -62,14 +63,15 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="提现"
-            android:textColor="@color/gray_700"
-            android:textSize="18sp"/>
+
+            android:textColor="#333333"
+            android:textSize="15sp"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:background="@color/gray_300"/>
+        android:background="#f6f6f6"/>
 
     <LinearLayout
         android:id="@+id/lay_add_card"
@@ -82,34 +84,36 @@
         android:paddingRight="8dp">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@mipmap/bankcard_j"/>
-
         <TextView
+            android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="15dp"
             android:text="添加银行卡"
-            android:textColor="@color/gray_700"
-            android:textSize="18sp"/>
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@mipmap/bankcard_r"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/btn_forward_normal2"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray_300"/>
+        android:background="#dddddd"/>
 
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/gray_300"
+        android:divider="#eeeeee"
+        android:headerDividersEnabled="false"
         android:dividerHeight="1dp"/>
 </LinearLayout>

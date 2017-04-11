@@ -64,6 +64,8 @@ public class EvaluateFragment extends BaseFragment {
     Button use;
     @BindView(R.id.btn_unuse)
     Button unused;
+    @BindView(R.id.tv_haopingdu)
+    TextView haopingdu;
     @BindView(R.id.fragment_evaluate)
     ListView loadMoreListView;
 
@@ -86,8 +88,8 @@ public class EvaluateFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if(bundle != null ){
             id = bundle.getString(ShopActivity.IDBUNDLE);
+//            Toast.makeText(getActivity(),""+id,Toast.LENGTH_SHORT).show();
         }
-//        Toast.makeText(getActivity(),"1",Toast.LENGTH_SHORT).show();
         loadData();
     }
 
@@ -113,8 +115,10 @@ public class EvaluateFragment extends BaseFragment {
         if(bundle != null ){
             id = bundle.getString(ShopActivity.IDBUNDLE);
         }
-        use.setBackgroundColor(Color.rgb(226,65,88));//#E24158
-        unused.setBackgroundColor(Color.rgb(144,144,144));//#909090
+//        use.setBackgroundColor(Color.rgb(226,65,88));//#E24158
+//        unused.setBackgroundColor(Color.rgb(144,144,144));//#909090
+        use.setBackgroundResource(R.drawable.red_bg);
+        unused.setBackgroundResource(R.drawable.black_bg);
         loadData();
 //        loadMoreListView.setCanLoadMore(true);
 //        loadMoreListView.setOnLoadMoreListener(new LoadMoreListView.OnLoadMoreListener() {
@@ -161,8 +165,10 @@ public class EvaluateFragment extends BaseFragment {
                 page=1;
                 status="1";
                 loadRvaluate(3);
-                use.setBackgroundColor(Color.rgb(226,65,88));//#E24158
-                unused.setBackgroundColor(Color.rgb(144,144,144));//#909090
+//                use.setBackgroundColor(Color.rgb(226,65,88));//#E24158
+//                unused.setBackgroundColor(Color.rgb(144,144,144));//#909090
+                use.setBackgroundResource(R.drawable.red_bg);
+                unused.setBackgroundResource(R.drawable.black_bg);
             }
         });
 
@@ -172,8 +178,10 @@ public class EvaluateFragment extends BaseFragment {
                 page=1;
                 status="2";
                 loadRvaluate(3);
-                use.setBackgroundColor(Color.rgb(144,144,144));//#909090
-                unused.setBackgroundColor(Color.rgb(226,65,88));//#E24158
+//                use.setBackgroundColor(Color.rgb(144,144,144));//#909090
+//                unused.setBackgroundColor(Color.rgb(226,65,88));//#E24158
+                use.setBackgroundResource(R.drawable.black_bg);
+                unused.setBackgroundResource(R.drawable.red_bg);
             }
         });
 
@@ -211,6 +219,7 @@ public class EvaluateFragment extends BaseFragment {
                         speed.setRating((float) resEntity.getDeliverscore());
                         use.setText("全部("+resEntity.getPjtotal()+")");
                         unused.setText("有图("+resEntity.getPjpic()+")");
+                        haopingdu.setText(resEntity.getPraisedegree()+"%");
                         loadRvaluate(1);
                     }
                 }
@@ -227,6 +236,7 @@ public class EvaluateFragment extends BaseFragment {
 
     private void loadRvaluate(final int isLoadMore) {
         Call<EvaluatesEntity> call = RetrofitService.getInstance().loadRvaluates(id, status, page, pageSize);
+//        Toast.makeText(getActivity(),""+id+","+status+","+page+","+pageSize,Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<EvaluatesEntity>() {
             @Override
             public void onResponse(Response<EvaluatesEntity> response, Retrofit retrofit) {

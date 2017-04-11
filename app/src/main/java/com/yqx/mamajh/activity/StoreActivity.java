@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.text.Layout;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.github.obsessive.library.base.BaseLazyFragment;
 import com.github.obsessive.library.eventbus.EventCenter;
@@ -60,7 +62,7 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
     @BindView(R.id.iv_bg)
     ImageView bg;
     @BindView(R.id.iv_shop_icon)
-    RoundImageView ivShopIcon;
+    ImageView ivShopIcon;
     @BindView(R.id.fl_personal_icon)
     FrameLayout flPersonalIcon;
     @BindView(R.id.tv_shopname)
@@ -79,13 +81,16 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
     LinearLayout ll_collent;
     @BindView(R.id.iv_collect)
     ImageView iv_collect;
+    @BindView(R.id.iv_search)
+    ImageView iv_search;
+    @BindView(R.id.iv_fhfh)
+    ImageView iv_fhfh;
 
     private String userId;
     private ShopFragmentAdapter mAdapter;
     private int clickPosition;
     private String shopPhone;
     private boolean iscollect;
-
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -113,7 +118,9 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
     protected void initViewsAndEvents() {
         ll_contsct.setOnClickListener(this);
         ll_collent.setOnClickListener(this);
-
+        iv_search.setOnClickListener(this);
+        iv_fhfh.setOnClickListener(this);
+        ivShopIcon.setOnClickListener(this);
         mToolbar.setBackgroundColor(Color.parseColor("#00000000"));
         line.setVisibility(View.GONE);
 
@@ -133,7 +140,6 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
                 }
             });
         }
-
     }
 
     @Override
@@ -148,7 +154,7 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
 
     private void loadData() {
 
-        showLoading("加载中", true);
+//        showLoading("加载中", true);
         Call<NetBaseEntity<ShopInfoEntity>> call = RetrofitService.getInstance().getShopInfo(AppApplication.TOKEN,userId);
         call.enqueue(new Callback<NetBaseEntity<ShopInfoEntity>>() {
             @Override
@@ -241,6 +247,22 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
                     }
                 }
                 break;
+            case R.id.iv_search:
+//                Snackbar.make(iv_search,"搜索",Snackbar.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString(ShopActivity.IDBUNDLE, userId);
+                readyGo(StoreSearchActivity.class, bundle);
+                break;
+            case R.id.iv_fhfh:
+                finish();
+                break;
+            case R.id.iv_shop_icon:
+                Bundle bundle1=new Bundle();
+                bundle1.putString(ShopActivity.IDBUNDLE, userId);
+                finish();
+                readyGo(StoreActivity.class,bundle1);
+                overridePendingTransition(0, 0);
+                break;
         }
     }
 
@@ -270,7 +292,7 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
                                     readyGo(ShopClassifyActivity.class, bundle);
                                 } else if(pos == 1){
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("title","商品列表");
+                                    bundle.putString("title","");
                                     bundle.putString(ShopActivity.IDBUNDLE, userId);
                                     readyGo(GoodsListActivity.class, bundle);
                                 }else {
@@ -308,11 +330,11 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
                         return;
                     }
                     if (response.body().getStatus() == 0) {
-                        Toast.makeText(StoreActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(StoreActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
                         iscollect = false;
                         iv_collect.setImageResource(isCollect());
                     } else {
-                        Toast.makeText(StoreActivity.this, "操作失败un", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StoreActivity.this, "操作失败", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -336,14 +358,13 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener,
                         return;
                     }
                     if (response.body().getStatus() == 0) {
-                        Toast.makeText(StoreActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(StoreActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                         iscollect = true;
                         iv_collect.setImageResource(isCollect());
                     } else {
-                        Toast.makeText(StoreActivity.this, "操作失败co"+AppApplication.TOKEN, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StoreActivity.this, "操作失败"+AppApplication.TOKEN, Toast.LENGTH_SHORT).show();
                     }
                 }
-
                 @Override
                 public void onFailure(Throwable t) {
 

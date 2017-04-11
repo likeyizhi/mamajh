@@ -100,7 +100,7 @@ public class RankingActivity extends BaseActivity implements LoadMoreListView.On
                             Glide.with(mContext).load(itemData.getImgSrc()).into(img);
                             about.setText(itemData.getTitle());
                             money.setText(itemData.getSellPrice() + "金币");
-                            num.setText(itemData.getSaleCount() + "人购买");
+                            num.setText(itemData.getSaleCount() + "人兑换");
                         }
 
                     }

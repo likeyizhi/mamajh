@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,6 +63,11 @@ public class OrderInfoActivity extends Activity{
     private TextView tvOrderState;
     private String orderId;
     private OrderInfoAdapter proAdapter;
+    private TextView tvStoreName;
+    private TextView tvGiftPayPrice;
+    private TextView tvPromotionPrice;
+    private ImageButton ib_back;
+    private String shopId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +75,7 @@ public class OrderInfoActivity extends Activity{
         setContentView(R.layout.activity_order_info);
         Intent intent=getIntent();
         orderId=intent.getStringExtra("_orderId");
+        shopId=intent.getStringExtra("_shopId");
 //        Toast.makeText(OrderInfoActivity.this,""+orderId,Toast.LENGTH_SHORT).show();
         initView();
         loadData();
@@ -150,6 +157,12 @@ public class OrderInfoActivity extends Activity{
             }
         });
 
+        ib_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setData(MemberOrderInfo.MemberOrderInfoRes memRes) {
@@ -162,12 +175,23 @@ public class OrderInfoActivity extends Activity{
         tvPayWay.setText(""+memRes.getPaymodel());
         tvOtherInfo.setText(""+memRes.getPostinfo());
         tvOrderRemark.setText(""+memRes.getOrderremark());
-
+        tvStoreName.setText(""+memRes.getShopname()+"");
+        tvStoreName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(OrderInfoActivity.this,StoreActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString(ShopActivity.IDBUNDLE,shopId);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         tvProNumber.setText("共"+memRes.getProductlist().size()+"件商品，");
         tvOrderPrice.setText("共"+memRes.getTotalprice()+"元");
         tvDeliveryPrice.setText("￥"+memRes.getPostprice());
         tvUnPayMoney.setText("￥"+memRes.getNotpayprice());
-
+        tvGiftPayPrice.setText(memRes.getGiftpayprice()+"");
+        tvPromotionPrice.setText(memRes.getPromotionprice()+"");
         switch (memRes.getState()){
             case "待付款":
                 llUnPay.setVisibility(View.VISIBLE);
@@ -190,7 +214,7 @@ public class OrderInfoActivity extends Activity{
                 llToComment.setVisibility(View.GONE);
                 tvAlreadyCancle.setVisibility(View.GONE);
                 break;
-            case "已签收":
+            case "已完成":
                 llUnPay.setVisibility(View.GONE);
                 llUnDelivery.setVisibility(View.GONE);
                 llSureGet.setVisibility(View.GONE);
@@ -273,14 +297,15 @@ public class OrderInfoActivity extends Activity{
         tvPayWay=(TextView)findViewById(R.id.tv_fuKuanFangShi);
         tvOtherInfo=(TextView)findViewById(R.id.tv_qiTaXinXi);
         tvOrderRemark=(TextView)findViewById(R.id.tv_beiZhu);
-
+        tvStoreName=(TextView)findViewById(R.id.tv_store_name);
         //下边三行数据
         llThreeTV=(LinearLayout)findViewById(R.id.ll_three);
         tvProNumber=(TextView)findViewById(R.id.tv_proNum);
         tvOrderPrice=(TextView)findViewById(R.id.tv_orderPrice);
         tvDeliveryPrice=(TextView)findViewById(R.id.tv_deliveryPrice);
         tvUnPayMoney=(TextView)findViewById(R.id.tv_unPayMoney);
-
+        tvGiftPayPrice=(TextView)findViewById(R.id.tv_giftpayprice);
+        tvPromotionPrice=(TextView)findViewById(R.id.tv_promotionprice);
         //待付款布局
         llUnPay=(LinearLayout)findViewById(R.id.ll_unPay);
         tvUnPayCancle=(Button)findViewById(R.id.btn_unPayCancle);
@@ -300,5 +325,7 @@ public class OrderInfoActivity extends Activity{
 
         //已取消
         tvAlreadyCancle=(TextView)findViewById(R.id.tv_alreadyCancle);
+
+        ib_back=(ImageButton)findViewById(R.id.ib_back);
     }
 }

@@ -1,11 +1,15 @@
 package com.yqx.mamajh.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +25,7 @@ import com.bumptech.glide.Glide;
 import com.github.obsessive.library.eventbus.EventCenter;
 import com.github.obsessive.library.netstatus.NetUtils;
 import com.github.obsessive.library.utils.DoubleUtil;
-import com.rey.material.widget.CheckBox;
+
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.base.BaseActivity;
@@ -59,6 +63,7 @@ public class ShopCartActivity extends BaseActivity {
     private ShopCartAdapter mAdapter;
 
     private List<Cartlist.Shop> mEntities = new ArrayList<>();
+    private MaterialDialog mMaterialDialog = null;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -100,7 +105,7 @@ public class ShopCartActivity extends BaseActivity {
                 return true;
             }
         });
-        getData(AppApplication.TOKEN);
+//        getData(AppApplication.TOKEN);
     }
 
     @Override
@@ -156,10 +161,16 @@ public class ShopCartActivity extends BaseActivity {
                         bundle.putString("ids", ids);
                         readyGo(OrderSettlementActivity.class, bundle);
                     }else{
-                        showToast("还没有选择商品哦~");
+//                        showToast("还没有选择商品哦~");
+                        Toast toast=Toast.makeText(ShopCartActivity.this,"您还没有选择商品",Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
                     }
                 } else {
-                    showToast("请选择一个店铺的商品进行结算");
+                    Toast toast=Toast.makeText(ShopCartActivity.this,"您还没有选择商品",Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER,0,0);
+                    toast.show();
+//                    showToast("请选择一个店铺的商品进行结算");
                 }
                 break;
             case R.id.btn_cart_gohome:
@@ -171,11 +182,18 @@ public class ShopCartActivity extends BaseActivity {
 
     private void getData(String token) {
         if (NetUtils.isNetworkConnected(mContext)) {
+            mMaterialDialog = new MaterialDialog.Builder(ShopCartActivity.this)
+                    .content(R.string.loading)
+                    .cancelable(false)
+                    .progress(true, 0)
+                    .progressIndeterminateStyle(false)
+                    .show();
             Call<NetBaseEntity<Cartlist>> mGetDataCallNet = RetrofitService.getInstance().getShopCartList(token);
             mGetDataCallNet.enqueue(new Callback<NetBaseEntity<Cartlist>>() {
                 @Override
                 public void onResponse(Response<NetBaseEntity<Cartlist>> response, Retrofit retrofit) {
                     if (response.body() == null) {
+                        mMaterialDialog.dismiss();
                         return;
                     }
                     if (response.body().getStatus() == 0) {
@@ -186,16 +204,21 @@ public class ShopCartActivity extends BaseActivity {
                             for (int i = 0; i < mEntities.size(); i++) {
                                 list.expandGroup(i);
                             }
+                            mMaterialDialog.dismiss();
                         } else {
                             layCartNull.setVisibility(View.VISIBLE);
+                            mMaterialDialog.dismiss();
                         }
                     } else {
                         layCartNull.setVisibility(View.VISIBLE);
+                        mMaterialDialog.dismiss();
                     }
+                    mMaterialDialog.dismiss();
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
+                    mMaterialDialog.dismiss();
                 }
             });
         } else {
@@ -482,6 +505,15 @@ public class ShopCartActivity extends BaseActivity {
                     }
                 }
             });
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(ShopCartActivity.this,""+entity.getID(),Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(ShopCartActivity.this,ProductInfoActivity.class);
+                    intent.putExtra("_id", entity.getID());
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 
@@ -495,7 +527,7 @@ public class ShopCartActivity extends BaseActivity {
 
     static class GroupViewHolder {
         @BindView(R.id.cb_item_check)
-        CheckBox  cbItemCheck;
+        CheckBox cbItemCheck;
         @BindView(R.id.iv_item_pic)
         ImageView ivItemPic;
         @BindView(R.id.tv_item_title)
@@ -530,5 +562,4 @@ public class ShopCartActivity extends BaseActivity {
         getData(AppApplication.TOKEN);
         super.onRestart();
     }
-
 }

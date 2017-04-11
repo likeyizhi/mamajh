@@ -1,6 +1,8 @@
 package com.yqx.mamajh.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
@@ -18,6 +20,7 @@ import com.github.obsessive.library.eventbus.EventCenter;
 import com.squareup.okhttp.ResponseBody;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.activity.ShopActivity;
+import com.yqx.mamajh.activity.ShowBigImageActivity;
 import com.yqx.mamajh.base.BaseFragment;
 import com.yqx.mamajh.bean.ShopInformationEntity;
 import com.yqx.mamajh.network.RetrofitService;
@@ -123,20 +126,23 @@ public class ShopInfoFragment extends BaseFragment {
                         View convertView = layoutInflater.inflate(R.layout.item_img, null);
                         imageView = (ImageView) convertView.findViewById(R.id.iv_img);
 
-                        imageView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //TODO 图片点击
-                            }
-                        });
-
                         return convertView;
                     }
 
                     @Override
-                    public void showData(int position, ShopInformationEntity.ResEntity.ShopimglistEntity itemData) {
+                    public void showData(int position, final ShopInformationEntity.ResEntity.ShopimglistEntity itemData) {
                         if(itemData != null){
                             Glide.with(mContext).load(itemData.getImgSrc()).into(imageView);
+                            imageView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    //TODO 图片点击
+//                                    Snackbar.make(imageView,"点击实景"+itemData.getID(),Snackbar.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(getActivity(), ShowBigImageActivity.class);
+                                    intent.putExtra("_imgUrl",itemData.getImgSrc());
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
                 };
@@ -155,20 +161,25 @@ public class ShopInfoFragment extends BaseFragment {
                         View convertView = layoutInflater.inflate(R.layout.item_img, null);
                         imageView = (ImageView) convertView.findViewById(R.id.iv_img);
 
-                        imageView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //TODO 图片点击
-                            }
-                        });
+
 
                         return convertView;
                     }
 
                     @Override
-                    public void showData(int position, ShopInformationEntity.ResEntity.ShopauthimglistEntity itemData) {
+                    public void showData(int position, final ShopInformationEntity.ResEntity.ShopauthimglistEntity itemData) {
                         if (itemData != null){
                             Glide.with(mContext).load(itemData.getImgSrc()).into(imageView);
+                            imageView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    //TODO 图片点击 商家资质
+//                                Snackbar.make(imageView,"点击",Snackbar.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(getActivity(), ShowBigImageActivity.class);
+                                    intent.putExtra("_imgUrl",itemData.getImgSrc());
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
                 };
@@ -241,9 +252,9 @@ public class ShopInfoFragment extends BaseFragment {
 
                         num.setText(shopInformationEntity.getRes().getPjtotal2());
                         sellNum.setText(shopInformationEntity.getRes().getMonthorder());
-                        address.setText(shopInformationEntity.getRes().getShopaddress());
-                        time.setText(shopInformationEntity.getRes().getShopworktime());
-                        tell.setText(shopInformationEntity.getRes().getShopphone());
+                        address.setText("地址："+shopInformationEntity.getRes().getShopaddress());
+                        time.setText("营业时间"+shopInformationEntity.getRes().getShopworktime());
+                        tell.setText("商家电话"+shopInformationEntity.getRes().getShopphone());
 
                     }
 

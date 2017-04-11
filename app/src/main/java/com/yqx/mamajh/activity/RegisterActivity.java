@@ -1,10 +1,13 @@
 package com.yqx.mamajh.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -39,12 +42,13 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.et_register_pwd2)
     EditText        etRegisterPwd2;
     @BindView(R.id.btn_register_code)
-    BootstrapButton btnRegisterCode;
+    Button btnRegisterCode;
 
     private MaterialDialog mMaterialDialog = null;
     private int            obj             = 0;
     private Timer          timer           = null;
     private int            time            = 60;
+    private TimerTask timerTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,7 +182,7 @@ public class RegisterActivity extends BaseActivity {
                     obj = response.body().getRes().getObj();
                     showToast(response.body().getMes());
                     timer = new Timer();
-                    TimerTask timerTask = new TimerTask() {
+                    timerTask = new TimerTask() {
                         @Override
                         public void run() {
                             runOnUiThread(new Runnable() {
@@ -186,13 +190,15 @@ public class RegisterActivity extends BaseActivity {
                                 public void run() {
                                     time--;
                                     btnRegisterCode.setClickable(false);
-                                    btnRegisterCode.setBootstrapBrand(DefaultBootstrapBrand.REGULAR);
+                                    btnRegisterCode.setBackgroundColor(Color.rgb(102,102,102));
+//                                    btnRegisterCode.setBootstrapBrand(DefaultBootstrapBrand.REGULAR);
                                     btnRegisterCode.setText(time + "s后可重新发送");
                                     if (time < 0) {
                                         time = 60;
                                         timer.cancel();
                                         btnRegisterCode.setClickable(true);
-                                        btnRegisterCode.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
+//                                        btnRegisterCode.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
+                                        btnRegisterCode.setBackgroundColor(Color.rgb(225,66,88));
                                         btnRegisterCode.setText("获取验证码");
                                     }
                                 }
@@ -222,6 +228,7 @@ public class RegisterActivity extends BaseActivity {
                 .progressIndeterminateStyle(false)
                 .show();
         Call<NetBaseEntity<Token>> call = RetrofitService.getInstance().registered(phone, pwd, code, obj);
+//        Toast.makeText(RegisterActivity.this,"pwd="+pwd+"phone="+phone+"code="+code+"obj="+obj,Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<NetBaseEntity<Token>>() {
             @Override
             public void onResponse(Response<NetBaseEntity<Token>> response, Retrofit retrofit) {
@@ -232,6 +239,7 @@ public class RegisterActivity extends BaseActivity {
 //                    bundle.putString("phone", phone);
 //                    intent.putExtras(bundle);
 //                    setResult(RESULT_OK, intent);
+                    timerTask.cancel();
                     readyGo(LoginActivity.class);
                     finish();
                 } else {
@@ -248,10 +256,10 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        readyGo(LoginActivity.class);
-        finish();
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        readyGo(LoginActivity.class);
+//        finish();
+//        super.onBackPressed();
+//    }
 }

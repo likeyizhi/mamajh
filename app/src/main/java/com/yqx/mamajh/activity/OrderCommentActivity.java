@@ -1,8 +1,21 @@
 package com.yqx.mamajh.activity;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,15 +39,24 @@ import com.werb.pickphotoview.util.PickConfig;
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.base.BaseActivity;
+import com.yqx.mamajh.base.Constants;
 import com.yqx.mamajh.bean.AddShowProduct;
 import com.yqx.mamajh.bean.MemberOrder;
 import com.yqx.mamajh.bean.MemberOrderInfo;
 import com.yqx.mamajh.bean.NetBaseEntity;
 import com.yqx.mamajh.network.RetrofitService;
+import com.yqx.mamajh.utils.SettingImage;
+import com.yqx.mamajh.utils.UploadUtil;
+
+import org.json.JSONException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +88,12 @@ public class OrderCommentActivity extends BaseActivity {
     ListView  lvProductlist;
     @BindView(R.id.et_comment)
     EditText  etComment;
+    @BindView(R.id.iv_img1)
+    ImageView iv_img1;
+    @BindView(R.id.iv_img2)
+    ImageView iv_img2;
+    @BindView(R.id.iv_img3)
+    ImageView iv_img3;
 
     private MemberOrder mOrder;
 
@@ -75,6 +103,35 @@ public class OrderCommentActivity extends BaseActivity {
     private String orderId;
     private String[] prosfs;
     private String ordernumber;
+    private String requestURL;
+    private String request;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 111:
+                    showToast("晒单成功"+request);
+                    mMaterialDialog.dismiss();
+                    finish();
+                    break;
+                case 222:
+                    showToast("晒单失败,请重试"+request);
+                    mMaterialDialog.dismiss();
+                    break;
+            }
+        }
+    };
+    private int whichImg;
+    private static final String IMAGE_FILE_NAME = "file_img.jpg";
+    private String[] items = new String[]{"选择本地图片", "拍照"};
+    private static final int SELECT_PIC_KITKAT = 49;
+    private static final int IMAGE_REQUEST_CODE = 50;
+    private static final int CAMERA_REQUEST_CODE = 51;
+    private static final int RESULT_REQUEST_CODE = 52;
+    private String file_imgPath1;
+    private String file_imgPath2;
+    private String file_imgPath3;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -101,7 +158,7 @@ public class OrderCommentActivity extends BaseActivity {
         setTitle("订单评价");
 
         orderId =(String)getIntent().getExtras().get("orderId");
-        Toast.makeText(OrderCommentActivity.this,orderId+"",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(OrderCommentActivity.this,orderId+"",Toast.LENGTH_SHORT).show();
         loadData(orderId);
 //        tvName.setText(mOrder.getName());
 //        ProductItmeAdapter productItmeAdapter = new ProductItmeAdapter(mContext, mOrder.getProductlist());
@@ -121,7 +178,76 @@ public class OrderCommentActivity extends BaseActivity {
             }
         });
         gvImg.setAdapter(new ImgAdapter());
-
+        iv_img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whichImg=1;
+                showDialog();
+            }
+        });
+        iv_img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whichImg=2;
+                showDialog();
+            }
+        });
+        iv_img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whichImg=3;
+                showDialog();
+            }
+        });
+    }
+    /**
+     * 修改头像
+     * 显示选择对话框
+     */
+    private void showDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("添加方式")
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0 :
+                                Intent intentFromGallery = new Intent();
+                                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
+                                intentFromGallery.addCategory(Intent.CATEGORY_OPENABLE);
+                                intentFromGallery.setType("image/jpeg"); // 设置文件类型
+                                if(android.os.Build.VERSION.SDK_INT>=android.os.Build.VERSION_CODES.KITKAT){
+                                    startActivityForResult(intentFromGallery, SELECT_PIC_KITKAT);
+                                }else{
+                                    startActivityForResult(intentFromGallery,IMAGE_REQUEST_CODE);
+                                }
+                                break;
+                            case 1 :
+                                Intent intentFromCapture = new Intent(
+                                        MediaStore.ACTION_IMAGE_CAPTURE);
+                                // 判断存储卡是否可以用，可用进行存储
+                                String state = Environment
+                                        .getExternalStorageState();
+                                if (state.equals(Environment.MEDIA_MOUNTED)) {
+                                    File path = Environment
+                                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+                                    File file = new File(path, IMAGE_FILE_NAME);
+                                    intentFromCapture.putExtra(
+                                            MediaStore.EXTRA_OUTPUT,
+                                            Uri.fromFile(file));
+                                }
+                                startActivityForResult(intentFromCapture,
+                                        CAMERA_REQUEST_CODE);
+                                break;
+                        }
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
 
@@ -188,6 +314,88 @@ public class OrderCommentActivity extends BaseActivity {
             mImgs.add("add");
             gvImg.setAdapter(new ImgAdapter());
         }
+        // 结果码不等于取消时候
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case IMAGE_REQUEST_CODE :
+                    startPhotoZoom(data.getData());
+                    break;
+                case SELECT_PIC_KITKAT :
+                    startPhotoZoom(data.getData());
+                    break;
+                case CAMERA_REQUEST_CODE :
+                    // 判断存储卡是否可以用，可用进行存储
+                    String state = Environment.getExternalStorageState();
+                    if (state.equals(Environment.MEDIA_MOUNTED)) {
+                        File path = Environment
+                                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+                        File tempFile = new File(path, IMAGE_FILE_NAME);
+                        startPhotoZoom(data.getData());
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "未找到存储卡，无法存储照片！", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case RESULT_REQUEST_CODE : // 图片缩放完成后
+                    if (data != null) {
+                        getImageToView(data);
+                    }
+                    break;
+            }
+        }
+
+    }
+
+    private void startPhotoZoom(Uri uri) {
+        if (uri == null) {
+//            Log.i("tag", "The uri is not exist.");
+            return;
+        }
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            String url=getPath(OrderCommentActivity.this,uri);
+            intent.setDataAndType(Uri.fromFile(new File(url)), "image/jpeg");
+        }else{
+            intent.setDataAndType(uri, "image/jpeg");
+        }
+        // 设置裁剪
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 1080);
+        intent.putExtra("outputY", 1920);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, RESULT_REQUEST_CODE);
+    }
+
+    private void getImageToView(Intent data){
+        Bundle extras = data.getExtras();
+        if (extras != null) {
+            Bitmap photo = extras.getParcelable("data");
+            switch (whichImg){
+                case 1:
+                    SettingImage settingImage1 = new SettingImage(photo, "file_img1");
+                    file_imgPath1=settingImage1.imagePath();
+                    iv_img1.setImageBitmap(photo);
+//                    Toast.makeText(OrderCommentActivity.this,""+file_imgPath1,Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    SettingImage settingImage2 = new SettingImage(photo, "file_img2");
+                    file_imgPath2=settingImage2.imagePath();
+                    iv_img2.setImageBitmap(photo);
+//                    Toast.makeText(OrderCommentActivity.this,""+file_imgPath2,Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    SettingImage settingImage3 = new SettingImage(photo, "file_img3");
+                    file_imgPath3=settingImage3.imagePath();
+                    iv_img3.setImageBitmap(photo);
+//                    Toast.makeText(OrderCommentActivity.this,""+file_imgPath3,Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
+        }
     }
 
     @OnClick(R.id.btn_submit)
@@ -204,9 +412,7 @@ public class OrderCommentActivity extends BaseActivity {
 //        Toast.makeText(OrderCommentActivity.this,productlist,Toast.LENGTH_SHORT).show();
 
         int isimg = 0;
-        if (mImgs.size() > 1) {
             isimg = 1;
-        }
         addShowProduct((int) ratingFwtd.getRating(), (int) ratingCpzl.getRating(), (int) ratingShsd.getRating(), etComment.getText().toString().trim(), isimg, productlist);
     }
 
@@ -223,17 +429,24 @@ public class OrderCommentActivity extends BaseActivity {
                 @Override
                 public void onResponse(Response<NetBaseEntity<AddShowProduct>> response, Retrofit retrofit) {
                     if (response.body().getStatus() == 0) {
-                        if (mImgs.size() == 2) {
-                            saveImage(response.body().getRes().getShowid(), new File(mImgs.get(0)), null, null);
-                        } else if (mImgs.size() == 3) {
-                            saveImage(response.body().getRes().getShowid(), new File(mImgs.get(0)), new File(mImgs.get(1)), null);
-                        } else if (mImgs.size() == 4) {
-                            saveImage(response.body().getRes().getShowid(), new File(mImgs.get(0)), new File(mImgs.get(1)), new File(mImgs.get(2)));
-                        } else {
+                        if (file_imgPath1!=null||file_imgPath2!=null||file_imgPath3!=null){
+                            saveImage(response.body().getRes().getShowid(), null, null, null);
+                        }else{
                             Toast.makeText(getApplicationContext(), "晒单成功", Toast.LENGTH_SHORT).show();
                             mMaterialDialog.dismiss();
                             finish();
                         }
+//                        if (mImgs.size() == 2) {
+//                            saveImage(response.body().getRes().getShowid(), new File(mImgs.get(0)), null, null);
+//                        } else if (mImgs.size() == 3) {
+//                            saveImage(response.body().getRes().getShowid(), new File(mImgs.get(0)), new File(mImgs.get(1)), null);
+//                        } else if (mImgs.size() == 4) {
+//                            saveImage(response.body().getRes().getShowid(), new File(mImgs.get(0)), new File(mImgs.get(1)), new File(mImgs.get(2)));
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), "晒单成功", Toast.LENGTH_SHORT).show();
+//                            mMaterialDialog.dismiss();
+//                            finish();
+//                        }
                     }
                     mMaterialDialog.dismiss();
                 }
@@ -255,51 +468,88 @@ public class OrderCommentActivity extends BaseActivity {
     }
 
     private void saveImage(int showid, File file_img1, File file_img2, File file_img3) {
-        RequestBody requestBody;
-        MultipartBody.Part part1 = null, part2 = null, part3 = null;
-        if (file_img1 != null) {
-            requestBody = RequestBody.create(MediaType.parse("image/png"), file_img1);
-            part1 = MultipartBody.Part.createFormData("file_img1", file_img1.getName(), requestBody);
+//        Toast.makeText(OrderCommentActivity.this,""+file_img1.getPath()+"|"+file_img2+"|"+file_img3,Toast.LENGTH_SHORT).show();
+        final Map<String, String> params = new HashMap<String, String>();
+        params.put("token", AppApplication.TOKEN+"");
+        params.put("type", 2+"");
+        params.put("showid", showid+"");
+        final Map<String, File> files = new TreeMap<String, File>();
+        if (file_imgPath1!=null){
+            files.put("file_img1", new File(file_imgPath1));
         }
-        if (file_img2 != null) {
-            requestBody = RequestBody.create(MediaType.parse("image/png"), file_img2);
-            part2 = MultipartBody.Part.createFormData("file_img2", file_img2.getName(), requestBody);
+        if (file_imgPath2!=null){
+            files.put("file_img2", new File(file_imgPath2));
         }
-        if (file_img3 != null) {
-            requestBody = RequestBody.create(MediaType.parse("image/png"), file_img3);
-            part3 = MultipartBody.Part.createFormData("file_img3", file_img3.getName(), requestBody);
+        if (file_imgPath3!=null){
+            files.put("file_img3", new File(file_imgPath3));
         }
-
-        if (NetUtils.isNetworkConnected(mContext)) {
-            mMaterialDialog = new MaterialDialog.Builder(OrderCommentActivity.this)
-                    .content(R.string.loading)
-                    .cancelable(false)
-                    .progress(true, 0)
-                    .progressIndeterminateStyle(false)
-                    .show();
-            Call<NetBaseEntity> mGetDataCallNet = RetrofitService.getInstance().saveImage(AppApplication.TOKEN, 2, showid, part1, part2, part3);
-            mGetDataCallNet.enqueue(new Callback<NetBaseEntity>() {
-                @Override
-                public void onResponse(Response<NetBaseEntity> response, Retrofit retrofit) {
-                    Toast.makeText(getApplicationContext(), "晒单成功", Toast.LENGTH_SHORT).show();
-                    mMaterialDialog.dismiss();
-                    finish();
+        requestURL= Constants.BASE_URL+"/SaveImage.aspx?token="+AppApplication.TOKEN+"&type=2&showid="+showid;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    request = UploadUtil.post(requestURL, params, files);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-                @Override
-                public void onFailure(Throwable t) {
-                    mMaterialDialog.dismiss();
-                    t.printStackTrace();
+                if ((request+"").contains("成功")) { // 请求成功
+                    Message message=new Message();
+                    message.what=111;
+                    handler.sendMessage(message);
+                } else { // 请求失败
+                    Message message=new Message();
+                    message.what=222;
+                    handler.sendMessage(message);
                 }
-            });
-        } else {
-            toggleNetworkError(true, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //错误后的点击屏幕的处理
-                }
-            });
-        }
+            }
+        }).start();
+//        RequestBody requestBody;
+//        MultipartBody.Part part1 = null, part2 = null, part3 = null;
+//        if (file_img1 != null) {
+//            requestBody = RequestBody.create(MediaType.parse("image/png"), file_img1);
+//            part1 = MultipartBody.Part.createFormData("file_img1", file_img1.getName(), requestBody);
+//        }
+//        if (file_img2 != null) {
+//            requestBody = RequestBody.create(MediaType.parse("image/png"), file_img2);
+//            part2 = MultipartBody.Part.createFormData("file_img2", file_img2.getName(), requestBody);
+//        }
+//        if (file_img3 != null) {
+//            requestBody = RequestBody.create(MediaType.parse("image/png"), file_img3);
+//            part3 = MultipartBody.Part.createFormData("file_img3", file_img3.getName(), requestBody);
+//        }
+//
+//        if (NetUtils.isNetworkConnected(mContext)) {
+//            mMaterialDialog = new MaterialDialog.Builder(OrderCommentActivity.this)
+//                    .content(R.string.loading)
+//                    .cancelable(false)
+//                    .progress(true, 0)
+//                    .progressIndeterminateStyle(false)
+//                    .show();
+//            Call<NetBaseEntity> mGetDataCallNet = RetrofitService.getInstance().saveImage(AppApplication.TOKEN, 2, showid, part1, part2, part3);
+//            mGetDataCallNet.enqueue(new Callback<NetBaseEntity>() {
+//                @Override
+//                public void onResponse(Response<NetBaseEntity> response, Retrofit retrofit) {
+//                    Toast.makeText(getApplicationContext(), "晒单成功", Toast.LENGTH_SHORT).show();
+//                    mMaterialDialog.dismiss();
+//                    finish();
+//                }
+//
+//                @Override
+//                public void onFailure(Throwable t) {
+//                    mMaterialDialog.dismiss();
+//                    t.printStackTrace();
+//                }
+//            });
+//        } else {
+//            toggleNetworkError(true, new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    //错误后的点击屏幕的处理
+//                }
+//            });
+//        }
     }
 
 
@@ -415,5 +665,129 @@ public class OrderCommentActivity extends BaseActivity {
         ProductViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+    /**
+     * <br>功能简述:4.4及以上获取图片的方法
+     * <br>功能详细描述:
+     * <br>注意:
+     * @param context
+     * @param uri
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static String getPath(final Context context, final Uri uri) {
+
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+
+        // DocumentProvider
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(context, contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[] { split[1] };
+
+                return getDataColumn(context, contentUri, selection, selectionArgs);
+            }
+        }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+
+            // Return the remote address
+            if (isGooglePhotosUri(uri))
+                return uri.getLastPathSegment();
+
+            return getDataColumn(context, uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+
+    public static String getDataColumn(Context context, Uri uri, String selection,
+                                       String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = { column };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is Google Photos.
+     */
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 }

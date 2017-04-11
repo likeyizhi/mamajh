@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#eeeeee">
+    android:background="#ffffff">
 
     <RelativeLayout
         android:id="@+id/rl_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="18dp"
         android:background="#FFFFFF">
 
         <ImageButton
@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="兑换详情"
-            android:textSize="20sp" />
+            android:textColor="#666666"
+            android:textSize="16sp" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -38,18 +39,27 @@
 
             android:visibility="invisible" />
     </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"/>
+
     <RelativeLayout
-        android:id="@+id/rl_rl"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF"
+        android:gravity="right">
+
         <LinearLayout
             android:id="@+id/ll_bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
+            android:layout_height="55dp"
+
+            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -58,45 +68,54 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="#666666"
                 android:text="当前金币0个，不能兑换此商品" />
 
             <Button
                 android:id="@+id/bt_zhuanQuJinBi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#ea6969"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:background="#e14258"
                 android:text="赚取金币"
                 android:textColor="#ffffff" />
         </LinearLayout>
+
         <ScrollView
+
+            android:id="@+id/sv_sv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/ll_bottom"
-            android:layout_alignParentTop="true"
-            android:id="@+id/sv_sv">
+            android:layout_alignParentTop="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:background="#FFFFFF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
 
                     <ImageView
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/iv_photo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_width="300dp"
+                        android:layout_height="300dp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -111,22 +130,23 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:text="$998"
-                            android:textColor="#ee6060" />
+                            android:textColor="#e14258" />
 
                         <TextView
                             android:id="@+id/tv_yiDui"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
-                            android:background="#ea6969"
+                            android:background="@drawable/red_bg"
                             android:text="0件已兑"
+
                             android:textColor="#ffffff" />
                     </LinearLayout>
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
@@ -135,8 +155,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
-                            android:paddingBottom="10dp"
-                            android:text="妈妈江湖" />
+
+                            android:text="妈妈江湖"
+                            android:textColor="#666666" />
 
                         <View
                             android:layout_width="1dp"
@@ -150,7 +171,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="15dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:layout_weight="1"
                             android:gravity="right"
                             android:text="抢兑中"
@@ -168,34 +189,49 @@
                             android:id="@+id/tv_jinBi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+
                             android:text="10金币"
-                            android:textColor="#ea6969" />
+                            android:textColor="#e14258"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#eeeeee" />
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:background="#FFFFFF"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical" >
+                    android:layout_marginTop="10dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:textColor="#666666"
+                        android:layout_marginBottom="10dp"
                         android:text="详情说明" />
-                    <View android:layout_width="match_parent"
+                    <View
+                        android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#eeeeee"/>
+                        android:layout_marginLeft="10dp"
+                        android:background="#eeeeee" />
                     <WebView
                         android:id="@+id/tv_xiangQing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:text="详情说明" />
+
+
 
 
                     <View
@@ -205,5 +241,13 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eeeeee"
+            android:layout_above="@+id/ll_bottom"
+     />
     </RelativeLayout>
+
+
 </LinearLayout>

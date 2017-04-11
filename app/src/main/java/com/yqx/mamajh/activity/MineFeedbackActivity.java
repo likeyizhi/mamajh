@@ -1,16 +1,18 @@
 package com.yqx.mamajh.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.beardedhen.androidbootstrap.BootstrapButton;
+
 import com.beardedhen.androidbootstrap.api.defaults.DefaultBootstrapBrand;
 import com.github.obsessive.library.eventbus.EventCenter;
 import com.github.obsessive.library.netstatus.NetUtils;
@@ -201,9 +203,11 @@ public class MineFeedbackActivity extends BaseActivity {
             }
             holder.btnItemType.setText(entity.getName());
             if (entity.getIsCheck()) {
-                holder.btnItemType.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
+                holder.btnItemType.setBackgroundColor(Color.rgb(225,66,88));
+                holder.btnItemType.setTextColor(Color.rgb(225,225,225));
             } else {
-                holder.btnItemType.setBootstrapBrand(DefaultBootstrapBrand.SECONDARY);
+                holder.btnItemType.setBackgroundColor(Color.rgb(225,225,225));
+                holder.btnItemType.setTextColor(Color.rgb(51,51,51));
             }
             holder.btnItemType.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -224,7 +228,7 @@ public class MineFeedbackActivity extends BaseActivity {
 
     static class ViewHolder {
         @BindView(R.id.btn_item_type)
-        BootstrapButton btnItemType;
+        Button btnItemType;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +25,10 @@ import com.yqx.mamajh.R;
 import com.yqx.mamajh.adapter.ViewPagerAdapter;
 import com.yqx.mamajh.bean.NetBaseEntity;
 import com.yqx.mamajh.bean.ProInfo;
+import com.yqx.mamajh.bean.ShopCartCount;
 import com.yqx.mamajh.fragment.ProInfo01Fragmenr;
 import com.yqx.mamajh.fragment.ProInfo02Fragmenr;
+import com.yqx.mamajh.fragment.ProInfo03Fragmenr;
 import com.yqx.mamajh.network.RetrofitService;
 
 import java.util.ArrayList;
@@ -47,10 +50,11 @@ public class ProductInfoActivity extends FragmentActivity{
     private RadioGroup rg_proinfo;
     private RadioButton rb_proinfo01;
     private RadioButton rb_proinfo02;
+    private RadioButton rb_proinfo03;
     private int id;
     private LinearLayout ll_proInfo_lianximaijia;
     private LinearLayout ll_proInfo_shoucang;
-    private LinearLayout ll_proInfo_gouwuche;
+    private RelativeLayout ll_proInfo_gouwuche;
     private TextView tv_proInfo_cart;
     private TextView tv_tianjiagouwuche;
     private ImageView iv_shoucang;
@@ -64,6 +68,7 @@ public class ProductInfoActivity extends FragmentActivity{
         id=intent.getIntExtra("_id",0);
 //        Toast.makeText(this, id+"",Toast.LENGTH_SHORT).show();
         loadData();
+        setShopCartCount();
         initView();
         setAdapter();
         setListeners();
@@ -82,10 +87,8 @@ public class ProductInfoActivity extends FragmentActivity{
                     setLianXiMaiJia(response.body().getRes().getPhone());
                     iscollect=response.body().getRes().iscollect();
                     iv_shoucang.setImageResource(setCollect());
-
                 }
             }
-
             @Override
             public void onFailure(Throwable t) {
 
@@ -134,6 +137,9 @@ public class ProductInfoActivity extends FragmentActivity{
                     case 1:
                         rb_proinfo02.setChecked(true);
                         break;
+                    case 2:
+                        rb_proinfo03.setChecked(true);
+                        break;
                     default:
                         break;
                 }
@@ -153,6 +159,9 @@ public class ProductInfoActivity extends FragmentActivity{
                         break;
                     case R.id.rb_proinfo02:
                         vp_proinfo.setCurrentItem(1);
+                        break;
+                    case R.id.rb_proinfo03:
+                        vp_proinfo.setCurrentItem(2);
                         break;
                     default:
                         break;
@@ -180,7 +189,7 @@ public class ProductInfoActivity extends FragmentActivity{
                                     return;
                                 }
                                 if (response.body().getStatus() == 0) {
-                                    Toast.makeText(ProductInfoActivity.this, "收藏商品成功", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(ProductInfoActivity.this, "收藏商品成功", Toast.LENGTH_SHORT).show();
                                     iscollect = false;
                                     iv_shoucang.setImageResource(setCollect());
                                 } else {
@@ -202,7 +211,7 @@ public class ProductInfoActivity extends FragmentActivity{
                                     return;
                                 }
                                 if (response.body().getStatus() == 0) {
-                                    Toast.makeText(ProductInfoActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(ProductInfoActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
                                     iscollect = true;
                                     iv_shoucang.setImageResource(setCollect());
                                 } else {
@@ -254,6 +263,7 @@ public class ProductInfoActivity extends FragmentActivity{
                                 return;
                             }
                             if (response.body().getStatus()==0){
+                                setShopCartCount();
                                 Toast.makeText(ProductInfoActivity.this,"添加购物车成功",Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(ProductInfoActivity.this,"添加失败,请重试",Toast.LENGTH_SHORT).show();
@@ -271,11 +281,31 @@ public class ProductInfoActivity extends FragmentActivity{
 
     }
 
+    private void setShopCartCount() {
+        Call<ShopCartCount> cartCountCall=RetrofitService.getInstance().getShopCartCount(AppApplication.TOKEN);
+        cartCountCall.enqueue(new Callback<ShopCartCount>() {
+            @Override
+            public void onResponse(Response<ShopCartCount> response, Retrofit retrofit) {
+                if (response.body()==null){
+                    return;
+                }
+                if (response.body().getStatus()==0){
+                    tv_proInfo_cart.setText(response.body().getRes().getCount()+"");
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+    }
+
     private void setAdapter() {
         fragments=new ArrayList<Fragment>();
         fragments.add(new ProInfo01Fragmenr());
         fragments.add(new ProInfo02Fragmenr());
-//        fragments.add(new ProInfo03Fragmenr());
+        fragments.add(new ProInfo03Fragmenr());
         viewpageradapter=new ViewPagerAdapter(getSupportFragmentManager(), fragments);
         vp_proinfo.setAdapter(viewpageradapter);
         vp_proinfo.setOffscreenPageLimit(2);
@@ -287,11 +317,11 @@ public class ProductInfoActivity extends FragmentActivity{
         rg_proinfo=(RadioGroup)findViewById(R.id.rg_proinfo);
         rb_proinfo01=(RadioButton)findViewById(R.id.rb_proinfo01);
         rb_proinfo02=(RadioButton)findViewById(R.id.rb_proinfo02);
-//        rb_proinfo03=(RadioButton)findViewById(R.id.rb_proinfo03);
+        rb_proinfo03=(RadioButton)findViewById(R.id.rb_proinfo03);
 
         ll_proInfo_lianximaijia=(LinearLayout)findViewById(R.id.ll_proInfo_lianximaijia);
         ll_proInfo_shoucang=(LinearLayout)findViewById(R.id.ll_proInfo_shoucang);
-        ll_proInfo_gouwuche=(LinearLayout)findViewById(R.id.ll_proInfo_gouwuche);
+        ll_proInfo_gouwuche=(RelativeLayout)findViewById(R.id.ll_proInfo_gouwuche);
         tv_proInfo_cart=(TextView)findViewById(R.id.tv_proInfo_cart);
         tv_tianjiagouwuche=(TextView)findViewById(R.id.tv_tianjiagouwuche);
         iv_shoucang=(ImageView)findViewById(R.id.iv_shoucang);
@@ -301,5 +331,9 @@ public class ProductInfoActivity extends FragmentActivity{
         return id;
     }
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setShopCartCount();
+    }
 }

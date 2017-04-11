@@ -1,6 +1,7 @@
 package com.yqx.mamajh.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.activity.OrderInfoActivity;
+import com.yqx.mamajh.activity.ProductInfoActivity;
 import com.yqx.mamajh.bean.MemberOrderInfo;
 
 import java.util.List;
@@ -61,12 +63,23 @@ public class OrderInfoAdapter extends BaseAdapter{
             convertView.setTag(holder);
         }
         holder= (ViewHolder) convertView.getTag();
-        MemberOrderInfo.MemberOrderInfoRes.MemberOrderInfoProductlist pro=getItem(position);
+        final MemberOrderInfo.MemberOrderInfoRes.MemberOrderInfoProductlist pro=getItem(position);
         Glide.with(context).load(pro.getImgurl()).into(holder.iv_proImg);
         holder.tv_name.setText(pro.getName()+"");
-        holder.tv_oneMoney.setText(pro.getPrice()+"");
+        holder.tv_oneMoney.setText("￥"+pro.getPrice()+"");
         holder.tv_productNumber.setText("选择数量："+pro.getCount()+"");
-        holder.tv_salePrice.setText("合计："+pro.getTotalprice());
+        holder.tv_salePrice.setText("合计：￥"+pro.getTotalprice());
+        if(pro!=null){
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent=new Intent(context, ProductInfoActivity.class);
+                    intent.putExtra("_id",Integer.parseInt(pro.getId()) );
+                    context.startActivity(intent);
+                }
+            });
+        }
         return convertView;
     }
 

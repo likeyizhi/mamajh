@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:background="#fff"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:id="@+id/ll_eva"
@@ -36,25 +38,35 @@
                     android:orientation="vertical">
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="评价" />
+                        android:text="评价"
+                        android:textColor="#999999"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp">
 
                         <TextView
                             android:id="@+id/tv_eva_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp" />
+                            android:textColor="#333333"
+                            android:text="0"
+                            android:paddingBottom="5dp"
+                            android:textSize="22sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="人" />
+                            android:text="人"
+                            android:paddingBottom="5dp"
+                            android:textColor="#333333"
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -72,23 +84,33 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#999999"
+                        android:textSize="12sp"
                         android:text="月销单" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp">
 
                         <TextView
                             android:id="@+id/tv_sell_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp" />
+                            android:textColor="#333333"
+                            android:text="15"
+                            android:paddingBottom="5dp"
+                            android:textSize="22sp" />
 
                         <TextView
+                            android:id="@+id/textView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="单" />
+                            android:text="单"
+                            android:paddingBottom="5dp"
+                            android:textColor="#333333"
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -96,25 +118,34 @@
 
 
             </LinearLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="8dp"
+    android:background="#eeeeee">
 
+</View>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="#fff"
                 android:orientation="vertical"
-                android:padding="10dp">
+               >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="活动" />
-
-                <FrameLayout
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:text="活动"></TextView>
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#888" />
+                    android:layout_height="8dp"
+                    android:background="#eeeeee">
+
+                </View>
+
+
 
                 <com.yqx.mamajh.widget.MyListview
                     android:id="@+id/lv_activity"
@@ -129,68 +160,90 @@
                 android:layout_height="wrap_content"
                 android:background="#fff"
                 android:orientation="horizontal"
-                android:padding="20dp">
+               >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="配送" />
+                    android:textColor="#999999"
+                    android:textSize="16sp"
+                    android:text="配送"
+                    android:padding="10dp"/>
 
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#eeeeee">
 
+            </View>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="#fff"
                 android:orientation="vertical"
-                android:padding="10dp">
+                >
 
                 <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="商家实景" />
+                    android:padding="10dp"
 
-                <FrameLayout
+                    android:text="商家实景"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <View
                     android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="1dp"
-                    android:background="#888" />
-
+                    android:background="#eeeeee">
+                </View>
                 <com.yqx.mamajh.widget.WrapHeightGridView
                     android:id="@+id/gv_imgs"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:horizontalSpacing="5dip"
                     android:numColumns="4"
                     android:stretchMode="columnWidth"
+                    android:layout_marginBottom="10dp"
                     android:verticalSpacing="5dip" />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#eeeeee">
 
+            </View>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+
                 android:background="#fff"
                 android:orientation="vertical"
-                android:padding="10dp">
+                >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="商家信息" />
 
-                <FrameLayout
+                android:layout_marginTop="-2dp"
+                    android:text="商家信息"
+                    android:padding="10dp"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <View
                     android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="1dp"
-                    android:background="#888" />
+                    android:background="#eeeeee">
+                </View>
 
 
                 <!-- </LinearLayout>
@@ -204,30 +257,41 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="-5dp"
                     android:padding="10dp"
-                    android:paddingBottom="10dp"
+
+                    android:textSize="14sp"
+                    android:textColor="#666666"
                     android:text="门店简介：" />
 
-                <FrameLayout
+                <View
                     android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="1dp"
-                    android:background="#888" />
+                    android:background="#eeeeee">
+                </View>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    >
 
                     <TextView
                         android:id="@+id/tv_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:text="地址"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="15dp"
+                        android:textSize="14sp"
+                        android:textColor="#999999"
+                        android:layout_marginLeft="10dp"
                         android:layout_toLeftOf="@+id/iv_ditu" />
 
                     <ImageView
                         android:id="@+id/iv_ditu"
+                        android:paddingTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/store_ditu"
@@ -238,25 +302,32 @@
 
                 </RelativeLayout>
 
-                <FrameLayout
+                <View
                     android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#888" />
+                    android:background="#eeeeee">
+                </View>
+
+
+
 
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp" />
-
-                <FrameLayout
+                    android:layout_marginLeft="10dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:text="营业时间"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+                <View
                     android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#888" />
-
+                    android:background="#eeeeee">
+                </View>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -269,10 +340,17 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
+
                         android:src="@mipmap/store_tell" />
 
                     <TextView
                         android:id="@+id/tv_tell"
+                        android:text="电话"
+                        android:paddingTop="10dp"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="10dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="#999999"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -280,27 +358,33 @@
 
                 </RelativeLayout>
 
-                <FrameLayout
+                <View
                     android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#888" />
+                    android:background="#eeeeee">
+                </View>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingLeft="10dp"
+
+                    android:padding="10dp"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
                     android:text="商家资质:" />
 
                 <com.yqx.mamajh.widget.WrapHeightGridView
                     android:id="@+id/gv_shopauthi"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+
                     android:horizontalSpacing="5dip"
-                    android:numColumns="3"
+                    android:numColumns="4"
+                    android:layout_marginLeft="10dp"
                     android:stretchMode="columnWidth"
+                    android:layout_marginBottom="10dp"
                     android:verticalSpacing="5dip" />
 
             </LinearLayout>

@@ -185,6 +185,16 @@
         </activity>
         <activity android:name=".activity.MyListActivity">
         </activity>
+        <activity android:name=".activity.ShowBigImageActivity">
+        </activity>
+        <activity android:name=".activity.StoreSearchActivity">
+        </activity>
+        <activity android:name=".activity.SearchLocationActivity">
+        </activity>
+        <activity android:name=".activity.AddAddressSearchActivity">
+        </activity>
+        <activity android:name=".activity.AddAddressNoMapActivity">
+        </activity>
 
 
     </application>

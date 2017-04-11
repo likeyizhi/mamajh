@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <include
@@ -13,17 +14,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+     android:gravity="center_vertical"
+        android:background="#f6f6f6"
+
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+android:layout_marginLeft="10dp"
             android:text="今日已完成"/>
 
         <TextView
             android:id="@+id/tv_num"
             android:textColor="#007fff"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -35,25 +41,35 @@
         <TextView
             android:id="@+id/tv_gold"
             android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#e14258"
             android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="金币"/>
 
         <TextView
             android:id="@+id/tv_silver"
             android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#e14258"
             android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="银币"/>
 
     </LinearLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"
+        />
     <com.github.obsessive.library.widgets.XSwipeRefreshLayout
         android:id="@+id/fragment_rank_list_swipe_layout"
         android:layout_width="match_parent"
@@ -64,8 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cacheColorHint="@android:color/transparent"
-            android:divider="@null"
-            android:dividerHeight="0dp"
+            android:divider="#eeeeee"
+            android:dividerHeight="1dp"
             android:fadingEdge="none"
             android:fadingEdgeLength="0dp"
             android:listSelector="@android:color/transparent"

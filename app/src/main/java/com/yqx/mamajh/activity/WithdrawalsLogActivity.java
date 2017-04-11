@@ -156,7 +156,7 @@ public class WithdrawalsLogActivity extends BaseActivity {
             String no = entity.getNumber().substring(entity.getNumber().length() - 4, entity.getNumber().length());
             holder.tvItemBankName.setText(entity.getBankName() + " 尾号" + no);
             holder.tvItemTime.setText(entity.getTime());
-            holder.tvItemPrice.setText(entity.getMoney());
+            holder.tvItemPrice.setText("+"+entity.getMoney());
             return view;
         }
 

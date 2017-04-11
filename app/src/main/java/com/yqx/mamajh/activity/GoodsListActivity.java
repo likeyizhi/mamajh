@@ -2,6 +2,7 @@ package com.yqx.mamajh.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.github.obsessive.library.adapter.ListViewDataAdapter;
 import com.github.obsessive.library.adapter.MultiItemRowListAdapter;
@@ -74,27 +76,29 @@ public class GoodsListActivity extends BaseActivity implements SwipeRefreshLayou
     private MyGvAdapter EAdapter;
     private String cid="0";
     private int p=1;
-    private String size="10";
+    private String size="6";
+    private String key;
     private List<HotGoodsEntity.ResEntity.ProlistEntity> EShopList;
+    private MaterialDialog mMaterialDialog = null;
     @Override
     protected void getBundleExtras(Bundle extras) {
 
         if(extras != null){
             id = extras.getString("id");
+//            Toast.makeText(GoodsListActivity.this,""+id,Toast.LENGTH_SHORT).show();
             if (id==null){
                 id="";
             }
             title=extras.getString("title");
-            if (title==null){
+            key=title;
+            if (title.equals("")){
                 title="商品列表";
             }
             cid=extras.getString("cid");
             if (cid==null){
                 cid="";
             }
-
         }
-
     }
 
     @Override
@@ -269,11 +273,20 @@ public class GoodsListActivity extends BaseActivity implements SwipeRefreshLayou
     }
 
     private void loadData(final boolean isLoadMore) {
-        Call<HotGoodsEntity> EShopCall=RetrofitService.getInstance().getHotGoods(id+"",cid,p,size);
+        if (!isLoadMore){
+            mMaterialDialog = new MaterialDialog.Builder(GoodsListActivity.this)
+                    .content(R.string.loading)
+                    .cancelable(false)
+                    .progress(true, 0)
+                    .progressIndeterminateStyle(false)
+                    .show();
+        }
+        Call<HotGoodsEntity> EShopCall=RetrofitService.getInstance().getHotGoods(id+"",cid,p,size,key);
         EShopCall.enqueue(new Callback<HotGoodsEntity>() {
             @Override
             public void onResponse(Response<HotGoodsEntity> response, Retrofit retrofit) {
                 if (response.body()==null){
+                    mMaterialDialog.dismiss();
                     return;
                 }
                 if(response.body().getStatus()==0){
@@ -282,20 +295,25 @@ public class GoodsListActivity extends BaseActivity implements SwipeRefreshLayou
                         if (!EShopListAdd.isEmpty()){
                             EShopList.addAll(EShopListAdd);
                             EAdapter.notifyDataSetChanged();
-                            Toast.makeText(GoodsListActivity.this,"正在加载...",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(gv_goods,"正在加载更多产品...",Snackbar.LENGTH_SHORT).show();
+//                            Toast.makeText(GoodsListActivity.this,"正在加载...",Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(GoodsListActivity.this,"就这些产品啦...",Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(GoodsListActivity.this,"就这些产品啦...",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(gv_goods,"就这些产品啦",Snackbar.LENGTH_SHORT).show();
+                            mMaterialDialog.dismiss();
                         }
                     }else{
                         EShopList=response.body().getRes().getProlist();
                         setGvAdapter(EShopList);
+                        mMaterialDialog.dismiss();
                     }
+                    mMaterialDialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-
+                mMaterialDialog.dismiss();
             }
         });
     }

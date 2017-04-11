@@ -181,7 +181,8 @@ public class MineFragment extends BaseFragment {
         Bundle bundle;
         switch (view.getId()) {
             case R.id.iv_mine_avatar:
-                readyGoForResult(MineInfoActivity.class, RC_MINE_INFO);
+//                readyGoForResult(MineInfoActivity.class, RC_MINE_INFO);
+                readyGo(MineInfoActivity.class);
                 break;
             case R.id.tv_mine_name:
                 readyGo(MineInfoActivity.class);
@@ -236,7 +237,9 @@ public class MineFragment extends BaseFragment {
                 readyGo(CouponActivity.class);
                 break;
             case R.id.lay_mine_account_safe:
-                readyGo(ForgetPwdActivity.class);
+                Bundle bu=new Bundle();
+                bu.putString("changeType","修改账户密码");
+                readyGo(ForgetPwdActivity.class, bu);
                 break;
             case R.id.lay_mine_collect:
                 readyGo(MineCollectActivity.class);
@@ -271,6 +274,7 @@ public class MineFragment extends BaseFragment {
         tvMineName.setText(AppApplication.memeberIndex.getNickName());
         tvMineMainprice.setText(AppApplication.memeberIndex.getMainPrice() + "");
         tvMineScore.setText(AppApplication.memeberIndex.getScore() + "");
+        tvMineChenghao.setText(AppApplication.memeberIndex.getLevel());
         if (AppApplication.memeberIndex.getDfk() > 0) {
             badgeMineWaitPayment.showTextBadge(AppApplication.memeberIndex.getDfk() + "");
             badgeMineWaitPayment.setVisibility(View.VISIBLE);

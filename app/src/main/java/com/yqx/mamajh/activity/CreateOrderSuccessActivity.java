@@ -1,7 +1,14 @@
 package com.yqx.mamajh.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,6 +27,8 @@ import com.yqx.mamajh.bean.NetBaseEntity;
 import com.yqx.mamajh.bean.WeiXinPay;
 import com.yqx.mamajh.network.RetrofitService;
 import com.yqx.mamajh.wxapi.WXPayEntryActivity;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,12 +60,13 @@ public class CreateOrderSuccessActivity extends BaseActivity {
     @BindView(R.id.btn_pay)
     BootstrapButton btnPay;
 
+
     private CreateOrder mOrder;
 
     private boolean isBalance = false;
 
     private MaterialDialog mMaterialDialog = null;
-
+    private String[] items = new String[]{"确定"};
     @Override
     protected void getBundleExtras(Bundle extras) {
 
@@ -93,17 +103,17 @@ public class CreateOrderSuccessActivity extends BaseActivity {
                     isBalance = true;
                 } else {
                     layBalance.setVisibility(View.GONE);
-                    btnPay.setText("微信支付（" + mOrder.getPrice() + "）");
+                    btnPay.setText("微信支付（￥" + mOrder.getPrice() + "）");
                     isBalance = false;
                 }
             }
         });
-
+        btnPay.setText("微信支付（￥" + mOrder.getPrice() + "）");
         tvPrice.setText("￥" + mOrder.getPrice());
         tvDeliveryMethod.setText(mOrder.getPostPay());
         tvAddressPerson.setText(mOrder.getName()+"("+mOrder.getPhone()+")");
         tvAddressInfo.setText(mOrder.getAddress());
-        tvBalance.setText(AppApplication.memeberIndex.getMainPrice() + "");
+        tvBalance.setText("￥"+AppApplication.memeberIndex.getMainPrice() + "");
     }
 
     @Override
@@ -157,7 +167,7 @@ public class CreateOrderSuccessActivity extends BaseActivity {
                     .progress(true, 0)
                     .progressIndeterminateStyle(false)
                     .show();
-            Call<NetBaseEntity<WeiXinPay>> mGetDataCallNet = RetrofitService.getInstance().getOrderWeiXinPayParam(AppApplication.TOKEN, no, useBlance);
+            Call<NetBaseEntity<WeiXinPay>> mGetDataCallNet = RetrofitService.getInstance().getOrderWeiXinPayParam(AppApplication.TOKEN, no, useBlance, etBalancePayPwd.getText()+"");
             mGetDataCallNet.enqueue(new Callback<NetBaseEntity<WeiXinPay>>() {
                 @Override
                 public void onResponse(Response<NetBaseEntity<WeiXinPay>> response, Retrofit retrofit) {
@@ -166,10 +176,14 @@ public class CreateOrderSuccessActivity extends BaseActivity {
                         return;
                     }
                     if (response.body().getStatus() == 0) {
-                        WeiXinPay weiXinPay = response.body().getRes();
-                        Bundle    bundle    = new Bundle();
-                        bundle.putParcelable(WXPayEntryActivity.WX_PAY_KEY, weiXinPay);
-                        readyGo(WXPayEntryActivity.class, bundle);
+                        if (!(etBalancePayPwd.getText()+"").equals("")){
+                            showDialog();
+                        }else{
+                            WeiXinPay weiXinPay = response.body().getRes();
+                            Bundle    bundle    = new Bundle();
+                            bundle.putParcelable(WXPayEntryActivity.WX_PAY_KEY, weiXinPay);
+                            readyGo(WXPayEntryActivity.class, bundle);
+                        }
                     }
                     mMaterialDialog.dismiss();
                 }
@@ -187,5 +201,19 @@ public class CreateOrderSuccessActivity extends BaseActivity {
                 }
             });
         }
+    }
+    private void showDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("支付成功")
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0 :
+                                finish();
+                                break;
+                        }
+                    }
+                }).show();
     }
 }

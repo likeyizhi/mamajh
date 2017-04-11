@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context="com.yqx.mamajh.activity.MineAddressActivity">
 
     <include
@@ -36,13 +37,17 @@
 
             <ListView
                 android:id="@+id/list"
+                android:headerDividersEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@color/gray_300"
-                android:dividerHeight="1dp"/>
+                android:divider="#eeeeee"
+                android:dividerHeight="5dp"/>
         </LinearLayout>
-
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="5dp"
+android:background="#eeeeee"
+    ></View>
     </FrameLayout>
 
 </LinearLayout>

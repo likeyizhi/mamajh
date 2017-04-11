@@ -7,9 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_box</item>
+    </style>
     <!-- 圆形 CheckBox -->
     <style name="round_check" parent="@style/Material.Drawable.CheckBox">
+
         <item name="cbd_cornerRadius">10dp</item>
         <item name="cbd_strokeColor">@color/colorPrimary</item>
         <item name="cbd_animDuration">100</item>
@@ -29,19 +32,19 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="atg_isAppendMode">false</item>
-        <item name="atg_borderColor">#666</item>
+        <item name="atg_borderColor">#eeeeee</item>
         <item name="atg_textColor">#666</item>
-        <item name="atg_backgroundColor">#AAAAAA</item>
-        <item name="atg_dashBorderColor">#AAAAAA</item>
-        <item name="atg_inputHintColor">#80000000</item>
-        <item name="atg_inputTextColor">#DE000000</item>
-        <item name="atg_checkedBorderColor">#666</item>
+        <item name="atg_backgroundColor">#eeeeee</item>
+        <item name="atg_dashBorderColor">#eeeeee</item>
+        <item name="atg_inputHintColor">#eeeeee</item>
+        <item name="atg_inputTextColor">#eeeeee</item>
+        <item name="atg_checkedBorderColor">#eeeeee</item>
         <item name="atg_checkedTextColor">#FFFFFF</item>
         <item name="atg_checkedMarkerColor">#FFFFFF</item>
-        <item name="atg_checkedBackgroundColor">#666</item>
+        <item name="atg_checkedBackgroundColor">#eeeeee</item>
         <item name="atg_pressedBackgroundColor">#EDEDED</item>
         <item name="atg_borderStrokeWidth">0.5dp</item>
-        <item name="atg_textSize">16sp</item>
+        <item name="atg_textSize">12sp</item>
         <item name="atg_horizontalSpacing">8dp</item>
         <item name="atg_verticalSpacing">4dp</item>
         <item name="atg_horizontalPadding">12dp</item>

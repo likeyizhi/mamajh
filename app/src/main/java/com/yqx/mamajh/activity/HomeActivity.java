@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.github.obsessive.library.base.BaseLazyFragment;
 import com.github.obsessive.library.eventbus.EventCenter;
@@ -53,7 +55,7 @@ public class HomeActivity extends BaseActivity implements MyTabWidget.OnTabSelec
     public static HomeActivity getInstance() {
         return instance;
     }
-
+    private long exitTime = 0;
 //    private RadioGroup rgMain=(RadioGroup)findViewById(R.id.rg_main);
 //    private RadioButton rbHome=(RadioButton)findViewById(R.id.rb_home);
 //    private RadioButton rbFind=(RadioButton)findViewById(R.id.rb_find);
@@ -71,6 +73,21 @@ public class HomeActivity extends BaseActivity implements MyTabWidget.OnTabSelec
     protected int getContentViewLayoutID() {
         getHyy();
         return R.layout.activity_home;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出江湖！！！", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     //使用EventBus时这里回调
@@ -158,8 +175,7 @@ public class HomeActivity extends BaseActivity implements MyTabWidget.OnTabSelec
                     readyGoForResult(LoginActivity.class, RC_LOGIN, bundle);
                 } else {
                     viewPager.setCurrentItem(index, false);
-                    readyGoForResult(ShopCartActivity.class, RC_SHOPCART);
-
+//                    readyGoForResult(ShopCartActivity.class, RC_SHOPCART);
                 }
                 break;
             case 3:

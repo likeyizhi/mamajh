@@ -1,6 +1,7 @@
 package com.yqx.mamajh.interactor.impl;
 
 import com.squareup.okhttp.ResponseBody;
+import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.bean.NetBaseEntity;
 import com.yqx.mamajh.bean.SearchHistoryListEntity;
 import com.yqx.mamajh.interactor.SearchHistoryInteractor;
@@ -30,7 +31,7 @@ public class SearchHistoryInteractorImpl implements SearchHistoryInteractor {
 
     @Override
     public void getSearchHistory() {
-        call = RetrofitService.getInstance().getSearchHistory();
+        call = RetrofitService.getInstance().getSearchHistory(AppApplication.TOKEN);
         if(call == null){
             return;
         }

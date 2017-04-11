@@ -7,12 +7,14 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+
     tools:context="com.yqx.mamajh.fragment.MineFragment">
 
     <RelativeLayout
         android:id="@+id/lay_navi"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
+        android:visibility="gone"
         android:background="@color/white">
 
         <TextView
@@ -21,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:textSize="14sp"
             android:text="个人中心"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
     </RelativeLayout>
@@ -37,20 +40,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:background="@mipmap/gwbj"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/iv_mine_avatar"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
                         android:layout_gravity="center"
                         android:layout_marginBottom="30dp"
                         android:layout_marginLeft="20dp"
@@ -58,7 +61,7 @@
                         android:layout_marginTop="30dp"
                         android:src="@mipmap/ic_launcher"
                         app:civ_border_color="@color/Gray"
-                        app:civ_border_width="2dp"/>
+                        app:civ_border_width="1dp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -79,7 +82,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="人才"
+                            android:text=""
                             android:textColor="@color/white"/>
                     </LinearLayout>
 
@@ -98,22 +101,25 @@
                             android:padding="5dp">
 
                             <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:id="@+id/imageView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:src="@mipmap/uc_address"/>
+                                android:src="@mipmap/uc_address" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
+                                android:textSize="12sp"
                                 android:text="@string/receipt_address"
                                 android:textColor="@color/white"/>
                         </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="2dp"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="5dp"
                             android:background="@color/white"/>
                     </LinearLayout>
 
@@ -121,8 +127,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="50dp"
+
                     android:background="#44000000"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -141,19 +147,21 @@
                             android:layout_height="wrap_content"
                             android:text="9999"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="金币"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <View
-                        android:layout_width="0.5dp"
+                        android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#FFFFFF"/>
+                        android:background="#584333" />
 
                     <LinearLayout
                         android:id="@+id/lay_mine_balance"
@@ -169,13 +177,15 @@
                             android:layout_height="wrap_content"
                             android:text="9999"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="余额"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -188,14 +198,19 @@
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/my_order"
-                    android:textStyle="bold"/>
+                    android:textColor="#666666"
+                    android:textSize="16sp"
+                     />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -206,21 +221,24 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="@string/check_all_order"/>
+                        android:textSize="12sp"
+                        android:textColor="#cccccc"
+
+                        android:text="@string/check_all_order" />
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/btn_forward_normal"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="2dp"
+                        android:src="@mipmap/btn_forward_normal1" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_text"/>
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -243,8 +261,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:src="@mipmap/uc_payment"/>
 
@@ -260,6 +278,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
                         android:text="@string/wait_payment"/>
 
                 </LinearLayout>
@@ -277,8 +297,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:src="@mipmap/uc_deliver"/>
 
@@ -294,6 +314,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
                         android:text="@string/wait_deliver"/>
 
                 </LinearLayout>
@@ -311,8 +333,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:src="@mipmap/uc_receipt"/>
 
@@ -327,6 +349,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
                         android:text="@string/wait_receipt"/>
 
                 </LinearLayout>
@@ -345,8 +369,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:src="@mipmap/uc_evaluate"/>
 
@@ -363,27 +387,38 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
                         android:text="@string/wait_comment"/>
 
                 </LinearLayout>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
+
             <LinearLayout
                 android:id="@+id/lay_mine_check_all_asset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/my_wallet"
-                    android:textStyle="bold"/>
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -392,24 +427,26 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="@string/check_all_asset"/>
+
+                        android:text="@string/check_all_asset"
+                        android:textColor="#cccccc"
+                        android:textSize="12sp" />
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/btn_forward_normal"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="2dp"
+                        android:src="@mipmap/btn_forward_normal1" />
                 </LinearLayout>
 
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_text"/>
-
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -427,14 +464,16 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:src="@mipmap/uc_balance"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
                         android:text="@string/account_balance"/>
 
                 </LinearLayout>
@@ -448,14 +487,16 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:src="@mipmap/uc_integral"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
                         android:text="@string/account_point"/>
 
                 </LinearLayout>
@@ -469,15 +510,18 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:src="@mipmap/uc_coupon"/>
 
                     <TextView
+                        android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/account_coupon"/>
+                        android:textSize="12sp"
+                        android:textColor="#666666"
+                        android:text="@string/account_coupon" />
 
                 </LinearLayout>
 
@@ -490,14 +534,16 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:src="@mipmap/uc_security"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
                         android:text="@string/account_safe"/>
 
                 </LinearLayout>
@@ -508,11 +554,11 @@
                 android:id="@+id/lay_mine_collect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -522,9 +568,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:src="@mipmap/uc_collection"/>
 
@@ -536,15 +581,15 @@
 
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/btn_forward_normal"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/btn_forward_normal2"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_text"/>
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
 
             <LinearLayout
                 android:id="@+id/lay_mine_personal_data"
@@ -553,7 +598,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -563,9 +608,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:src="@mipmap/uc_data"/>
 
@@ -575,17 +619,16 @@
                         android:text="@string/my_data"/>
                 </LinearLayout>
 
-
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/btn_forward_normal"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/btn_forward_normal2"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_text"/>
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
 
             <LinearLayout
                 android:id="@+id/lay_mine_problem"
@@ -594,7 +637,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -604,9 +647,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:src="@mipmap/uc_problem"/>
 
@@ -617,15 +659,15 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/btn_forward_normal"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/btn_forward_normal2"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_text"/>
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
 
             <LinearLayout
                 android:id="@+id/lay_mine_feedback"
@@ -634,7 +676,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -644,9 +686,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:src="@mipmap/uc_feedback"/>
 
@@ -657,15 +698,15 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/btn_forward_normal"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/btn_forward_normal2"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_text"/>
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
 
             <LinearLayout
                 android:id="@+id/lay_mine_contact"
@@ -674,7 +715,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -684,9 +725,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:src="@mipmap/uc_contact"/>
 
@@ -695,17 +735,15 @@
                         android:layout_height="wrap_content"
                         android:text="@string/service_and_help"/>
                 </LinearLayout>
-
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/btn_forward_normal"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/btn_forward_normal2"/>
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_text"/>
+                android:layout_height="1dp"
+                android:background="#eeeeee"/>
 
             <LinearLayout
                 android:id="@+id/lay_mine_about"
@@ -714,7 +752,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -724,9 +762,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:src="@mipmap/uc_about"/>
 
@@ -737,9 +774,9 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/btn_forward_normal"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/btn_forward_normal2"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

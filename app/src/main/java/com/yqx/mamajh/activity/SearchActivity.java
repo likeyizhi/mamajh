@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.github.obsessive.library.eventbus.EventCenter;
 import com.github.obsessive.library.netstatus.NetUtils;
 import com.github.obsessive.library.widgets.ClearEditText;
+import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.Presenter.SearchHistoryPresenter;
 import com.yqx.mamajh.Presenter.impl.SearchHistoryPresenterImpl;
 import com.yqx.mamajh.R;
@@ -176,21 +177,50 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.tv_clear:
 //                showToast("");
+                ClearSearch();
                 break;
 
         }
     }
 
+    private void ClearSearch() {
+        Call<NetBaseEntity> call=RetrofitService.getInstance().clearSearch(AppApplication.TOKEN);
+        call.enqueue(new Callback<NetBaseEntity>() {
+            @Override
+            public void onResponse(Response<NetBaseEntity> response, Retrofit retrofit) {
+                if (response.body()==null){
+                    return;
+                }
+                if (response.body().getStatus()==0){
+                    Intent intent = new Intent();
+                    intent.setClass(mContext, SearchActivity.class);
+                    finish();
+                    startActivity(intent);
+                    // activity开启无动画
+                    overridePendingTransition(0, 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     public void onTagClick(String tag) {
-        Intent intent = new Intent();
-        intent.setClass(mContext, SearchActivity.class);
-        intent.putExtra(SearchActivity.SEARCH_INPUT, tag);
-        finish();
+//        Intent intent = new Intent();
+//        intent.setClass(mContext, SearchActivity.class);
+//        intent.putExtra(SearchActivity.SEARCH_INPUT, tag);
+//        finish();
+//        startActivity(intent);
+//        // activity开启无动画
+//        overridePendingTransition(0, 0);
+        etSearch.setText(tag);
+        Intent intent=new Intent(SearchActivity.this,SearchResultActivity.class);
+        intent.putExtra("_searchKey", tag);
         startActivity(intent);
-        // activity开启无动画
-        overridePendingTransition(0, 0);
-
     }
 
     @Override
@@ -216,9 +246,14 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     hotSearchList.add(item.getTitle());
                 }
             }
-
             tagGroupHot.setTags(hotSearchList);
             tagGroupHistory.setTags(historySearchList);
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        loadData();
+        super.onRestart();
     }
 }

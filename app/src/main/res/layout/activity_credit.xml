@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <include
@@ -24,7 +26,7 @@
             <com.yqx.mamajh.widget.cyclebanner.ImageCycleView
                 android:id="@+id/icv_imgs"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/one_hundred" />
+                android:layout_height="90dp" />
 
             <com.yqx.mamajh.widget.WrapHeightGridView
                 android:id="@+id/gv_group"
@@ -39,11 +41,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
+                android:visibility="gone"
                 android:text="新手专区"
                 android:textSize="20dp" />
 
             <com.yqx.mamajh.widget.WrapHeightGridView
                 android:id="@+id/gv_new"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/ten"
@@ -53,25 +57,40 @@
                 android:paddingBottom="@dimen/ten"
                 android:paddingTop="@dimen/ten"
                 android:scrollbars="none" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+              android:background="#f1f1f1"
 
+               />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:text="热兑专区"
-                android:textSize="20dp" />
 
+                android:padding="10dp"
+
+                android:textColor="#e14258"
+                android:text="热兑专区"
+                android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeeeee"></TextView>
             <com.yqx.mamajh.widget.WrapHeightGridView
                 android:id="@+id/gv_hot"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
+                android:horizontalSpacing="10dp"
+
+                android:verticalSpacing="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/ten"
                 android:layout_marginTop="@dimen/ten"
                 android:background="@color/white"
                 android:numColumns="2"
                 android:paddingBottom="@dimen/ten"
-                android:paddingTop="@dimen/ten"
+
                 android:scrollbars="none" />
 
             <TextView
@@ -80,10 +99,12 @@
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
                 android:text="限时热兑"
+                android:visibility="gone"
                 android:textSize="20dp" />
 
             <com.yqx.mamajh.widget.WrapHeightGridView
                 android:id="@+id/gv_time"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/ten"
