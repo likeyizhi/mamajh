@@ -54,7 +54,7 @@ public class MyAddressAdapter extends BaseAdapter{
         }
         holder= (MyAddressViewHolder) convertView.getTag();
         final DeliveryAddress myAddress=getItem(position);
-        holder.tv_address.setText(myAddress.getArea()+myAddress.getAddress()+"");
+        holder.tv_address.setText(myAddress.getAddress()+"");
         holder.tv_name.setText(myAddress.getName()+"");
         holder.tv_phone.setText(myAddress.getPhone()+"");
         if (myAddress!=null){

@@ -1,5 +1,6 @@
 package com.yqx.mamajh.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.github.obsessive.library.netstatus.NetUtils;
 import com.github.obsessive.library.widgets.XSwipeRefreshLayout;
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
+import com.yqx.mamajh.activity.ProductInfoActivity;
 import com.yqx.mamajh.base.BaseFragment;
 import com.yqx.mamajh.bean.CollectProduct;
 import com.yqx.mamajh.bean.NetBaseEntity;
@@ -187,6 +189,16 @@ public class CollectProductFragment extends BaseFragment {
             Glide.with(getContext()).load(entity.getImg()).crossFade().into(holder.ivItemImg);
             holder.tvItemTitle.setText(entity.getTitle());
             holder.tvItemPrice.setText("￥" + entity.getPrice());
+            if (entity!=null){
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(getActivity(), ProductInfoActivity.class);
+                        intent.putExtra("_id",entity.getId());
+                        startActivity(intent);
+                    }
+                });
+            }
             return view;
         }
 

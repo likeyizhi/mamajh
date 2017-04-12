@@ -1,0 +1,282 @@
+{
+   "status": 0,
+   "mes": "成功",
+   "res": {
+     "carouselad": [
+       {
+         "title": "2015-12-01",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/201661611613422.jpg",
+         "linktype": "1",
+         "productid": "1"
+       },
+       {
+         "title": "2",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/20166161161910.jpg",
+         "linktype": "1",
+         "productid": "2"
+       }
+     ],
+     "wordad": [
+       {
+         "title": "大促",
+         "desc": "小葵花妈妈课堂开课了！",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/",
+         "linktype": "1",
+         "productid": "1"
+       },
+       {
+         "title": "热评",
+         "desc": "不要舍不得，化妆品出现这些情况必须扔...",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/",
+         "linktype": "1",
+         "productid": "2"
+       },
+       {
+         "title": "头条",
+         "desc": "宝宝出生后到底是母婴同床好还是让宝宝单独睡婴儿床?",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/",
+         "linktype": "1",
+         "productid": "3"
+       },
+       {
+         "title": "百科",
+         "desc": "培养宝宝的早期记忆力,宝妈您做了吗",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/",
+         "linktype": "1",
+         "productid": "4"
+       }
+     ],
+     "hotshop": [
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       },
+       {
+         "ID": "1",
+         "Name": "测试数据",
+         "Phone": "13811118888",
+         "Logo": "http://182.92.183.143:8011/webimg/img_DeliveryShop/DeliveryShop/1.png",
+         "X": "116.529112",
+         "Y": "39.931321",
+         "Distance": "752米",
+         "Time": "48",
+         "Mark": "0",
+         "SaleTotal": "200",
+         "SareTotal": "0",
+         "IsCollect": "0",
+         "Address": "1"
+       }
+
+     ],
+     "blowshop_four_ad": [
+       {
+         "title": "2015-12-01",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/201661611613422.jpg",
+         "linktype": "1",
+         "productid": "1"
+       },
+       {
+         "title": "2",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/20166161161910.jpg",
+         "linktype": "1",
+         "productid": "2"
+       }
+     ],
+     "blowshop_four_ad": [
+       {
+         "title": "2015-12-01",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/201661611613422.jpg",
+         "linktype": "1",
+         "productid": "1"
+       },
+       {
+         "title": "2015-12-01",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/201661611613422.jpg",
+         "linktype": "1",
+         "productid": "1"
+       },
+       {
+         "title": "2015-12-01",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/201661611613422.jpg",
+         "linktype": "1",
+         "productid": "1"
+       },
+       {
+         "title": "2015-12-01",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/201661611613422.jpg",
+         "linktype": "1",
+         "productid": "1"
+       }
+     ],
+
+     "blowshop_one_ad": [
+       {
+         "title": "1",
+         "img": "http://182.92.183.143:8011/webimg/img_AD/2016616132246226.jpg",
+         "linktype": "1",
+         "productid": "1"
+       }
+     ]
+   }
+ }

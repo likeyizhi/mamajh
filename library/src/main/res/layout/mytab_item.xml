@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+    <RelativeLayout
+        android:id="@+id/rl_tab_child_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+	    <CheckedTextView
+	        android:id="@+id/item_name_home"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:gravity="center"
+	        android:layout_centerInParent="true"
+	        android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/indicate_img_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dip"
+            android:layout_toRightOf="@id/item_name_home"
+            android:src="@drawable/update_hint"
+            android:visibility="gone" />
+	</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <CheckedTextView
+            android:id="@+id/item_name_dev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/indicate_img_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dip"
+            android:layout_toRightOf="@id/item_name_dev"
+            android:src="@drawable/update_hint"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_item_cam"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        android:gravity="center" >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/middle_background"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
+        <ImageView
+            android:id="@+id/item_cam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/middle_create"
+            android:layout_centerInParent="true"
+
+            />
+        </RelativeLayout>
+    </RelativeLayout>
+
+	<RelativeLayout
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1"
+	    android:gravity="center" >
+
+		    <CheckedTextView
+		        android:id="@+id/item_name_auditions"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		        android:gravity="center"
+		        android:layout_centerInParent="true"
+                android:checked="true"
+                android:textColor="#0099FF"
+		        android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/indicate_img_auditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_toRightOf="@id/item_name_auditions"
+                android:src="@drawable/update_hint"
+                android:visibility="gone" />
+		</RelativeLayout>
+	<RelativeLayout
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1"
+	    android:gravity="center" >
+
+		    <CheckedTextView
+		        android:id="@+id/item_name_person"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		        android:gravity="center"
+		        android:layout_centerInParent="true"
+		        android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/indicate_img_preson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_toRightOf="@id/item_name_person"
+                android:src="@drawable/update_hint"
+                android:visibility="gone" />
+		</RelativeLayout>
+</LinearLayout>

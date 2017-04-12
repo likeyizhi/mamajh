@@ -19,6 +19,7 @@ package com.yqx.mamajh.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -84,7 +85,11 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Activity)mContext).finish();
+                if (mBrowserLayout.canGoBack()){
+                    mBrowserLayout.goBack();
+                }else{
+                    ((Activity)mContext).finish();
+                }
             }
         });
         if (null != mToolBar) {
@@ -149,5 +154,16 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     @Override
     protected TransitionMode getOverridePendingTransitionMode() {
         return TransitionMode.PUSH_LEFT;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK && mBrowserLayout.canGoBack()){
+            mBrowserLayout.goBack();
+            return true;
+        }else{
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

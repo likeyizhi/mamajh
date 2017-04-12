@@ -1,5 +1,6 @@
 package com.yqx.mamajh.fragment;
 
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -25,6 +26,7 @@ public class DiscoveryFragment extends BaseFragment {
         commonWebBrowserLayout.hideBrowserController();
 //        commonWebBrowserLayout.loadUrl("http://m.mamajh.com/Discover.aspx");
         commonWebBrowserLayout.loadUrl("http://m.mamajh.com/Discover2.aspx");
+//        commonWebBrowserLayout.loadUrl("http://m.mamajh.com/App/Discover.aspx");
 
 //        commonWebBrowserLayout.getWebView().setWebViewClient(new WebViewClient(){
 //            @Override

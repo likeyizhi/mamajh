@@ -79,6 +79,7 @@ public class AddAddressSearchActivity extends Activity{
     private String chooseAddress;
     private ImageButton ibBack;
     public static AddAddressSearchActivity addAddressSearchActivity=null;
+    private ImageButton ibGoLast;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -204,9 +205,16 @@ public class AddAddressSearchActivity extends Activity{
                 finish();
             }
         });
+        ibGoLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location(latitudeLocation,longitudeLocation);
+            }
+        });
     }
 
     private void initView() {
+        ibGoLast=(ImageButton)findViewById(R.id.ib_goLast);
         ibBack=(ImageButton)findViewById(R.id.ib_back);
         lvAddAddress=(ListView)findViewById(R.id.lv_addAddress);
         etSearchLocation=(EditText)findViewById(R.id.et_search_location);

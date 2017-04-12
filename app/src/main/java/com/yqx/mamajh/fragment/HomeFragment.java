@@ -588,7 +588,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 break;
             case 1:
                 bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, "育儿宝典");
-                bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, "http://m.mamajh.com/Knowledge.aspx");
+                bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, "http://m.mamajh.com/App/Knowledge.aspx");
                 bundle.putBoolean(BaseWebActivity.BUNDLE_KEY_SHOW_BOTTOM_BAR, false);
                 readyGo(BaseWebActivity.class, bundle);
                 break;

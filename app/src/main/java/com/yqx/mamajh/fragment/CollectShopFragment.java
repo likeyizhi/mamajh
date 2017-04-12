@@ -1,5 +1,6 @@
 package com.yqx.mamajh.fragment;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.github.obsessive.library.netstatus.NetUtils;
 import com.github.obsessive.library.widgets.XSwipeRefreshLayout;
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
+import com.yqx.mamajh.activity.ShopActivity;
+import com.yqx.mamajh.activity.StoreActivity;
 import com.yqx.mamajh.base.BaseFragment;
 import com.yqx.mamajh.bean.CollectShop;
 import com.yqx.mamajh.bean.NetBaseEntity;
@@ -192,6 +195,16 @@ public class CollectShopFragment extends BaseFragment {
             holder.tvItemScore.setText(entity.getScore() + "分");
             //holder.tvItemPriceCount.setText("累积购买" + entity.getBuyCount() + "次，共计" + entity.getBuyPrice() + "元");
             holder.tvItemPriceCount.setText(entity.getAttentionquanty() + "人关注");
+            if (entity!=null){
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle=new Bundle();
+                        bundle.putString(ShopActivity.IDBUNDLE,entity.getId()+"");
+                        readyGo(StoreActivity.class,bundle);
+                    }
+                });
+            }
             return view;
         }
 
