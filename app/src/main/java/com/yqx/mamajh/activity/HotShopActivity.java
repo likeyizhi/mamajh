@@ -1,5 +1,7 @@
 package com.yqx.mamajh.activity;
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.adapter.ViewPagerAdapter;
 import com.yqx.mamajh.fragment.HotShopByDistanceFragment;
@@ -34,12 +37,36 @@ public class HotShopActivity extends FragmentActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isApplyKitKatTranslucency()) {
+            setSystemBarTintDrawable(getResources().getDrawable(R.color.colorPrimary));
+        }
         setContentView(R.layout.activity_hot_shop);
         initView();
         setListeners();
         setAdapter();
     }
+    //默认返回true
+    protected boolean isApplyKitKatTranslucency() {
+        return true;
+    }
+    /**
+     * use SytemBarTintManager
+     *
+     * @param tintDrawable
+     */
+    protected void setSystemBarTintDrawable(Drawable tintDrawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            if (tintDrawable != null) {
+                mTintManager.setStatusBarTintEnabled(true);
+                mTintManager.setTintDrawable(tintDrawable);
+            } else {
+                mTintManager.setStatusBarTintEnabled(false);
+                mTintManager.setTintDrawable(null);
+            }
+        }
 
+    }
     private void setAdapter() {
         fragments=new ArrayList<Fragment>();
         fragments.add(new HotShopBySaleTotalFragment());

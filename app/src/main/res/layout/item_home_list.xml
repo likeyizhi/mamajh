@@ -88,13 +88,14 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    style="?android:attr/ratingBarStyleSmall"
+                    android:progressDrawable="@drawable/ratingbaryellowsmall"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/five"
                     android:progressTint="#FFD600"
                     android:numStars="5"
+                    android:isIndicator="true"
                     android:rating="5" />
 
                 <TextView
@@ -102,7 +103,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/five"
-                    android:textSize="14sp"
+
+                    android:textSize="12sp"
                     android:textColor="#888888"
                     tools:text="月销333单" />
 

@@ -2,6 +2,8 @@ package com.yqx.mamajh.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.obsessive.library.netstatus.NetUtils;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.adapter.OrderInfoAdapter;
@@ -72,6 +75,9 @@ public class OrderInfoActivity extends Activity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isApplyKitKatTranslucency()) {
+            setSystemBarTintDrawable(getResources().getDrawable(R.color.colorPrimary));
+        }
         setContentView(R.layout.activity_order_info);
         Intent intent=getIntent();
         orderId=intent.getStringExtra("_orderId");
@@ -80,7 +86,28 @@ public class OrderInfoActivity extends Activity{
         initView();
         loadData();
     }
+    //默认返回true
+    protected boolean isApplyKitKatTranslucency() {
+        return true;
+    }
+    /**
+     * use SytemBarTintManager
+     *
+     * @param tintDrawable
+     */
+    protected void setSystemBarTintDrawable(Drawable tintDrawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            if (tintDrawable != null) {
+                mTintManager.setStatusBarTintEnabled(true);
+                mTintManager.setTintDrawable(tintDrawable);
+            } else {
+                mTintManager.setStatusBarTintEnabled(false);
+                mTintManager.setTintDrawable(null);
+            }
+        }
 
+    }
     private void loadData() {
         Call<MemberOrderInfo> call= RetrofitService.getInstance().memberOrderInfo(AppApplication.TOKEN,orderId+"");
         call.enqueue(new Callback<MemberOrderInfo>() {

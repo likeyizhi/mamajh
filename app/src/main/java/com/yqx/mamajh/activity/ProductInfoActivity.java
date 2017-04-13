@@ -3,7 +3,9 @@ package com.yqx.mamajh.activity;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -20,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.adapter.ViewPagerAdapter;
@@ -63,18 +66,40 @@ public class ProductInfoActivity extends FragmentActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isApplyKitKatTranslucency()) {
+            setSystemBarTintDrawable(getResources().getDrawable(R.color.colorPrimary));
+        }
         setContentView(R.layout.activity_product_info);
         Intent intent=getIntent();
         id=intent.getIntExtra("_id",0);
-//        Toast.makeText(this, id+"",Toast.LENGTH_SHORT).show();
         loadData();
         setShopCartCount();
         initView();
         setAdapter();
         setListeners();
-//        Toast.makeText(this, AppApplication.TOKEN+"",Toast.LENGTH_SHORT).show();
     }
+    //默认返回true
+    protected boolean isApplyKitKatTranslucency() {
+        return true;
+    }
+    /**
+     * use SytemBarTintManager
+     *
+     * @param tintDrawable
+     */
+    protected void setSystemBarTintDrawable(Drawable tintDrawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            if (tintDrawable != null) {
+                mTintManager.setStatusBarTintEnabled(true);
+                mTintManager.setTintDrawable(tintDrawable);
+            } else {
+                mTintManager.setStatusBarTintEnabled(false);
+                mTintManager.setTintDrawable(null);
+            }
+        }
 
+    }
     private void loadData() {
         Call<ProInfo> call= RetrofitService.getInstance().getProInfo(id,AppApplication.TOKEN+"");
         call.enqueue(new Callback<ProInfo>() {

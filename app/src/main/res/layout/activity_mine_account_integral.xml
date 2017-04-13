@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context="com.yqx.mamajh.activity.MineAccountIntegralActivity">
 
     <include
@@ -20,32 +21,34 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp">
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
+        <Button
             android:id="@+id/btn_score"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_weight="1"
             android:text="金币"
-            app:bootstrapBrand="danger"
-            app:bootstrapSize="lg"
-            app:buttonMode="regular"/>
+            android:textColor="#ffffff"
+            android:background="@drawable/leftred"
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
+            />
+
+        <Button
             android:id="@+id/btn_score1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_weight="1"
             android:text="银币"
-            app:bootstrapBrand="regular"
-            app:bootstrapSize="lg"
-            app:buttonMode="regular"/>
+            android:textColor="#333333"
+            android:background="@drawable/rightwhite"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="280dp"
         android:layout_margin="10dp"
-        android:background="@color/colorPrimary"
+
+        android:background="@drawable/bg_borderyuan5bigred"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="15dp">
@@ -54,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:src="@mipmap/accintegral_xl"/>
+            android:src="@mipmap/xiaolian" />
 
         <TextView
             android:id="@+id/tv_score_hint1"
@@ -62,12 +65,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="当前金币总数"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -76,13 +80,13 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="40sp"/>
+                android:textSize="40sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="个"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -90,37 +94,40 @@
             android:id="@+id/tv_score_hint2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
             android:text="金币可以兑换好多优质物品哦"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <com.beardedhen.androidbootstrap.BootstrapButton
+            <Button
                 android:id="@+id/btn_pay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="95dp"
+                android:layout_height="30dp"
                 android:layout_margin="8dp"
+                android:background="@drawable/bg_borderyuan5"
                 android:text="金币充值"
-                android:visibility="visible"
-                app:bootstrapBrand="regular"
-                app:buttonMode="regular"
-                app:roundedCorners="true"/>
+                android:textColor="#ffffff"
+                android:textSize="14sp"
 
-            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:visibility="visible" />
+
+            <Button
                 android:id="@+id/btn_convert"
-                android:layout_width="wrap_content"
-                android:visibility="visible"
-                android:layout_height="wrap_content"
+
+                android:layout_width="95dp"
+                android:layout_height="30dp"
                 android:layout_margin="8dp"
+                android:background="@drawable/bg_borderyuan5"
                 android:text="兑换商城"
-                app:bootstrapBrand="regular"
-                app:buttonMode="regular"
-                app:roundedCorners="true"/>
+                android:textColor="#ffffff"
+                android:textSize="14sp"
+                android:visibility="visible" />
         </LinearLayout>
 
     </LinearLayout>
@@ -128,9 +135,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+
         android:text="收支明细"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textColor="#333333"
+        android:textSize="16sp"/>
 
     <View
         android:layout_width="match_parent"
@@ -145,7 +155,7 @@
         <com.yqx.mamajh.widget.LoadMoreListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="@color/gray_300"
             android:dividerHeight="1dp"
             android:scrollbars="none"/>

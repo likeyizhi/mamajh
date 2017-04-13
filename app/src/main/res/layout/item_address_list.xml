@@ -32,6 +32,7 @@
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:text="{收货人}"
+                android:textSize="16sp"
                 android:textColor="#333333"
                 />
 
@@ -55,49 +56,59 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:padding="5dp"
+        android:lineSpacingExtra="5dp"
         android:text="{地址}"
         android:textColor="#999999"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
 
-        <com.rey.material.widget.CheckBox
+        android:layout_marginBottom="10dp"
+        android:padding="5dp">
+
+        <CheckBox
             android:id="@+id/cb_item_address_select"
-            style="@style/round_check"
+            style="@style/CustomCheckboxTheme"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:background="@null"
+            android:layout_height="wrap_content"
+android:layout_weight="1"
             android:checked="false"
             android:gravity="center|left"
-            android:text="设为默认地址"
-            android:textColor="#666666"/>
+            android:text="  设为默认地址"
+            android:textColor="#666666" />
 
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
+        <Button
             android:id="@+id/btn_item_address_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:textColor="#666666"
-            android:layout_marginBottom="5dp"
-            app:bootstrapBrand="secondary"
-            app:bootstrapText="{fa-pencil-square-o} 编辑"
-            app:buttonMode="regular"
-            app:roundedCorners="true"/>
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+android:padding="5dp"
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
-            android:id="@+id/btn_item_address_del"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bootstrapBrand="secondary"
+            android:background="@drawable/bg_borderyuan5white"
+            android:drawableLeft="@mipmap/bianji"
+            android:text="编辑"
+            android:textSize="14sp"
             android:textColor="#666666"
-            app:bootstrapText="{fa-trash-o} 删除"
-            app:buttonMode="regular"
-            app:roundedCorners="true"/>
+          android:layout_marginRight="10dp"
+           />
+
+        <Button
+            android:id="@+id/btn_item_address_del"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+
+            android:layout_alignBaseline="@+id/cb_item_address_select"
+            android:layout_alignBottom="@+id/cb_item_address_select"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp"
+            android:background="@drawable/bg_borderyuan5white"
+            android:drawableLeft="@mipmap/shanchu"
+            android:text="删除"
+            android:textColor="#666666" />
     </LinearLayout>
 </LinearLayout>

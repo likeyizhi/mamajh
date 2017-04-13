@@ -130,8 +130,8 @@
             <ImageView
                 android:id="@+id/iv_toolbar_line"
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/line_title_bottom" />
+                android:layout_height="1dp"
+                android:background="#eeeeee" />
 
         </LinearLayout>
 

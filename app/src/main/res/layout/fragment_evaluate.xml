@@ -99,10 +99,11 @@
 
                             <RatingBar
                                 android:id="@+id/rb_manner"
-                                android:progressTint="#e14258"
-                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_marginTop="1dp"
+                                android:isIndicator="true"
+                                android:progressDrawable="@drawable/ratingbaryellowguess"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="20dp"
                                 android:layout_marginLeft="10dp"
                                 android:numStars="5"
                                 android:rating="4" />
@@ -124,11 +125,12 @@
 
                             <RatingBar
                                 android:id="@+id/rb_quality"
-                                style="?android:attr/ratingBarStyleSmall"
+                                android:progressDrawable="@drawable/ratingbaryellowguess"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="20dp"
                                 android:layout_marginLeft="10dp"
-                                android:progressTint="#e14258"
+                                android:layout_marginTop="1dp"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:rating="4" />
 
@@ -148,12 +150,13 @@
 
                             <RatingBar
                                 android:id="@+id/rb_speed"
-                                style="?android:attr/ratingBarStyleSmall"
+                                android:progressDrawable="@drawable/ratingbaryellowguess"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="20dp"
                                 android:layout_marginLeft="10dp"
                                 android:numStars="5"
-                                android:progressTint="#e14258"
+                                android:isIndicator="true"
+                                android:layout_marginTop="1dp"
                                 android:rating="4" />
 
                         </LinearLayout>

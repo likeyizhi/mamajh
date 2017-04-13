@@ -6,14 +6,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
+    <TextView
         android:id="@+id/btn_price"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="50"
-        app:bootstrapBrand="regular"
-        app:bootstrapSize="lg"
-        app:buttonMode="regular"
-        app:roundedCorners="true"
-        app:showOutline="true"/>
+        android:gravity="center"
+        android:textColor="#666666"
+
+
+
+    />
 </LinearLayout>

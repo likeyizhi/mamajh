@@ -44,9 +44,9 @@
         <item name="atg_checkedBackgroundColor">#eeeeee</item>
         <item name="atg_pressedBackgroundColor">#EDEDED</item>
         <item name="atg_borderStrokeWidth">0.5dp</item>
-        <item name="atg_textSize">12sp</item>
+        <item name="atg_textSize">14sp</item>
         <item name="atg_horizontalSpacing">8dp</item>
-        <item name="atg_verticalSpacing">4dp</item>
+        <item name="atg_verticalSpacing">14dp</item>
         <item name="atg_horizontalPadding">12dp</item>
         <item name="atg_verticalPadding">3dp</item>
     </style>

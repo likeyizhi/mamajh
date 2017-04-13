@@ -20,6 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical">
 
 
@@ -28,19 +29,23 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="5sp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@mipmap/ordersdj" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/dpdp" />
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:text="店铺名"
                     android:textColor="@color/gray_700" />
 
@@ -55,7 +60,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_200" />
+                android:background="#eeeeee" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,15 +73,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
+                    android:textColor="#333333"
                     android:text="服务态度" />
 
                 <RatingBar
                     android:id="@+id/rating_fwtd"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="26dp"
                     android:max="5"
                     android:numStars="5"
-                    android:progressDrawable="@drawable/ratingbar"
+                    android:progressDrawable="@drawable/ratingbaryellow"
                     android:rating="5"
                     android:stepSize="1" />
 
@@ -91,18 +97,20 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/textView22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:text="产品质量" />
+                    android:text="产品质量"
+                    android:textColor="#333333" />
 
                 <RatingBar
                     android:id="@+id/rating_cpzl"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="26dp"
                     android:max="5"
                     android:numStars="5"
-                    android:progressDrawable="@drawable/ratingbar"
+                    android:progressDrawable="@drawable/ratingbaryellow"
                     android:rating="5"
                     android:stepSize="1" />
 
@@ -119,15 +127,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
+                    android:textColor="#333333"
                     android:text="送货速度" />
 
                 <RatingBar
                     android:id="@+id/rating_shsd"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="26dp"
                     android:max="5"
                     android:numStars="5"
-                    android:progressDrawable="@drawable/ratingbar"
+                    android:progressDrawable="@drawable/ratingbaryellow"
                     android:rating="5"
                     android:stepSize="1" />
 
@@ -136,12 +145,12 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_200" />
+                android:background="#eeeeee" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:text="晒图"
                 android:textColor="@color/colorPrimary" />
             <LinearLayout
@@ -181,36 +190,43 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray_200" />
+                android:background="#eeeeee" />
 
             <com.yqx.mamajh.widget.ZListview
                 android:id="@+id/lv_productlist"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:divider="#eeeeee"
+                android:dividerHeight="1dp"
                 android:background="@color/white" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_200" />
             <EditText
                 android:id="@+id/et_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:textSize="14sp"
                 android:gravity="top|left"
                 android:hint="长度在1~200个字之间写下购买体会或者使用过程中带来的帮助可以为其他爸爸妈妈提供帮助"
                 android:minLines="4"
                 android:padding="10dp" />
 
-            <com.beardedhen.androidbootstrap.BootstrapButton
+            <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
                 android:text="提交评价"
-                app:bootstrapBrand="danger"
-                app:bootstrapSize="lg"
-                app:buttonMode="regular"
-                app:roundedCorners="true" />
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:background="@drawable/red_bg"
+            />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

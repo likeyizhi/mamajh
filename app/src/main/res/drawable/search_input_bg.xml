@@ -7,10 +7,10 @@
 
     <!-- 圆角 -->
     <corners
-        android:bottomLeftRadius="6dp"
-        android:bottomRightRadius="6dp"
-        android:topLeftRadius="6dp"
-        android:topRightRadius="6dp" /> <!-- 设置四个角的半径 -->
+        android:bottomLeftRadius="5dp"
+        android:bottomRightRadius="5dp"
+        android:topLeftRadius="5dp"
+        android:topRightRadius="5dp" /> <!-- 设置四个角的半径 -->
 
     <!-- 间隔 -->
     <padding

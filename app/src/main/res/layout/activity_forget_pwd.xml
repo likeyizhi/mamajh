@@ -23,9 +23,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -33,11 +35,9 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="手机号"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textSize="14sp"
+
+
+            android:textSize="16sp"
             android:textColor="#333333"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -53,7 +53,7 @@
             android:maxLines="1"
             android:padding="10dp"
             android:singleLine="true"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColorHint="#999999"/>
 
     </LinearLayout>
@@ -67,9 +67,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -77,11 +78,8 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="验证码"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textSize="14sp"
+
+            android:textSize="16sp"
             android:textColor="#333333"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -97,18 +95,21 @@
             android:maxLines="1"
             android:padding="10dp"
             android:singleLine="true"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColorHint="#999999"/>
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
+        <Button
             android:id="@+id/btn_forget_code"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="获取验证码"
-            android:textSize="12sp"
-            app:bootstrapBrand="danger"
 
-            app:buttonMode="regular" />
+
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:background="#e14258"
+
+           />
 
     </LinearLayout>
 
@@ -121,9 +122,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -132,13 +135,10 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="密码"
-            android:paddingTop="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:paddingBottom="5dp"
+
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#333333"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/et_forget_pwd"
@@ -152,7 +152,7 @@
             android:maxLines="1"
             android:padding="10dp"
             android:singleLine="true"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColorHint="#999999"/>
 
     </LinearLayout>
@@ -166,9 +166,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -176,12 +178,9 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="确认密码"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="#333333"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
+
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <EditText
@@ -196,7 +195,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColorHint="#999999"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -207,18 +206,19 @@
         android:layout_marginRight="12dp"
         android:background="#cccccc"/>
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
+    <Button
         android:id="@+id/btn_forget_submit"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="25dp"
+
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/red_bg"
         android:text="确定"
-        app:bootstrapBrand="danger"
-        app:bootstrapSize="lg"
-        app:buttonMode="regular"
-        app:roundedCorners="true"/>
+/>
 
 </LinearLayout>

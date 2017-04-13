@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -44,9 +45,9 @@ public class MineAccountIntegralActivity extends BaseActivity {
     @BindView(R.id.tv_score_hint2)
     TextView            tvScoreHint2;
     @BindView(R.id.btn_score)
-    BootstrapButton     btnScore;
+    Button btnScore;
     @BindView(R.id.btn_score1)
-    BootstrapButton     btnScore1;
+    Button     btnScore1;
     @BindView(R.id.lv)
     LoadMoreListView    lv;
     @BindView(R.id.swipe_refresh)
@@ -140,8 +141,10 @@ public class MineAccountIntegralActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_score:
                 tvScore.setText(AppApplication.memeberIndex.getScore() + "");
-                btnScore.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
-                btnScore1.setBootstrapBrand(DefaultBootstrapBrand.REGULAR);
+                btnScore.setBackgroundResource(R.drawable.leftred);
+                btnScore.setTextColor(0xffffffff);
+                btnScore1.setBackgroundResource(R.drawable.rightwhite);
+                btnScore1.setTextColor(0xff333333);
                 tvScoreHint1.setText("当前金币总数");
                 tvScoreHint2.setText("金币可以兑换好多优质物品哦");
                 type = 0;
@@ -149,8 +152,10 @@ public class MineAccountIntegralActivity extends BaseActivity {
                 break;
             case R.id.btn_score1:
                 tvScore.setText(AppApplication.memeberIndex.getScore2() + "");
-                btnScore.setBootstrapBrand(DefaultBootstrapBrand.REGULAR);
-                btnScore1.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
+                btnScore1.setBackgroundResource(R.drawable.rightred);
+                btnScore1.setTextColor(0xffffffff);
+                btnScore.setBackgroundResource(R.drawable.leftwhite);
+                btnScore.setTextColor(0xff333333);
                 tvScoreHint1.setText("当前银币总数");
                 tvScoreHint2.setText("银币可以兑换金币哦");
                 type = 1;
@@ -224,6 +229,7 @@ public class MineAccountIntegralActivity extends BaseActivity {
         public View getView(final int i, View view, ViewGroup viewGroup) {
             final AccountIntegral entity = mEntities.get(i);
             final ViewHolder      holder;
+
             if (view == null) {
                 view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_mine_account_balance, null);
                 holder = new ViewHolder(view);

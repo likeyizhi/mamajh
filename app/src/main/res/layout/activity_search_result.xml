@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:fitsSystemWindows="true"
     >
-    <RelativeLayout
-        android:background="#E14258"
-        android:layout_width="match_parent"
-        android:layout_height="24dp">
-    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/rl_head"
+
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         >
         <ImageButton
             android:id="@+id/ib_back"
@@ -26,11 +25,23 @@
             android:layout_centerInParent="true"
             android:textSize="16sp"
             android:text="搜索结果"/>
+
     </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"
+
+        />
+
     <ListView
         android:layout_below="@id/rl_head"
         android:id="@+id/lv_searchResult"
         android:layout_width="match_parent"
+        android:divider="#eeeeee"
+        android:dividerHeight="1dp"
+        android:headerDividersEnabled="true"
+
         android:layout_height="wrap_content"
         android:layout_weight="1">
     </ListView>

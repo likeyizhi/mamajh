@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+
 import com.github.obsessive.library.eventbus.EventCenter;
 import com.github.obsessive.library.netstatus.NetUtils;
 import com.rey.material.widget.CheckBox;

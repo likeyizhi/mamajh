@@ -2,6 +2,8 @@ package com.yqx.mamajh.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.bean.StoreSearch;
 import com.yqx.mamajh.network.RetrofitService;
@@ -37,6 +40,9 @@ public class StoreSearchActivity extends Activity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isApplyKitKatTranslucency()) {
+            setSystemBarTintDrawable(getResources().getDrawable(R.color.colorPrimary));
+        }
         setContentView(R.layout.activity_store_search);
         Bundle bundle=getIntent().getExtras();
         id=bundle.getString("id");
@@ -44,7 +50,28 @@ public class StoreSearchActivity extends Activity{
         loadData();
         setListeners();
     }
+    //默认返回true
+    protected boolean isApplyKitKatTranslucency() {
+        return true;
+    }
+    /**
+     * use SytemBarTintManager
+     *
+     * @param tintDrawable
+     */
+    protected void setSystemBarTintDrawable(Drawable tintDrawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            if (tintDrawable != null) {
+                mTintManager.setStatusBarTintEnabled(true);
+                mTintManager.setTintDrawable(tintDrawable);
+            } else {
+                mTintManager.setStatusBarTintEnabled(false);
+                mTintManager.setTintDrawable(null);
+            }
+        }
 
+    }
     private void setListeners() {
         ib_back.setOnClickListener(new View.OnClickListener() {
             @Override

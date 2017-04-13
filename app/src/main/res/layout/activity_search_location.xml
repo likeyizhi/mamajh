@@ -90,7 +90,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:background="#FFFFFF"
-        android:visibility="gone"
+android:visibility="gone"
         android:layout_height="match_parent">
         <LinearLayout
             android:orientation="horizontal"
@@ -125,16 +125,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/dialog"
-                android:layout_width="80.0dip"
-                android:layout_height="80.0dip"
-                android:layout_gravity="center"
-                android:background="#999999"
-                android:gravity="center"
-                android:textColor="#ffffffff"
-                android:textSize="30.0dip"
-                android:visibility="invisible" />
+
 
             <com.yqx.mamajh.widget.SideBar
                 android:id="@+id/sidrbar"
@@ -151,6 +142,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </ListView>
+            <TextView
+                android:id="@+id/dialog"
+                android:layout_width="80.0dip"
+                android:layout_height="80.0dip"
+                android:layout_gravity="center"
+                android:background="#999999"
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="30.0dip"
+                android:visibility="invisible" />
         </FrameLayout>
     </LinearLayout>
 
@@ -206,6 +207,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
+                android:layout_marginRight="30dp"
                 android:background="#FFFFFF"
                 android:textColor="#333333"
                 android:text="当前定位"/>
@@ -215,6 +217,7 @@
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/dzsx"
                 android:padding="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_centerVertical="true"
                 android:background="@null"/>
         </RelativeLayout>

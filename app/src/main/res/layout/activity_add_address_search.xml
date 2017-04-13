@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,29 +76,119 @@
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp">
-        <com.baidu.mapapi.map.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="250dp">
-        </com.baidu.mapapi.map.MapView>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/dwnew"/>
-        <ImageButton
-            android:id="@+id/ib_goLast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:src="@mipmap/dwnew"
-            android:padding="10dp"/>
-    </RelativeLayout>
-    <ListView
-        android:id="@+id/lv_addAddress"
-        android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+                </com.baidu.mapapi.map.MapView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/dwnew"/>
+                <ImageButton
+                    android:id="@+id/ib_goLast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/dw_refresh"
+                    android:background="@null"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="10dp"/>
+            </RelativeLayout>
+            <ListView
+                android:id="@+id/lv_addAddress"
+                android:layout_width="match_parent"
+                android:divider="#eeeeee"
+                android:dividerHeight="1dp"
+
+                android:layout_height="match_parent">
+            </ListView>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_changeCity"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="#FFFFFF"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@mipmap/dw"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前定位城市"
+                    android:textSize="14sp"
+                    android:textColor="#999999"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="城市"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="5dp"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:textColor="#e14258"
+                android:layout_marginLeft="20dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.yqx.mamajh.widget.SideBar
+                    android:id="@+id/sidrbar"
+                    android:background="@null"
+                    android:layout_width="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="right|center" />
+                <ListView
+                    android:id="@+id/lv_location"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:divider="#f4f4f4"
+                    android:dividerHeight="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+                <TextView
+                    android:id="@+id/tv_dialog"
+                    android:layout_width="80.0dip"
+                    android:layout_height="80.0dip"
+                    android:layout_gravity="center"
+                    android:background="#999999"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textColor="#ffffffff"
+                    android:textSize="30.0dip"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

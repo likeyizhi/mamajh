@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -44,12 +46,21 @@ import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.github.obsessive.library.netstatus.NetUtils;
 import com.yqx.mamajh.R;
+import com.yqx.mamajh.adapter.LoactionCityAdapter;
 import com.yqx.mamajh.adapter.SouSuoDiZhiAdapter;
+import com.yqx.mamajh.bean.LocationCity;
 import com.yqx.mamajh.bean.SouSuoDiZhi;
 import com.yqx.mamajh.fragment.HomeFragment;
+import com.yqx.mamajh.network.RetrofitService;
+import com.yqx.mamajh.widget.SideBar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Created by likey on 2017/4/10.
@@ -80,6 +91,14 @@ public class AddAddressSearchActivity extends Activity{
     private ImageButton ibBack;
     public static AddAddressSearchActivity addAddressSearchActivity=null;
     private ImageButton ibGoLast;
+    private String firstGetAddress;
+    private LinearLayout llCity;
+    private SideBar sidrbar;
+    private ListView lvLocation;
+    private TextView tvDialog;
+    private LinearLayout llChangeCity;
+    private ArrayList<LocationCity.LocationCityRes.LocationCityList.LocationCityListCityList> brands;
+    private LoactionCityAdapter locationAdapter;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -104,6 +123,7 @@ public class AddAddressSearchActivity extends Activity{
             initView();
             setListeners();
             loadData();
+            loadLocationCity();
         }else{
             Toast.makeText(this,"请检查网络",Toast.LENGTH_SHORT).show();
         }
@@ -208,12 +228,86 @@ public class AddAddressSearchActivity extends Activity{
         ibGoLast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvCity.setText(HomeFragment.city);
                 location(latitudeLocation,longitudeLocation);
+            }
+        });
+        llCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        llCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (llChangeCity.getVisibility()==View.GONE){
+                    llChangeCity.setVisibility(View.VISIBLE);
+                }else{
+                    llChangeCity.setVisibility(View.GONE);
+                }
+            }
+        });
+        sidrbar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
+            @Override
+            public void onTouchingLetterChanged(String s) {
+                // 该字母首次出现的位置
+                int position = locationAdapter.getPositionForSection(s.charAt(0));
+                if (position != -1) {
+                    lvLocation.setSelection(position+1);
+                }
+            }
+        });
+    }
+    private void loadLocationCity() {
+        Call<LocationCity> call= RetrofitService.getInstance().getLocationCity();
+        call.enqueue(new Callback<LocationCity>() {
+            @Override
+            public void onResponse(Response<LocationCity> response, Retrofit retrofit) {
+                if (response.body()==null){
+                    return;
+                }
+                if (response.body().getStatus()==0){
+                    List<LocationCity.LocationCityRes.LocationCityList> list = response.body().getRes().getList();
+                    brands=new ArrayList<LocationCity.LocationCityRes.LocationCityList.LocationCityListCityList>();
+                    for (int i=0;i<list.size();i++){
+                        List<LocationCity.LocationCityRes.LocationCityList.LocationCityListCityList> citylist = list.get(i).getCityList();
+                        for (int j=0;j<citylist.size();j++){
+                            LocationCity.LocationCityRes.LocationCityList.LocationCityListCityList brand = list.get(i).getCityList().get(j);
+                            brands.add(brand);
+                        }
+                    }
+                    setLocationAdapter(brands);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+            }
+        });
+    }
+    private void setLocationAdapter(ArrayList<LocationCity.LocationCityRes.LocationCityList.LocationCityListCityList> brands) {
+        locationAdapter=new LoactionCityAdapter(AddAddressSearchActivity.this,brands);
+        lvLocation.setAdapter(locationAdapter);
+
+        locationAdapter.setOnItemClickSetChangeCity(new LoactionCityAdapter.OnItemClickSetChangeCity() {
+            @Override
+            public void OnItemClickSetChangeCity(int id, String name, String x, String y) {
+                tvCity.setText(name+"");
+                currentCity=name;
+                llChangeCity.setVisibility(View.GONE);
+                location(Double.parseDouble(y), Double.parseDouble(x));
             }
         });
     }
 
     private void initView() {
+        llChangeCity=(LinearLayout)findViewById(R.id.ll_changeCity);
+        lvLocation=(ListView)findViewById(R.id.lv_location);
+        tvDialog=(TextView)findViewById(R.id.tv_dialog);
+        sidrbar=(SideBar)findViewById(R.id.sidrbar);
+        sidrbar.setTextView(tvDialog);
+        llCity=(LinearLayout)findViewById(R.id.ll_city);
         ibGoLast=(ImageButton)findViewById(R.id.ib_goLast);
         ibBack=(ImageButton)findViewById(R.id.ib_back);
         lvAddAddress=(ListView)findViewById(R.id.lv_addAddress);
@@ -269,7 +363,20 @@ public class AddAddressSearchActivity extends Activity{
                 addressLocation = result.getAddress();
 //                tvAddress.setText(result.getAddress());
 //                Toast.makeText(AddAddressSearchActivity.this,addressLocation,Toast.LENGTH_SHORT).show();
-                getCity();
+//                getCity();
+                ArrayList<SouSuoDiZhi> diZhiArrayList=new ArrayList<SouSuoDiZhi>();
+                if (result.getPoiList()!=null){
+                    for (int d=0;d<result.getPoiList().size();d++){
+                        if (result.getPoiList().get(d).location!=null){
+                            SouSuoDiZhi diZhi = new SouSuoDiZhi(result.getPoiList().get(d).location.latitude+"",
+                                    result.getPoiList().get(d).location.longitude+"",
+                                    result.getPoiList().get(d).name+"",
+                                    result.getPoiList().get(d).address+"");
+                            diZhiArrayList.add(diZhi);
+                        }
+                    }
+                    setSouSuoDiZhiAdapter(diZhiArrayList);
+                }
             }
         });
     }
@@ -361,6 +468,8 @@ public class AddAddressSearchActivity extends Activity{
         latitudeLocation=location.getLatitude();
         longitudeLocation=location.getLongitude();
         addressLocation=location.getAddrStr();
+        currentCity=location.getCity();
+        firstGetAddress=location.getPoiList().get(0).getName();
         location(latitudeLocation, longitudeLocation);
     }
 
@@ -392,19 +501,19 @@ public class AddAddressSearchActivity extends Activity{
     }
     /**得到当前所在城市**/
     private void getCity(){
-        if(addressLocation!=null&&!addressLocation.equals("")){
-            int indexProvince=addressLocation.indexOf("省");
-            int indexCity=addressLocation.indexOf("市");
-            currentCity=addressLocation.substring(indexProvince + 1, indexCity)+"";
-            Message message=new Message();
-            handler.sendMessage(message);
-            message.what=1;
-            poiCitySearchOption= new PoiCitySearchOption().city(currentCity).keyword(addressLocation).pageNum(1).pageCapacity(100);
-            poiSearch.searchInCity(poiCitySearchOption);
-//            tvCity.setText("北京");
-//            Toast.makeText(AddAddressSearchActivity.this,addressLocation.substring(indexProvince + 1, indexCity)+"",Toast.LENGTH_SHORT).show();
-//            Toast.makeText(AddAddressSearchActivity.this,"addressLocation="+addressLocation,Toast.LENGTH_SHORT).show();
-        }
+//        if(addressLocation!=null&&!addressLocation.equals("")){
+//            int indexProvince=addressLocation.indexOf("省");
+//            int indexCity=addressLocation.indexOf("市");
+//            currentCity=addressLocation.substring(indexProvince + 1, indexCity)+"";
+//            Message message=new Message();
+//            handler.sendMessage(message);
+//            message.what=1;
+////            tvCity.setText("北京");
+////            Toast.makeText(AddAddressSearchActivity.this,addressLocation.substring(indexProvince + 1, indexCity)+"",Toast.LENGTH_SHORT).show();
+////            Toast.makeText(AddAddressSearchActivity.this,"addressLocation="+addressLocation,Toast.LENGTH_SHORT).show();
+//        }
+        poiCitySearchOption= new PoiCitySearchOption().city(tvCity.getText()+"").keyword(addressLocation).pageNum(1).pageCapacity(100);
+        poiSearch.searchInCity(poiCitySearchOption);
     }
     @Override
     protected void onResume(){

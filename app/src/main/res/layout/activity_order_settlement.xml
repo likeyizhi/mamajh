@@ -72,10 +72,11 @@
                         android:id="@+id/imageView6" />
                     <TextView
                         android:id="@+id/tv_address_info"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_address_person"
                         android:textColor="#5a5a5a"
+                        android:layout_marginRight="40dp"
                         android:text="收货地址: "
                         android:layout_toLeftOf="@+id/imageView1"
                         android:layout_toRightOf="@+id/imageView6"

@@ -3,12 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
+    android:fitsSystemWindows="true"
     >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="#E14258"
-        android:layout_height="24dp">
-    </RelativeLayout>
     <LinearLayout
         android:id="@+id/ll_ctrl"
         android:layout_width="match_parent"
@@ -137,7 +133,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="25dp"
         android:layout_marginBottom="5dp"
         android:layout_above="@+id/ll_ctrl"
         android:layout_alignParentStart="true">
@@ -169,7 +164,7 @@
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:layout_marginBottom="3dp"
                     android:textColor="#666666"
                     android:text="订单详情"

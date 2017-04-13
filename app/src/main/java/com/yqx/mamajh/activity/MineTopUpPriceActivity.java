@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.GridView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -25,6 +28,7 @@ import com.yqx.mamajh.wxapi.WXPayEntryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -236,7 +240,7 @@ public class MineTopUpPriceActivity extends BaseActivity {
     class TopUpPriceItmeAdapter extends BaseAdapter {
 
         private List<TopUpPrice> entities = new ArrayList<>();
-
+        private int selectorPosition;
         public TopUpPriceItmeAdapter(List<TopUpPrice> entities) {
             this.entities = entities;
         }
@@ -267,20 +271,34 @@ public class MineTopUpPriceActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) view.getTag();
             }
+            if (selectorPosition ==i) {
+                holder.btnPrice.setBackgroundResource(R.drawable.xuanzhong);
+            } else {
+                holder.btnPrice.setBackgroundResource(R.drawable.weixuanzhong);
+            }
             holder.btnPrice.setText(entity.getPrice() + "");
+
             holder.btnPrice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     tvPrice.setText(entity.getPrice() + "");
+                    changeState(i);
                 }
             });
             return view;
         }
+        public void changeState(int pos) {
+            selectorPosition = pos;
+            notifyDataSetChanged();
 
+        }
     }
 
     class TopUpIntegralItmeAdapter extends BaseAdapter {
         private List<TopUpIntegral.Pricelist> entities = new ArrayList<>();
+        private int selectorPosition;
+
 
         public TopUpIntegralItmeAdapter(List<TopUpIntegral.Pricelist> entities) {
             this.entities = entities;
@@ -312,24 +330,37 @@ public class MineTopUpPriceActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) view.getTag();
             }
-            holder.btnPrice.setText(entity.getPrice() + "");
+            if (selectorPosition ==i) {
+                holder.btnPrice.setBackgroundResource(R.drawable.xuanzhong);
+            } else {
+                holder.btnPrice.setBackgroundResource(R.drawable.weixuanzhong);
+            }
+            holder.btnPrice.setText(entity.getPrice() + "金币");
             holder.btnPrice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     tvPrice.setText(entity.getPrice() + "");
+                    changeState(i);
                 }
             });
             return view;
         }
+        public void changeState(int pos) {
+            selectorPosition = pos;
+            notifyDataSetChanged();
 
+        }
     }
 
     static class ViewHolder {
         @BindView(R.id.btn_price)
-        BootstrapButton btnPrice;
+        TextView btnPrice;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+
     }
+
 }

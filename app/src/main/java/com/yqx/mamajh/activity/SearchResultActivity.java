@@ -2,6 +2,8 @@ package com.yqx.mamajh.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.adapter.SearchResultAdapter;
@@ -37,6 +40,9 @@ public class SearchResultActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isApplyKitKatTranslucency()) {
+            setSystemBarTintDrawable(getResources().getDrawable(R.color.colorPrimary));
+        }
         setContentView(R.layout.activity_search_result);
         Intent intent=getIntent();
         k=intent.getStringExtra("_searchKey");
@@ -45,7 +51,28 @@ public class SearchResultActivity extends Activity{
         loadData();
         setListeners();
     }
+    //默认返回true
+    protected boolean isApplyKitKatTranslucency() {
+        return true;
+    }
+    /**
+     * use SytemBarTintManager
+     *
+     * @param tintDrawable
+     */
+    protected void setSystemBarTintDrawable(Drawable tintDrawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+            if (tintDrawable != null) {
+                mTintManager.setStatusBarTintEnabled(true);
+                mTintManager.setTintDrawable(tintDrawable);
+            } else {
+                mTintManager.setStatusBarTintEnabled(false);
+                mTintManager.setTintDrawable(null);
+            }
+        }
 
+    }
     private void setListeners() {
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override

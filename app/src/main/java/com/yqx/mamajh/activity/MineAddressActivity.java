@@ -8,15 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.beardedhen.androidbootstrap.BootstrapButton;
+
 import com.github.obsessive.library.eventbus.EventCenter;
 import com.github.obsessive.library.netstatus.NetUtils;
-import com.rey.material.widget.CheckBox;
+
 import com.yqx.mamajh.AppApplication;
 import com.yqx.mamajh.R;
 import com.yqx.mamajh.base.BaseActivity;
@@ -323,11 +325,11 @@ public class MineAddressActivity extends BaseActivity {
         @BindView(R.id.tv_item_address_info)
         TextView        tvItemAddressInfo;
         @BindView(R.id.cb_item_address_select)
-        CheckBox        cbItemAddressSelect;
+        CheckBox cbItemAddressSelect;
         @BindView(R.id.btn_item_address_edit)
-        BootstrapButton btnItemAddressEdit;
+        Button btnItemAddressEdit;
         @BindView(R.id.btn_item_address_del)
-        BootstrapButton btnItemAddressDel;
+        Button btnItemAddressDel;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

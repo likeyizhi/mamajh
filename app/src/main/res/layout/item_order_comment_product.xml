@@ -9,6 +9,7 @@
         android:id="@+id/iv_mine_order_product_item_img"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginLeft="5dp"
         android:src="@mipmap/ic_launcher"/>
 
     <LinearLayout
@@ -32,9 +33,10 @@
             android:layout_height="20dp"
             android:max="5"
             android:numStars="5"
-            android:progressDrawable="@drawable/ratingbar"
+            android:progressDrawable="@drawable/ratingbaryellowsmall"
             android:rating="5"
-            android:stepSize="1"/>
+            android:layout_marginTop="35dp"
+            android:stepSize="1" />
 
     </LinearLayout>
 

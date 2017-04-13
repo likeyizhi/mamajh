@@ -3,6 +3,7 @@ package com.yqx.mamajh.activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -39,7 +40,7 @@ public class ForgetPwdActivity extends BaseActivity {
     @BindView(R.id.et_forget_pwd2)
     EditText        etForgetPwd2;
     @BindView(R.id.btn_forget_code)
-    BootstrapButton btnForgetCode;
+    Button btnForgetCode;
 
     private MaterialDialog mMaterialDialog = null;
     private int            obj             = 0;
@@ -234,13 +235,13 @@ public class ForgetPwdActivity extends BaseActivity {
                                 public void run() {
                                     time--;
                                     btnForgetCode.setClickable(false);
-                                    btnForgetCode.setBootstrapBrand(DefaultBootstrapBrand.REGULAR);
+                                    btnForgetCode.setBackgroundResource(R.drawable.black_bg);
                                     btnForgetCode.setText(time + "s后可重新发送");
                                     if (time < 0) {
                                         time = 60;
                                         timer.cancel();
                                         btnForgetCode.setClickable(true);
-                                        btnForgetCode.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
+                                        btnForgetCode.setBackgroundResource(R.drawable.bg_borderyuan5red);
                                         btnForgetCode.setText("获取验证码");
                                     }
                                 }

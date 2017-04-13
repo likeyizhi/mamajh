@@ -33,25 +33,27 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="40sp"/>
+                android:textSize="40sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="元"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
+        <Button
             android:id="@+id/btn_pay_balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:background="@drawable/bg_borderyuan5"
             android:layout_marginTop="10dp"
             android:text="充值余额"
-            app:bootstrapBrand="regular"
-            app:buttonMode="regular"
-            app:roundedCorners="true"/>
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+
+          />
     </LinearLayout>
 
     <TextView
@@ -71,6 +73,7 @@
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         >
 
         <com.yqx.mamajh.widget.LoadMoreListView
